@@ -9,7 +9,6 @@ const SelectContainer = ({index, getSelected}) => {
 
   return (
     <StyledSelectContainer>
-      {index}
       <Select onClick={onClickSelect('1')}>select1</Select>
       <Select onClick={onClickSelect('2')}>select2</Select>
     </StyledSelectContainer>

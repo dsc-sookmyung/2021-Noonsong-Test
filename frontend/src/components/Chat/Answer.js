@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import SpeechBubbleContainer from './SpeechBubbleContainer';
 import SpeechBubble from './SpeechBubble';
 
 const Answer = ({index}) => {
@@ -8,11 +7,9 @@ const Answer = ({index}) => {
   });
 
   return (
-    <SpeechBubbleContainer>
-      <SpeechBubble role="answer">
-        답 {index}
-      </SpeechBubble>
-    </SpeechBubbleContainer>
+    <SpeechBubble role="answer">
+      답 {index}
+    </SpeechBubble>
   )
 }
 
