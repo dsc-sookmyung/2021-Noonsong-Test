@@ -15,7 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url, include
+from rest_framework import routers
+from feedback.views import FeedbackViewSet
+
+router = routers.DefaultRouter() 
+router.register('feedbacks',FeedbackViewSet) # prefix = feedbacks , viewset = FeedbackViewSet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include(router.urls)),
+    #path('', views.ReactAppView.as_view()), 추가
+
 ]
