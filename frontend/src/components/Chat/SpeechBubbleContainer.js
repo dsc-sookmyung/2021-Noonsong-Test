@@ -3,9 +3,6 @@ import styled, {css} from 'styled-components';
 
 
 const StyledSpeechBubbleContainer = styled.div`
-  /* flexbox 스타일 */
-  display: flex;
-  flex-direction: column;
   max-height: 250px;
   overflow: hidden;
 

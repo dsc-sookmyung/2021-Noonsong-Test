@@ -1,8 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import SelectContainer from './SelectContainer';
 import Question from './Question';
 import Answer from './Answer';
+import SpeechBubbleContainer from './SpeechBubbleContainer';
 
+const AlwaysScrollToBottom = () => {
+  const scrollRef = useRef();
+  useEffect(() => scrollRef.current.scrollIntoView());
+  return <div ref={scrollRef} />;
+};
 
 const ChatTemplate = () => {
   const [question, setQuestion] = useState(false);
@@ -27,12 +33,23 @@ const ChatTemplate = () => {
     setSelect(false);
   }, [select])
 
-  const getSelected = (selectedIndex) => {
+  const getSelected = useCallback((selectedIndex) => {
     setSelected([...selected, selectedIndex])
-  }
+  });
+
+  const mounted = useRef(false);
+  useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true;
+    }
+    else {
+      setNumbers([...numbers, numbers[numbers.length - 1] + 1]);
+    }
+  }, [selected])
 
   return (
     <>
+    <SpeechBubbleContainer>
       {numbers.map((v) => 
         <>
           <Question 
@@ -43,14 +60,17 @@ const ChatTemplate = () => {
             key={`${v}answer`} 
             index={v}>
           </Answer> 
+          <AlwaysScrollToBottom />
         </>
       )}
-      <SelectContainer 
-        index={numbers.length - 1} 
-        getSelected={getSelected} >        
-      </SelectContainer>
-    </>
+    </SpeechBubbleContainer>
+    <SelectContainer 
+      index={numbers.length - 1} 
+      getSelected={getSelected}>   
+    </SelectContainer>
+  </>
   )
 }
 
 export default ChatTemplate;
+
