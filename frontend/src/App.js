@@ -4,7 +4,7 @@ import SelectContainer from './components/Chat/SelectContainer';
 import Select from './components/Chat/Select';
 import SpeechBubble from './components/Chat/SpeechBubble';
 import SpeechBubbleContainer from './components/Chat/SpeechBubbleContainer';
-
+import ChatTemplate from './components/Chat/ChatTemplate';
 
 const AppBlock = styled.div`
   width: 512px;
@@ -28,6 +28,7 @@ function App() {
         <Select>첫 번째 선택지 엄청 길어지는 경우 </Select>
         <Select>두 번째 선택지가 이렇게 밀린다!</Select>
       </SelectContainer>
+      <ChatTemplate></ChatTemplate>
     </AppBlock>
   );
 }
