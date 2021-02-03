@@ -1,76 +1,74 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import styled from 'styled-components';
 import SelectContainer from './SelectContainer';
-import Question from './Question';
-import Answer from './Answer';
-import SpeechBubbleContainer from './SpeechBubbleContainer';
-
-const AlwaysScrollToBottom = () => {
-  const scrollRef = useRef();
-  useEffect(() => scrollRef.current.scrollIntoView());
-  return <div ref={scrollRef} />;
-};
+import Messages from './Messages';
 
 const ChatTemplate = () => {
-  const [question, setQuestion] = useState(false);
-  const [select, setSelect] = useState(false);
-  const [answer, setAnswer] = useState(false);
   const [numbers, setNumbers] = useState([1]);
   const [selected, setSelected] = useState([]);
-
-  useEffect(() => {
-    setQuestion(true);
-    setAnswer(false);
-  }, [])
-
-  useEffect(() => {
-    setSelect(true);
-  }, [question])
-
-  useEffect(() => {
-    setAnswer(true);
-    setNumbers([...numbers, numbers[numbers.length - 1] + 1]);
-    setQuestion(false);
-    setSelect(false);
-  }, [select])
-
-  const getSelected = useCallback((selectedIndex) => {
-    setSelected([...selected, selectedIndex])
-  });
+  const [isSelected, setIsSelected] = useState(false);
+  const [questions, setQuestions] = useState([]);
 
   const mounted = useRef(false);
-  useEffect(() => {
+  useEffect((prevSelected) => {
     if (!mounted.current) {
       mounted.current = true;
     }
     else {
+      function handleStatusChange(status) {
+        questions: questions.concat({
+          index: numbers.length
+        })
+      }
       setNumbers([...numbers, numbers[numbers.length - 1] + 1]);
     }
   }, [selected])
 
+  const getSelected = useCallback((selectedIndex) => {
+    setSelected([...selected, selectedIndex])
+    console.log(selected);
+  });
+
+  const handleSelectClick = () => {
+    setIsSelected(!isSelected);
+  }
+
   return (
     <>
+    {/*
     <SpeechBubbleContainer>
       {numbers.map((v) => 
         <>
           <Question 
-            key={`${v}question`} 
+            key={`question${v}`} 
             index={v}>
           </Question>
-          <Answer 
-            key={`${v}answer`} 
+          <Answer
+            key={`answer${v}`} 
             index={v}>
-          </Answer> 
-          <AlwaysScrollToBottom />
+          </Answer>
         </>
-      )}
+      )}     
     </SpeechBubbleContainer>
+    */}
+    <MBoxWrapper>
+      <Messages numbers={numbers} />
+    </MBoxWrapper>
     <SelectContainer 
-      index={numbers.length - 1} 
-      getSelected={getSelected}>   
+      index={Math.ceil(numbers.length / 2)} 
+      getSelected={getSelected}
+      handleSelectClick={handleSelectClick}>
     </SelectContainer>
   </>
   )
 }
 
-export default ChatTemplate;
+const MBoxWrapper = styled.div`
+  width: 90%;
+  height: 80%;
+  margin: 0 auto;
+  border: 1px solid black;
+  padding: 1rem;
+`;
 
+export default ChatTemplate;
