@@ -1,0 +1,48 @@
+.framewrapper {
+    height: 60vh;
+    width: 80vw;
+    margin: 20vh auto;
+    display: flex;
+}
+
+.polaroid {
+    display: inline-block;
+    width: 18rem;
+    height: 15rem;
+    padding: 1rem;
+    background-color: white;
+    align-self: flex-start;
+    border: 1px solid #eeeeee;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    position: relative;
+    transform: rotate(-17deg);
+}
+
+.original {
+    width: 40rem;
+    height: auto;
+    background-color: #355F95;
+    padding: 1.6rem;
+    border: 1.2rem solid #2E4E7E;
+    align-self: flex-end;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.imagewrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.pin {
+    position: absolute;
+    width: 6rem;
+    top: -2.6rem;
+}
+
+.image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
