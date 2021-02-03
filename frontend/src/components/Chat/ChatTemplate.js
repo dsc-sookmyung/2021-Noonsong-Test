@@ -39,7 +39,7 @@ const ChatTemplate = ({ isOpened, close }) => {
               </SideBar> 
               <ContentWrapper>
                 <MBoxWrapper>
-                  <Messages numbers={numbers} />
+                  <Messages numbers={numbers} selected={selected}/>
                 </MBoxWrapper>
                 <SelectContainer 
                   index={Math.ceil(numbers.length / 2)} 
@@ -62,7 +62,7 @@ const Background = styled.div`
 
 const ChatModal = styled.div`
   width: 40rem;
-  height: 54rem;
+  height: 40rem;
   background-color: white;
   position: absolute;
   top: 50%;
@@ -73,34 +73,33 @@ const ChatModal = styled.div`
 `;
 
 const SideBar = styled.div`
-    width: 100%;
-    height: 1rem;
-    background-color: #333333;
-    border-radius: 1rem 1rem 0 0;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem 0;
+  width: 100%;
+  height: 1rem;
+  background-color: #333333;
+  border-radius: 1rem 1rem 0 0;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
 `;
 
 const ContentWrapper = styled.div`
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 `;
 
 const SideBarButton = styled.button`
-    background-color: ${props => props.color};
-    width: 1rem;
-    height: 1rem;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    margin-left: 1rem;
+  background-color: ${props => props.color};
+  width: 1rem;
+  height: 1rem;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 1rem;
 `;
  
 const MBoxWrapper = styled.div`
   width: 90%;
-  height: 80%;
+  height: 75%;
   margin: 0 auto;
-  border: 1px solid black;
   padding: 1rem;
 `;
