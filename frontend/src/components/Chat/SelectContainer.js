@@ -17,6 +17,10 @@ const SelectContainer = ({index, getSelected, handleSelectClick}) => {
 }
 
 const StyledSelectContainer = styled.div`
+  width: 90%;
+  margin: 0 auto;
+  padding: 1rem;
+
   /* flexbox 스타일 */
   display: flex;
   flex-direction: row;
