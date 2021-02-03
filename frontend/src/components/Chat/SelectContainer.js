@@ -1,6 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
+import Select from './Select';
 
+const SelectContainer = ({index, getSelected}) => {
+  const onClickSelect = (selectedIndex) => (e) => {
+    getSelected(selectedIndex);
+  }
+
+  return (
+    <StyledSelectContainer>
+      <Select onClick={onClickSelect('1')}>select1</Select>
+      <Select onClick={onClickSelect('2')}>select2</Select>
+    </StyledSelectContainer>
+  )
+}
 
 const StyledSelectContainer = styled.div`
   /* flexbox 스타일 */
@@ -21,9 +34,5 @@ const StyledSelectContainer = styled.div`
     border-radius: 6px;
   }
 `;
-
-function SelectContainer({children, ...rest}) {
-  return <StyledSelectContainer {...rest}>{children}</StyledSelectContainer>;
-}
 
 export default SelectContainer;
