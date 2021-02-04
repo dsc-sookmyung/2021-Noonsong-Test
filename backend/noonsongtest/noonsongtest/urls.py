@@ -18,9 +18,13 @@ from django.urls import path
 from django.conf.urls import url, include
 from rest_framework import routers
 from feedback.views import FeedbackViewSet
+from poll.views import QuestionViewSet, AnswerViewSet
+
 
 router = routers.DefaultRouter() 
 router.register('feedbacks',FeedbackViewSet) # prefix = feedbacks , viewset = FeedbackViewSet
+router.register('questions',QuestionViewSet)
+router.register('answers',AnswerViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
