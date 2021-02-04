@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import Message from './Message';
+import Comment from './Comment';
 
 const AlwaysScrollToBottom = () => {
   const scrollRef = useRef();
@@ -8,27 +8,29 @@ const AlwaysScrollToBottom = () => {
   return <div ref={scrollRef} />;
 };
 
-const Messages = ({ numbers }) => {
+const Comments = ({ comments }) => {
   return (
-    <div className="messagesSection">
-      <MessagesContainer>
-        {numbers.map((v) => {
+    <div className="commentsSection">
+      <CommentsContainer>
+        {comments.map((comment, index) => {
           return (
-            <div className="messagesContainer">
-              <Message key={`message ${v}`} index={v} />
+            <div className="commentsContainer">
+              <Comment key={index}>
+                {comment}
+              </Comment>
             </div>
           );
         })}
         <AlwaysScrollToBottom />
-      </MessagesContainer>
+      </CommentsContainer>
     </div>
   )
 }
 
-export default Messages;
+export default Comments;
 
-const MessagesContainer = styled.div`
-  height: 30rem;
+const CommentsContainer = styled.div`
+  height: 20rem;  // todo
   overflow-y: scroll;
 
   /* scrollbar */

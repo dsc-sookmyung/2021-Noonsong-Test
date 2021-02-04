@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
+import styled, { keyframes } from 'styled-components';
 import SpeechBubble from './SpeechBubble';
 
-const Message = ({ selected, index }) => {
+const Message = ({ index }) => {
   useEffect(() => {
     console.log('message');
   });
