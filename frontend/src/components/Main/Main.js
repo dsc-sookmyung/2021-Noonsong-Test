@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, createElement } from 'react';
 import style from './Main.module.css';
 
 import ChatTemplate from '../Chat/ChatTemplate';
@@ -48,6 +48,38 @@ function Main(props) {
     setIsBoardModalOpened(false);
   }
 
+  useEffect(() => {
+    window.onload = async () => {
+      let typingTxts = document.querySelectorAll("." + style.typingtxt);
+      for (let i = 0; i < typingTxts.length; i++) {
+        let typingBool = false; 
+        let typingIdx = 0; 
+        let typingTxt = typingTxts[i].innerText.split("");
+        console.log(typingTxt);
+        if (typingBool === false) {
+          typingBool = true;
+          await intervalHandler(typingTxt, typingIdx);
+          document.querySelector("." + style.typing).innerHTML = document.querySelector("." + style.typing).innerHTML + "<br/>";
+        }
+      }
+    }
+  }, [])
+
+  const intervalHandler = (typingTxt, typingIdx) => {
+    return new Promise((resolve, reject) => {
+      var tyInt = setInterval(() => { 
+        if (typingIdx < typingTxt.length) {
+          console.log(typingTxt[typingIdx]);
+          document.querySelector("." + style.typing).append(typingTxt[typingIdx]);
+          typingIdx++; 
+        } else { 
+          clearInterval(tyInt);
+          resolve();
+        } 
+      }, 100);
+    })
+  }
+
   return (
     <div className={style.contentwrapper}>
       <div className={style.framewrapper}>
@@ -62,12 +94,21 @@ function Main(props) {
           <h1 className={style.title}>
             ❄️ 나는 어떤 타입의 <span className={style.highlight}>눈송이</span>일까? 
           </h1>
-          <p className={style.desc + ' ' + style.typingtxt}>
-            n년차 눈송이인 당신! 당신은 어떤 타입의 눈송이인지 확인해보고 싶지 않으셨나요?<br/>
-            그런 당신을 위해 특별히 DSC Sookmyung의 Gitribute 팀에서 야심차게 눈송이 유형 테스트를 준비했습니다. 🥰<br/>
-            눈송이 유형 테스트를 통해 본인도 몰랐던 자신의 귀여움과 특별함을 찾아보세요!<br/><br/>
-            아래의 학교 사진을 눌러 테스트를 시작할 수 있답니다 👩🏻‍💻
-          </p>
+          <div className={style.textwrapper}>
+            <p className={style.desc + ' ' + style.typingtxt}>
+              n년차 눈송이인 당신! 당신은 어떤 타입의 눈송이인지 확인해보고 싶지 않으셨나요?
+            </p>
+            <p className={style.desc + ' ' + style.typingtxt}>
+              그런 당신을 위해 특별히 DSC Sookmyung의 Gitribute 팀에서 야심차게 눈송이 유형 테스트를 준비했습니다.  ٩꒰｡•◡•｡꒱۶ 
+            </p>
+            <p className={style.desc + ' ' + style.typingtxt}>
+              눈송이 유형 테스트를 통해 본인도 몰랐던 자신의 귀여움과 특별함을 찾아보세요!
+            </p>
+            <p className={style.desc + ' ' + style.typingtxt}>
+            아래의 학교 사진을 눌러 테스트를 시작할 수 있답니다  ◡‿◡✿ 
+            </p>
+          </div>
+          
           <p className={style.typing}></p> 
           <img src={noonsong} alt="noonsong" className={style.noonsong}/>
         </div>

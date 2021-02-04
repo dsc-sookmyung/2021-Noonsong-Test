@@ -59,15 +59,13 @@
 
 .typing {  
     display: inline-block; 
-    animation-name: cursor; 
-    animation-duration: 0.3s; 
-    animation-iteration-count: infinite; 
-}
-
-@keyframes cursor { 
-    0% { border-right: 1px solid #fff } 
-    50% { border-right: 1px solid #000 } 
-    100% { border-right: 1px solid #fff } 
+    animation-duration: 0.6s; 
+    animation-iteration-count: infinite;
+    line-height: 1.8;
+    font-size: 0.95em;
+    max-width: 640px;
+    width: 90%;
+    word-break: keep-all;
 }
 
 .polaroid {
@@ -160,7 +158,14 @@
     top: 156px;
 }
 
+.textwrapper {
+    position: relative;
+}
+
 .noonsong {
+    position: absolute;
+    left: 4rem;
+    bottom: 3.2rem;
     width: 7.2rem;
     margin-top: 2rem;
 }
