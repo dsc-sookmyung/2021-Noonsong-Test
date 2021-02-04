@@ -1,14 +1,77 @@
+.contentwrapper {
+    height: 90vh;
+    width: 90vw;
+    margin: 5vh auto;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    background-color: beige;
+    background-image: url("../../Images/corkboard.jpg");
+    background-attachment: fixed;
+    background-size: 100% auto;
+    box-sizing: border-box;
+}
+
 .framewrapper {
-    height: 60vh;
+    height: 70vh;
     width: 80vw;
-    margin: 20vh auto;
+    padding: 10vh 0;
+    margin: 0 auto;
     display: flex;
+    position: relative;
+}
+
+.highlight {
+    background-color: #2E4E7E;
+    color: white;
+}
+
+.mainpage {
+    position: absolute;
+    left: 16rem;
+    right: 16rem;
+    height: 40%;
+    display: inline-block;
+    background-color: floralwhite;
+    font-family: "Carmen Sans";
+    line-height: 1;
+    padding: 4.4rem 3.6rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    min-height: 390px;
+}
+
+.title {
+    margin: 0 0 2.4rem;
+    font-weight: 900;
+    font-size: 2.4em;
+}
+
+.desc {
+    line-height: 1.8;
+    font-size: 0.95em;
+    max-width: 640px;
+    width: 90%;
+    word-break: keep-all;
+}
+
+.typingtxt {
+    display: none;
+}
+
+.typing {  
+    display: inline-block; 
+    animation-duration: 0.2s; 
+    animation-iteration-count: infinite;
+    line-height: 1.8;
+    font-size: 0.95em;
+    max-width: 640px;
+    width: 90%;
+    word-break: keep-all;
 }
 
 .polaroid {
     display: inline-block;
-    width: 18rem;
-    height: 15rem;
+    width: 216px;
+    height: 180px;
     padding: 1rem;
     background-color: white;
     align-self: flex-start;
@@ -16,16 +79,24 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     position: relative;
     transform: rotate(-17deg);
+    z-index: 1;
 }
 
 .original {
-    width: 40rem;
+    width: 440px;
     height: auto;
     background-color: #355F95;
-    padding: 1.6rem;
-    border: 1.2rem solid #2E4E7E;
+    /* background-image: url("../../Images/frame-border.png"); */
+    background-attachment: fixed;
+    background-size: 100% auto;
+    padding: 1.2rem;
+    border: 0.7rem solid #2E4E7E;
     align-self: flex-end;
+    position: relative;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    transform: rotate(2deg);
+    margin-left: 20rem;
+    z-index: 0;
 }
 
 .imagewrapper {
@@ -35,14 +106,66 @@
     overflow: hidden;
 }
 
+.bedge {
+    transform: rotate(8deg);
+    margin-left: 1.6rem;
+}
+
 .pin {
     position: absolute;
     width: 6rem;
     top: -2.6rem;
 }
 
+.tape {
+    position: absolute;
+    width: 9rem;
+    top: -2.2rem;
+}
+
 .image {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    cursor: pointer;
+}
+
+.sticker {
+    position: relative;
+}
+
+.postit {
+    background-color: #f3dbcf;
+    position: absolute;
+    padding: 0.6rem 1.2rem;
+    font-family: "Carmen Sans";
+    font-weight: 500;
+    line-height: 1;
+    left: -40px;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 2px 4px;
+}
+
+.polaroid > .postit {
+    bottom: 8px;
+}
+
+.original > .postit {
+    top: 12px;
+    left: -108px;
+}
+
+.sticker > .postit {
+    top: 156px;
+}
+
+.textwrapper {
+    position: relative;
+}
+
+.noonsong {
+    position: absolute;
+    left: 4rem;
+    bottom: 3.2rem;
+    width: 7.2rem;
+    margin-top: 2rem;
 }
