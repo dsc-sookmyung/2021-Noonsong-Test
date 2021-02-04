@@ -5,6 +5,7 @@ import styled, {css} from 'styled-components';
 const StyledSpeechBubbleContainer = styled.div`
   max-height: 250px;
   overflow: hidden;
+  padding: 2rem;
 
   &:hover {
     overflow-y: auto;
