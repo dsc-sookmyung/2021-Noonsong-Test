@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import SpeechBubble from './SpeechBubble';
 
-const Message = ({ selected }) => {
+const Message = ({ selected, index }) => {
   useEffect(() => {
     console.log('message');
   });
