@@ -2,20 +2,25 @@ import React from 'react';
 import styled from 'styled-components';
 import Select from './Select';
 
-const SelectContainer = ({index, getSelected}) => {
+const SelectContainer = ({index, getSelected, handleSelectClick}) => {
   const onClickSelect = (selectedIndex) => (e) => {
     getSelected(selectedIndex);
+    handleSelectClick();
   }
 
   return (
     <StyledSelectContainer>
-      <Select onClick={onClickSelect('1')}>select1</Select>
-      <Select onClick={onClickSelect('2')}>select2</Select>
+      <Select onClick={onClickSelect(1)}>select1 {index}</Select>
+      <Select onClick={onClickSelect(2)}>select2 {index}</Select>
     </StyledSelectContainer>
   )
 }
 
 const StyledSelectContainer = styled.div`
+  width: 90%;
+  margin: 0 auto;
+  padding: 1rem;
+
   /* flexbox 스타일 */
   display: flex;
   flex-direction: row;
