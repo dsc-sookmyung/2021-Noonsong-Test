@@ -8,14 +8,14 @@ const AlwaysScrollToBottom = () => {
   return <div ref={scrollRef} />;
 };
 
-const Messages = ({ numbers, selected }) => {
+const Messages = ({ numbers }) => {
   return (
     <div className="messagesSection">
       <MessagesContainer>
         {numbers.map((v) => {
           return (
             <div className="messagesContainer">
-              <Message index={v} selected={selected} />
+              <Message key={`message ${v}`} index={v} />
             </div>
           );
         })}
