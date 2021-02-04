@@ -2,11 +2,13 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import SelectContainer from './SelectContainer';
 import Messages from './Messages';
+import ResultTemplate from '../Result/ResultTemplate';
 
 const ChatTemplate = ({ isOpened, close }) => {
   const [numbers, setNumbers] = useState([1]);
   const [selected, setSelected] = useState([]);
-  
+  const [loaded, setLoaded] = useState(true);
+
   const mounted = useRef(false);
   useEffect(() => {
     if (!mounted.current) {
@@ -23,27 +25,44 @@ const ChatTemplate = ({ isOpened, close }) => {
     setNumbers([...numbers, numbers[numbers.length - 1] + 1]);
   });
 
+  useEffect(() => {
+    if (!loaded) {
+      setTimeout(() => setLoaded(true), 1500);
+    }
+  }, [loaded]);
+
+  const handleLoad = () => {
+    setLoaded(!loaded);
+  }
+
   return (
     <>
     { isOpened ? (
       <div>
-          <ChatModal>
-              <SideBar>
-                  <SideBarButton type="button" color={"rgb(237, 105, 94)"} onClick={close}></SideBarButton>
-                  <SideBarButton type="button" color={"rgb(244, 190, 79)"}></SideBarButton>
-                  <SideBarButton type="button" color={"rgb(98, 194, 84)"}></SideBarButton>
-              </SideBar> 
-              <ContentWrapper>
-                <MBoxWrapper>
-                  <Messages numbers={numbers} />
-                </MBoxWrapper>
-                <SelectContainer 
-                  index={Math.ceil(numbers.length / 2)} 
-                  getSelected={getSelected}>
-                </SelectContainer>
-              </ContentWrapper>
-          </ChatModal>
-        </div>
+        <ChatModal>
+          <SideBar>
+            <SideBarButton type="button" color={"rgb(237, 105, 94)"} onClick={close}></SideBarButton>
+            <SideBarButton type="button" color={"rgb(244, 190, 79)"}></SideBarButton>
+            <SideBarButton type="button" color={"rgb(98, 194, 84)"}></SideBarButton>
+          </SideBar> 
+          { numbers.length < 26 ? (
+          <ContentWrapper>
+            <MBoxWrapper>
+              <Messages numbers={numbers} loaded={loaded}/>
+            </MBoxWrapper>
+            <SelectContainer 
+              index={Math.ceil(numbers.length / 2)} 
+              getSelected={getSelected}
+              handleLoad={handleLoad}>
+            </SelectContainer>
+          </ContentWrapper>
+          ) : (
+          <ContentWrapper>
+            <ResultTemplate></ResultTemplate>
+          </ContentWrapper>
+          )}
+        </ChatModal>
+      </div>
     ) : null}
   </>
   );
