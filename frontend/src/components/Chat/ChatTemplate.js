@@ -6,7 +6,6 @@ import Messages from './Messages';
 const ChatTemplate = ({ isOpened, close }) => {
   const [numbers, setNumbers] = useState([1]);
   const [selected, setSelected] = useState([]);
-  const [isSelected, setIsSelected] = useState(false);
   
   const mounted = useRef(false);
   useEffect(() => {
@@ -16,16 +15,13 @@ const ChatTemplate = ({ isOpened, close }) => {
     else {
       setNumbers([...numbers, numbers[numbers.length - 1] + 1]);
     }
+    console.log(selected);
   }, [selected])
 
   const getSelected = useCallback((selectedIndex) => {
     setSelected([...selected, selectedIndex])
-    console.log(selected);
+    setNumbers([...numbers, numbers[numbers.length - 1] + 1]);
   });
-
-  const handleSelectClick = () => {
-    setIsSelected(!isSelected);
-  }
 
   return (
     <>
@@ -39,12 +35,11 @@ const ChatTemplate = ({ isOpened, close }) => {
               </SideBar> 
               <ContentWrapper>
                 <MBoxWrapper>
-                  <Messages numbers={numbers} selected={selected}/>
+                  <Messages numbers={numbers} />
                 </MBoxWrapper>
                 <SelectContainer 
                   index={Math.ceil(numbers.length / 2)} 
-                  getSelected={getSelected}
-                  handleSelectClick={handleSelectClick}>
+                  getSelected={getSelected}>
                 </SelectContainer>
               </ContentWrapper>
           </ChatModal>
