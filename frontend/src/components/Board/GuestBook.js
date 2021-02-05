@@ -6,8 +6,14 @@ import Form from './Form';
 function GuestBook() {
   const [comments, setComments] = useState([]); 
 
+  useEffect(async () => {
+    await fetch('http://localhost:8000/feedbacks/')
+      .then((res) => console.log(res))
+      .catch((err) => console.log("error: ", err));
+  }, [])
+
   return (
-    <ContentWrapper>
+    <>
       <CBoxWrapper>
         <Comments comments={comments} />
       </CBoxWrapper>
@@ -17,16 +23,11 @@ function GuestBook() {
           setComments([...comments, trimmedText]);
         }
       }}/>
-    </ContentWrapper>
+    </>
   )
 }
 
 export default GuestBook;
-
-const ContentWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-`;
 
 const CBoxWrapper = styled.div`
   width: 100%;
