@@ -15,7 +15,7 @@ const BoardTemplate = ({ isOpened, close }) => {
             </ContentWrapper>
         </BoardModal>
       </div>
-    ) : null}
+    ) : null }
   </>
   );
 }
