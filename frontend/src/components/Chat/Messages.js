@@ -17,15 +17,13 @@ const Messages = ({ numbers, loaded }) => {
         {numbers.map((v) => {
           return (
             <div className="messagesContainer">
-              {(v == numbers.length - 1) ? (
+              <Message key={`message ${v}`} index={v} />
+              {(v == numbers.length) ? (
                 <Wrapper disappear={!loaded}>
                 <div class="dot-typing"></div>
                 </Wrapper>
               ) : (null)}
-              <DelayedRender delay={1500}>
-                <Message key={`message ${v}`} index={v} />
-                <AlwaysScrollToBottom />
-              </DelayedRender>
+              <AlwaysScrollToBottom />
             </div>
           );
         })}
@@ -63,9 +61,7 @@ const Wrapper = styled.div`
   ${props =>
   props.disappear &&
   css`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  `}
+    display: block;
+    float: left;
+    `}
 `;
