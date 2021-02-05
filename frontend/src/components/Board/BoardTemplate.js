@@ -37,4 +37,6 @@ const BoardModal = styled.div`
 const ContentWrapper = styled.div`
   width: 100%;
   height: calc(100% - 3rem);
+  display: flex;
+  flex-direction: column;
 `;
