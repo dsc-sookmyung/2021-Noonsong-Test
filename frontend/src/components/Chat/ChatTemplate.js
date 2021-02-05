@@ -2,8 +2,10 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import SelectContainer from './SelectContainer';
 import Messages from './Messages';
-import ResultTemplate from '../Result/ResultTemplate';
 import SideBar from '../_Basic/SideBar';
+import ProgressBar from '../_Basic/ProgressBar';
+import ResultTemplate from '../Result/ResultTemplate'
+import DelayedRender from './DelayedRender';
 
 const ChatTemplate = ({ isOpened, close }) => {
   const [numbers, setNumbers] = useState([1]);
@@ -28,7 +30,7 @@ const ChatTemplate = ({ isOpened, close }) => {
 
   useEffect(() => {
     if (!loaded) {
-      setTimeout(() => setLoaded(true), 1500);
+      setTimeout(() => setLoaded(true), 1000);
     }
   }, [loaded]);
 
@@ -55,7 +57,10 @@ const ChatTemplate = ({ isOpened, close }) => {
           </ContentWrapper>
           ) : (
           <ContentWrapper>
-            <ResultTemplate></ResultTemplate>
+            <ProgressBar/>
+            <DelayedRender delay={1500}>
+              <ResultTemplate></ResultTemplate>
+            </DelayedRender>
           </ContentWrapper>
           )}
         </ChatModal>
