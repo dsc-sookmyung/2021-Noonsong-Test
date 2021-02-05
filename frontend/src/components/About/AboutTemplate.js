@@ -4,7 +4,7 @@ import styled from 'styled-components';
 function AboutTemplate({ isOpened, close }) {
     const ResultModal = styled.div`
         width: 40rem;
-        height: 54rem;
+        height: 40rem;
         background-color: white;
         position: absolute;
         top: 50%;
