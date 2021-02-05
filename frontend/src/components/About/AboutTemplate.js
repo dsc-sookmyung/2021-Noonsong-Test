@@ -1,10 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import SideBar from '../_Basic/SideBar';
+import Profile from './Profile';
+import '../../fonts/font.css';
+
+import suyeon from '../../Images/mori8.jpg';
+import suhee from '../../Images/0hee0.jpg';
+import eunji from '../../Images/heleneunji.jpg';
+import jiyeon from '../../Images/hellouz818.png';
 
 function AboutTemplate({ isOpened, close }) {
-    const ResultModal = styled.div`
+    const AboutModal = styled.div`
         width: 40rem;
-        height: 54rem;
+        height: 40rem;
         background-color: white;
         position: absolute;
         top: 50%;
@@ -14,47 +22,84 @@ function AboutTemplate({ isOpened, close }) {
         box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
     `;
 
-    const SideBar = styled.div`
-        width: 100%;
-        height: 1rem;
-        background-color: #333333;
-        border-radius: 1rem 1rem 0 0;
-        justify-content: center;
-        align-items: center;
-        padding: 1rem 0;
-    `;
-
     const ContentWrapper = styled.div`
         width: 100%;
         height: 100%;
-        padding: 2rem;
+        padding: 2.4rem;
     `;
 
-    const SideBarButton = styled.button`
-        background-color: ${props => props.color};
-        width: 1rem;
-        height: 1rem;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        margin-left: 1rem;
+    const Title = styled.div`
+        width: calc(100% - 4rem);
+        margin: 1.2rem 0.4rem;
+        font-size: 1.7rem;
+        font-family: "Carmen Sans";
+        font-weight: 700;
+    `;
+
+    const Description = styled.div`
+        margin: 1.2rem 0.4rem;
+        font-size: 0.95rem;
+        font-family: "Carmen Sans";
+        font-weight: 300;
+    `;
+
+    const ProfileWrapper = styled.div`
+        width: calc(100% - 4rem);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin: 2.64rem 0;
     `;
 
     return (
         <>
             { isOpened ? (
-                <div>
-                <ResultModal>
-                    <SideBar>
-                        <SideBarButton type="button" color={"rgb(237, 105, 94)"} onClick={close}></SideBarButton>
-                        <SideBarButton type="button" color={"rgb(244, 190, 79)"}></SideBarButton>
-                        <SideBarButton type="button" color={"rgb(98, 194, 84)"}></SideBarButton>
-                    </SideBar> 
+                <AboutModal>
+                    <SideBar close={close}/>
                     <ContentWrapper>
-                        ChatTamplate test
+                        <Title>
+                            ❄️ Team Gitribute 
+                        </Title>
+                        <Description>
+                            DSC Sookmyung 소속의 Gitribute(깃트리뷰트) 팀입니다. <br/>
+                            성격도 나이도 다 달라 걱정했지만 알고보니 우리들 꽤.. 찰떡궁합이랄까? 🤭 🥰
+                        </Description>
+                        <ProfileWrapper>
+                            <Profile 
+                                name={"남수연"}
+                                major={"컴퓨터과학전공 19"}
+                                image={suyeon}
+                                insta={"tsusuyomi"}
+                                github={"mori8"} 
+                                role={"front-end"}
+                            />
+                            <Profile
+                                name={"서희"}
+                                major={"IT공학전공 19"}
+                                image={suhee}
+                                insta={"suhhee_e"}
+                                github={"0hee0"}
+                                role={"front-end"}
+                            />
+                            <Profile 
+                                name={"권은지"}
+                                major={"IT공학전공 18"}
+                                image={eunji}
+                                insta={"_eunji_99"}
+                                github={"heleneunji"}
+                                role={"back-end"} 
+                            />
+                            <Profile 
+                                name={"유지연"}
+                                major={"소프트웨어융합전공 18"}
+                                image={jiyeon}
+                                insta={null}
+                                github={"hellouz818"}
+                                role={"back-end"}
+                            />
+                        </ProfileWrapper>
                     </ContentWrapper>
-                </ResultModal>
-                </div>
+                </AboutModal>
             ) : null}
         </>
     );

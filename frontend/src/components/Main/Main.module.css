@@ -45,22 +45,12 @@
     font-size: 2.4em;
 }
 
-.desc {
-    line-height: 1.8;
-    font-size: 0.95em;
-    max-width: 640px;
-    width: 90%;
-    word-break: keep-all;
-}
-
 .typingtxt {
     display: none;
 }
 
 .typing {  
     display: inline-block; 
-    animation-duration: 0.2s; 
-    animation-iteration-count: infinite;
     line-height: 1.8;
     font-size: 0.95em;
     max-width: 640px;
@@ -80,6 +70,7 @@
     position: relative;
     transform: rotate(-17deg);
     z-index: 1;
+    cursor: pointer;
 }
 
 .original {
@@ -97,6 +88,7 @@
     transform: rotate(2deg);
     margin-left: 20rem;
     z-index: 0;
+    cursor: pointer;
 }
 
 .imagewrapper {
@@ -109,6 +101,7 @@
 .bedge {
     transform: rotate(8deg);
     margin-left: 1.6rem;
+    cursor: pointer;
 }
 
 .pin {
@@ -127,7 +120,6 @@
     height: 100%;
     width: 100%;
     object-fit: cover;
-    cursor: pointer;
 }
 
 .sticker {

@@ -37,13 +37,13 @@ const TailStyles = css`
       props.role === 'question' &&
       css`
         border-radius: 0 15px 15px 15px;
-      `}
+    `}
 
     ${props =>
       props.role === 'answer' &&
       css`
         border-radius: 15px 0 15px 15px;
-      `}
+    `}
 `;
 
 const StyledSpeechBubble = styled.div`
