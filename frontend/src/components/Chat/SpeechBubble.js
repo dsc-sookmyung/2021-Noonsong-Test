@@ -18,7 +18,7 @@ const colorStyles = css`
     `}
 `;
 
-const PositionStyles = css`
+const positionStyles = css`
   ${props =>
     props.role === 'question' &&
     css`
@@ -32,7 +32,7 @@ const PositionStyles = css`
     `}
 `;
 
-const TailStyles = css`
+const tailStyles = css`
     ${props =>
       props.role === 'question' &&
       css`
@@ -60,10 +60,10 @@ const StyledSpeechBubble = styled.div`
 
   /* 색상 */
   ${colorStyles}
-  ${TailStyles}
+  ${tailStyles}
 
   /* 말풍선 위치 */
-  ${PositionStyles}
+  ${positionStyles}
 `;
 
 const Wrapper = styled.div`
