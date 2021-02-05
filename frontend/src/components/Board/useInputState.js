@@ -1,13 +1,18 @@
 import { useState } from 'react';
 
 export default (initialValue) => {
-  const [value, setValue] = useState(initialValue);
+  const [name, setName] = useState(initialValue);
+  const [comment, setComment] = useState(initialValue);
 
   return {
-    value,
-    onChange: (event) => {
-      setValue(event.target.value);
+    name,
+    comment,
+    onChangeName: (event) => {
+      setName(event.target.value);
     },
-    reset: () => setValue('')
+    onChangeComment: (event) => {
+      setComment(event.target.value);
+    },
+    reset: () => { setName(''); setComment(''); }
   };
 };

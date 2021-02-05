@@ -1,0 +1,13 @@
+.form {
+    padding: 1.2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.inputWrapper {
+    flex-grow: 5;
+}
+
+.submitButton {
+    margin: 0.4rem;
+}
