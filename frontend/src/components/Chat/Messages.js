@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useRef, useState } from 'react';
+import styled, { css } from 'styled-components';
 import Message from './Message';
+import './TypingDot.css';
 
 const AlwaysScrollToBottom = () => {
   const scrollRef = useRef();
@@ -8,13 +9,18 @@ const AlwaysScrollToBottom = () => {
   return <div ref={scrollRef} />;
 };
 
-const Messages = ({ numbers }) => {
+const Messages = ({ numbers, loaded }) => {
   return (
     <div className="messagesSection">
       <MessagesContainer>
         {numbers.map((v) => {
           return (
             <div className="messagesContainer">
+              {(v == numbers.length - 1) ? (
+                <Wrapper disappear={!loaded}>
+                <div class="dot-typing"></div>
+                </Wrapper>
+              ) : (null)}
               <Message key={`message ${v}`} index={v} />
             </div>
           );
@@ -43,4 +49,19 @@ const MessagesContainer = styled.div`
       background-color: #f1f3f5; // background: #dee2e6;
       -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05);
   }
+`;
+
+const Wrapper = styled.div`
+  display: none;
+  margin-top: 10px;
+  padding: 15px;
+  font-family: arial;
+  position: relative;
+  float: left;
+
+  ${props =>
+  props.disappear &&
+  css`
+    display: block;
+  `}
 `;

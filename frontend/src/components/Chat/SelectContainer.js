@@ -2,9 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import Select from './Select';
 
-const SelectContainer = ({index, getSelected}) => {
+const SelectContainer = ({index, getSelected, handleLoad}) => {
   const onClickSelect = (selectedIndex) => (e) => {
     getSelected(selectedIndex);
+    handleLoad();
   }
 
   return (
