@@ -37,12 +37,14 @@ const tailStyles = css`
       props.role === 'question' &&
       css`
         border-radius: 0 15px 15px 15px;
+        margin-left: 1rem;
     `}
 
     ${props =>
       props.role === 'answer' &&
       css`
         border-radius: 15px 0 15px 15px;
+        margin-right: 1rem;
     `}
 `;
 
@@ -51,7 +53,7 @@ const StyledSpeechBubble = styled.div`
   width: auto;
   display: inline-block;
   margin-top: 10px;
-  padding: 15px;
+  padding: 14px 24px;
   text-align: center;
   font-weight: 900;
   font-family: arial;
