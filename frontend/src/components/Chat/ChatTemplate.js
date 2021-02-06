@@ -7,6 +7,8 @@ import ProgressBar from '../_Basic/ProgressBar';
 import ResultTemplate from '../Result/ResultTemplate'
 import DelayedRender from './DelayedRender';
 
+import noonsongImage from '../../Images/bbosong.jpg';
+
 const ChatTemplate = ({ isOpened, close }) => {
   const [numbers, setNumbers] = useState([1]);
   const [selected, setSelected] = useState([]);
@@ -50,6 +52,10 @@ const ChatTemplate = ({ isOpened, close }) => {
     setLoaded(!loaded);
   }
 
+  const openResultModal = () => {
+    setIsResultModalOpened(true);
+  }
+
   const closeResultModal = () => {
     setIsResultModalOpened(false);
   }
@@ -75,14 +81,22 @@ const ChatTemplate = ({ isOpened, close }) => {
             </DelayedRender>
           </ContentWrapper>
           ) : (
-          <ContentWrapper>
-            <ProgressBarWrapper disappear={!loaded}>
-              <ProgressBar/>
-            </ProgressBarWrapper>
-            <DelayedRender delay={1000}>
-              <ResultTemplate isOpened={isResultModalOpened} close={closeResultModal}></ResultTemplate>
-            </DelayedRender>
-          </ContentWrapper>
+            <ContentWrapper>
+            { !loaded ? 
+              <ProgressBarWrapper disappear={!loaded}>
+                <ProgressBar/>
+              </ProgressBarWrapper>
+              :
+              <ResultWrapper>
+                <NoonsongType>뽀송뽀송 함박눈송이</NoonsongType>
+                <NoonsongImage><img src={noonsongImage} alt="loading..." style={{width: "20rem"}} /></NoonsongImage>
+                <NoonsongDescription>
+                  주변 사람들을 편안하게 해주는 능력을 갖고 있는, 누구에게나 사랑받는 눈송이에요!<br/>
+                  뽀송뽀송한 함박눈송이들 사이에 있으면 제 마음도 뽀송뽀송해지는 기분이랄까요?<br/>
+                </NoonsongDescription>
+              </ResultWrapper>
+              }
+            </ContentWrapper>
           )}
         </ChatModal>
       </div>
@@ -130,4 +144,48 @@ const ProgressBarWrapper = styled.div`
   css`
     display: block;
   `}
+`;
+
+const NoonsongType = styled.div`
+    width: 80%;
+    font-weight: bold;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+`;
+
+const NoonsongImage = styled.div`
+    margin-bottom: 0.4rem;
+`;
+
+const NoonsongDescription = styled.div`
+    width: 80%;
+    font-size: 1rem;
+    text-align: center;
+    word-break: keep-all;
+`;
+
+const ResultWrapper = styled.div`
+    width: calc(100% - 6rem);
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: auto;
+    padding: 3rem;
+    font-family: "Carmen Sans";
+    overflow-y: scroll;
+
+    /* scrollbar */
+    ::-webkit-scrollbar {
+      width: 16px;
+    }
+    ::-webkit-scrollbar-thumb {
+        height: 6px;
+        border: 4px solid rgba(0, 0, 0, 0);
+        background-clip: padding-box;
+        -webkit-border-radius: 7px;
+        background-color: #f1f3f5; // background: #dee2e6;
+        -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05);
+    }
 `;

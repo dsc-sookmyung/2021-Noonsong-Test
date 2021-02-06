@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import noonsongImage from '../../Images/noonsong2.gif';
 
 const ResultTemplate = ({ isOpened, close }) => {
+    const [open, setOpen] = useState(isOpened);
     return (
         <>
-            { isOpened ? (
+            { open ? (
                 <div>
                 <ResultModal>
-                    <CloseButton type="button" onClick={close}>✕</CloseButton>
+                    <CloseButton type="button" onClick={() => {open = false}}>✕</CloseButton>
                     <ContentWrapper>
                         <NoonsongType>퀸송이</NoonsongType>
                         <NoonsongImage><img src={noonsongImage} alt="loading..." /></NoonsongImage>
