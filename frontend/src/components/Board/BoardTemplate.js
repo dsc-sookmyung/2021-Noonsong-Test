@@ -11,8 +11,8 @@ const BoardTemplate = ({ isOpened, close }) => {
         <BoardModal>
           <SideBar close={close}/>
           <ContentWrapper>
-            <GuestBook></GuestBook>
-            </ContentWrapper>
+            <GuestBook/>
+          </ContentWrapper>
         </BoardModal>
       </div>
     ) : null }
@@ -36,5 +36,7 @@ const BoardModal = styled.div`
 
 const ContentWrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: calc(100% - 3rem);
+  display: flex;
+  flex-direction: column;
 `;

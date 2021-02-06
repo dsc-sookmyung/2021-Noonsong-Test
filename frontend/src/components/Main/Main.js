@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createElement } from 'react';
 import style from './Main.module.css';
+import '../../fonts/font.css';
 
 import ChatTemplate from '../Chat/ChatTemplate';
 import AboutTemplate from '../About/AboutTemplate';
@@ -56,7 +57,6 @@ function Main(props) {
         let typingBool = false; 
         let typingIdx = 0; 
         let typingTxt = typingTxts[i].innerText.split('');
-        console.log(typingTxt);
         if (typingBool === false) {
           typingBool = true;
           await intervalHandler(typingTxt, typingIdx);
@@ -70,7 +70,6 @@ function Main(props) {
     return new Promise((resolve, reject) => {
       var tyInt = setInterval(() => { 
         if (typingIdx < typingTxt.length) {
-          console.log(typingTxt[typingIdx]);
           document.querySelector('.' + style.typing).append(typingTxt[typingIdx]);
           typingIdx++; 
         } else { 

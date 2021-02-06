@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import SelectContainer from './SelectContainer';
 import Messages from './Messages';
-import ResultTemplate from '../Result/ResultTemplate';
 import SideBar from '../_Basic/SideBar';
+import ProgressBar from '../_Basic/ProgressBar';
+import ResultTemplate from '../Result/ResultTemplate'
+import DelayedRender from './DelayedRender';
 
 const ChatTemplate = ({ isOpened, close }) => {
   const [numbers, setNumbers] = useState([1]);
   const [selected, setSelected] = useState([]);
   const [loaded, setLoaded] = useState(true);
+  const [isResultModalOpened, setIsResultModalOpened] = useState(false);
 
   const mounted = useRef(false);
   useEffect(() => {
@@ -22,18 +25,22 @@ const ChatTemplate = ({ isOpened, close }) => {
   }, [selected])
 
   const getSelected = useCallback((selectedIndex) => {
-    setSelected([...selected, selectedIndex])
+    setTimeout(() => setSelected([...selected, selectedIndex]), 1000);
     setNumbers([...numbers, numbers[numbers.length - 1] + 1]);
   });
 
   useEffect(() => {
     if (!loaded) {
-      setTimeout(() => setLoaded(true), 1500);
+      setTimeout(() => setLoaded(true), 1000);
     }
   }, [loaded]);
 
   const handleLoad = () => {
     setLoaded(!loaded);
+  }
+
+  const closeResultModal = () => {
+    setIsResultModalOpened(false);
   }
 
   return (
@@ -47,15 +54,22 @@ const ChatTemplate = ({ isOpened, close }) => {
             <MBoxWrapper>
               <Messages numbers={numbers} loaded={loaded}/>
             </MBoxWrapper>
-            <SelectContainer 
-              index={Math.ceil(numbers.length / 2)} 
-              getSelected={getSelected}
-              handleLoad={handleLoad}>
-            </SelectContainer>
+            <DelayedRender delay={1000}>
+              <SelectContainer 
+                index={Math.ceil(numbers.length / 2)} 
+                getSelected={getSelected}
+                handleLoad={handleLoad}>
+              </SelectContainer>
+            </DelayedRender>
           </ContentWrapper>
           ) : (
           <ContentWrapper>
-            <ResultTemplate></ResultTemplate>
+            <ProgressBarWrapper disappear={!loaded}>
+              <ProgressBar/>
+            </ProgressBarWrapper>
+            <DelayedRender delay={1000}>
+              <ResultTemplate isOpened={true} close={closeResultModal}></ResultTemplate>
+            </DelayedRender>
           </ContentWrapper>
           )}
         </ChatModal>
@@ -93,4 +107,16 @@ const MBoxWrapper = styled.div`
   height: 75%;
   margin: 0 auto;
   padding: 1rem;
+`;
+
+const ProgressBarWrapper = styled.div`
+  display: none;
+  width: 100%;
+  height: 100%;
+
+  ${props =>
+  props.disappear &&
+  css`
+    display: block;
+  `}
 `;
