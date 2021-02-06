@@ -10,15 +10,15 @@ const AlwaysScrollToBottom = () => {
   return <div ref={scrollRef} />;
 };
 
-const Messages = ({ numbers, loaded }) => {
+const Messages = ({ numbers, contents, selected, loaded }) => {
   return (
     <div className="messagesSection">
       <MessagesContainer>
         {numbers.map((v) => {
           return (
             <div className="messagesContainer">
-              <Message key={`message ${v}`} index={v} />
-              {(v == numbers.length) ? (
+              <Message key={`message ${v}`} text={contents[Math.ceil(v / 2) - 1]} selectedAnswer={selected} index={v} />
+              {(v === numbers.length) ? (
                 <Wrapper disappear={!loaded}>
                 <div class="dot-typing"></div>
                 </Wrapper>

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const StyledSelect = styled.button`
   /* 공통 스타일 */
   outline: none;
-  border-radius: 8px;
+  border-radius: 16px;
   color: black;
   font-weight: bold;
   cursor: pointer;
@@ -19,8 +19,9 @@ const StyledSelect = styled.button`
 
   /* 색상 */
   background: none;
-  border: 2px solid;
+  border: 1px solid;
   border-color: #4379b7;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
   &:hover {
     color: white;
     background: #4379b7;
