@@ -35,7 +35,7 @@ const Messages = ({ numbers, contents, selected, loaded }) => {
 export default Messages;
 
 const MessagesContainer = styled.div`
-  height: 30rem;
+  height: 32rem;
   overflow-y: scroll;
 
   /* scrollbar */

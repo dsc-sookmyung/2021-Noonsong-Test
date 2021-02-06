@@ -1,5 +1,6 @@
 .dot-typing {
   position: relative;
+  margin-left: 1rem;
   left: -9999px;
   width: 10px;
   height: 10px;
