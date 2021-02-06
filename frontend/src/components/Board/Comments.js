@@ -13,7 +13,7 @@ const Comments = ({ comments }) => {
     <div className="commentsSection">
       <CommentsContainer>
         {Array.prototype.map.call(comments, (comment, index) => {
-          return (<Comment key={comment.name + index} name={comment.name} comment={comment.comment}/>);
+          return (<Comment key={comment.guest + comment.id} name={comment.guest} comment={comment.content}/>);
         })}
         <AlwaysScrollToBottom />
       </CommentsContainer>

@@ -13,7 +13,6 @@ const Name = styled.div`
   font-weight: 700;
 `;
 
-
 const Wrapper = styled.div`
   &:after {
     content: '';
