@@ -7,7 +7,7 @@
   background-color: #4379B7;
   color: #4379B7;
   box-shadow: 9984px 0 0 0 #4379B7, 9999px 0 0 0 #4379B7, 10014px 0 0 0 #4379B7;
-  animation: dotTyping 1.5s infinite linear;
+  animation: dotTyping 1s infinite linear;
 }
 
 @keyframes dotTyping {

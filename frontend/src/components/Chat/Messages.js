@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import Message from './Message';
+import DelayedRender from './DelayedRender'
 import './TypingDot.css';
 
 const AlwaysScrollToBottom = () => {
@@ -16,16 +17,16 @@ const Messages = ({ numbers, loaded }) => {
         {numbers.map((v) => {
           return (
             <div className="messagesContainer">
-              {(v == numbers.length - 1) ? (
+              <Message key={`message ${v}`} index={v} />
+              {(v == numbers.length) ? (
                 <Wrapper disappear={!loaded}>
                 <div class="dot-typing"></div>
                 </Wrapper>
               ) : (null)}
-              <Message key={`message ${v}`} index={v} />
+              <AlwaysScrollToBottom />
             </div>
           );
         })}
-        <AlwaysScrollToBottom />
       </MessagesContainer>
     </div>
   )
@@ -56,12 +57,11 @@ const Wrapper = styled.div`
   margin-top: 10px;
   padding: 15px;
   font-family: arial;
-  position: relative;
-  float: left;
 
   ${props =>
   props.disappear &&
   css`
     display: block;
-  `}
+    float: left;
+    `}
 `;
