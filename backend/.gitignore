@@ -1,5 +1,5 @@
 myvenv
-noonsongtest/noonsongtest/settings.py
+noonsongtest/secrets.json
 
 # Created by https://www.toptal.com/developers/gitignore/api/django,python,windows,macos,venv,vim
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,python,windows,macos,venv,vim
