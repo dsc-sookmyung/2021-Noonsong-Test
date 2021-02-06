@@ -7,9 +7,10 @@ function GuestBook() {
 
   useEffect(async () => {
     /* get comments */
-    await fetch('http://localhost:8000/feedbacks/')
-      .then((res) => console.log(res))
-      .catch((err) => console.log("error: ", err));
+    let res = await fetch('http://localhost:8000/feedbacks/');
+    await res.json().then((data) => {
+      setComments(data);
+    });
   }, [])
 
   return (
@@ -20,7 +21,8 @@ function GuestBook() {
           console.log(comments);
           return [...prevComments, commentObject]
         });
-        /* fetch post */
+        /* post comments */
+        // let res = fetch('http://localhost:8000/feedbacks/')
       }}
       />
     </>

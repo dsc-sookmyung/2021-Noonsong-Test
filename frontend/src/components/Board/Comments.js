@@ -13,7 +13,7 @@ const Comments = ({ comments }) => {
     <div className="commentsSection">
       <CommentsContainer>
         {Array.prototype.map.call(comments, (comment, index) => {
-          return (<Comment key={comment.name + index} name={comment.name} comment={comment.comment}/>);
+          return (<Comment key={comment.guest + comment.id} name={comment.guest} comment={comment.content}/>);
         })}
         <AlwaysScrollToBottom />
       </CommentsContainer>
@@ -24,8 +24,9 @@ const Comments = ({ comments }) => {
 export default Comments;
 
 const CommentsContainer = styled.div`
-  height: 26rem;
+  height: 24rem;
   overflow-y: scroll;
+  padding: 0.8rem;
 
   /* scrollbar */
   ::-webkit-scrollbar {

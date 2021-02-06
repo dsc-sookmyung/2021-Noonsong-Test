@@ -32,7 +32,6 @@
     height: 40%;
     display: inline-block;
     background-color: floralwhite;
-    font-family: "Carmen Sans";
     line-height: 1;
     padding: 4.4rem 3.6rem;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
@@ -40,6 +39,7 @@
 }
 
 .title {
+    font-family: "Carmen Sans";
     margin: 0 0 2.4rem;
     font-weight: 900;
     font-size: 2.4em;
@@ -50,6 +50,8 @@
 }
 
 .typing {  
+    font-family: "Carmen Sans";
+    font-weight: 400;
     display: inline-block; 
     line-height: 1.8;
     font-size: 0.95em;
