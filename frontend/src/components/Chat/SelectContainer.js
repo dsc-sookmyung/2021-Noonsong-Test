@@ -7,13 +7,22 @@ const SelectContainer = ({index, getSelected, handleLoad, contents}) => {
     getSelected(selectedIndex);
     handleLoad();
   }
-
+  
   return (
     <div>
-      <StyledSelectContainer>
-        <Select onClick={onClickSelect(1)}>{contents[index - 1].answers[0].answer}</Select>
-        <Select onClick={onClickSelect(2)}>{contents[index - 1].answers[1].answer}</Select>
-      </StyledSelectContainer>
+      {index === 13 ? (
+        <StyledSelectContainer>
+          <Select onClick={onClickSelect(1)}>{contents[index - 1].answers[0].answer}</Select>
+          <Select onClick={onClickSelect(2)}>{contents[index - 1].answers[1].answer}</Select>
+          <Select onClick={onClickSelect(3)}>{contents[index - 1].answers[2].answer}</Select>
+          <Select onClick={onClickSelect(4)}>{contents[index - 1].answers[3].answer}</Select>
+        </StyledSelectContainer>
+      ) : (
+        <StyledSelectContainer>
+          <Select onClick={onClickSelect(1)}>{contents[index - 1].answers[0].answer}</Select>
+          <Select onClick={onClickSelect(2)}>{contents[index - 1].answers[1].answer}</Select>
+        </StyledSelectContainer>
+      )}
     </div>
   )
 }
