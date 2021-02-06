@@ -10,8 +10,10 @@ import DelayedRender from './DelayedRender';
 const ChatTemplate = ({ isOpened, close }) => {
   const [numbers, setNumbers] = useState([1]);
   const [selected, setSelected] = useState([]);
+  const [nowSelected, setNowSelected] = useState([]);
   const [loaded, setLoaded] = useState(true);
   const [isResultModalOpened, setIsResultModalOpened] = useState(false);
+  const [questions, setQuestions] = useState([]);
 
   const mounted = useRef(false);
   useEffect(() => {
@@ -24,16 +26,25 @@ const ChatTemplate = ({ isOpened, close }) => {
     console.log(selected);
   }, [selected])
 
-  const getSelected = useCallback((selectedIndex) => {
-    setTimeout(() => setSelected([...selected, selectedIndex]), 1000);
-    setNumbers([...numbers, numbers[numbers.length - 1] + 1]);
-  });
-
   useEffect(() => {
     if (!loaded) {
       setTimeout(() => setLoaded(true), 1000);
     }
   }, [loaded]);
+
+  useEffect(async () => {
+    let res = await fetch('http://localhost:8000/questions/');
+    await res.json().then((data) => {
+      setQuestions(data);
+      console.log(questions);
+    })
+  }, [])
+
+  const getSelected = useCallback((selectedIndex) => {
+    setNowSelected([...nowSelected, selectedIndex]);
+    setTimeout(() => setSelected([...selected, selectedIndex]), 1000);
+    setNumbers([...numbers, numbers[numbers.length - 1] + 1]);
+  });
 
   const handleLoad = () => {
     setLoaded(!loaded);
@@ -52,13 +63,14 @@ const ChatTemplate = ({ isOpened, close }) => {
           { numbers.length < 26 ? (
           <ContentWrapper>
             <MBoxWrapper>
-              <Messages numbers={numbers} loaded={loaded}/>
+              <Messages numbers={numbers} contents={questions} selected={nowSelected} loaded={loaded}/>
             </MBoxWrapper>
             <DelayedRender delay={1000}>
               <SelectContainer 
                 index={Math.ceil(numbers.length / 2)} 
                 getSelected={getSelected}
-                handleLoad={handleLoad}>
+                handleLoad={handleLoad}
+                contents={questions}>
               </SelectContainer>
             </DelayedRender>
           </ContentWrapper>
@@ -103,10 +115,9 @@ const ContentWrapper = styled.div`
 `;
 
 const MBoxWrapper = styled.div`
-  width: 90%;
+  width: 100%;
   height: 75%;
   margin: 0 auto;
-  padding: 1rem;
 `;
 
 const ProgressBarWrapper = styled.div`
