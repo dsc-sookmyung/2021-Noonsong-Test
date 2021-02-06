@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from .models import Question, Answer
+from .models import Question, Answer, Result, Response
 
 
 
@@ -15,3 +15,12 @@ class QuestionSerializer(serializers.ModelSerializer):
         model = Question # 모델 설정 
         fields = ('id','question', 'answers') # 필드 설정
 
+class ResultSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Result
+        fields = ('id', 'title', 'explain')
+
+class ResponseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Response
+        fields = '__all__'
