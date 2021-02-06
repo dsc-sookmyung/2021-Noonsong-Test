@@ -80,7 +80,7 @@ const ChatTemplate = ({ isOpened, close }) => {
               <ProgressBar/>
             </ProgressBarWrapper>
             <DelayedRender delay={1000}>
-              <ResultTemplate isOpened={true} close={closeResultModal}></ResultTemplate>
+              <ResultTemplate isOpened={isResultModalOpened} close={closeResultModal}></ResultTemplate>
             </DelayedRender>
           </ContentWrapper>
           )}
@@ -116,7 +116,7 @@ const ContentWrapper = styled.div`
 
 const MBoxWrapper = styled.div`
   width: 100%;
-  height: 75%;
+  height: 80%;
   margin: 0 auto;
 `;
 
