@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createElement } from 'react';
 import style from './Main.module.css';
+import '../../fonts/font.css';
 
 import ChatTemplate from '../Chat/ChatTemplate';
 import AboutTemplate from '../About/AboutTemplate';

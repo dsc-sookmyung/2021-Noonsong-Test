@@ -24,8 +24,9 @@ const Comments = ({ comments }) => {
 export default Comments;
 
 const CommentsContainer = styled.div`
-  height: 26rem;
+  height: 24rem;
   overflow-y: scroll;
+  padding: 0.8rem;
 
   /* scrollbar */
   ::-webkit-scrollbar {
