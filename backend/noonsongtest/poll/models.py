@@ -15,6 +15,7 @@ class Answer(models.Model):
 
 class Result(models.Model):
     title = models.CharField(max_length=1000)
+    image = models.CharField(max_length=3000, null=True)
     explain = models.CharField(max_length=3000, null=True)
 
     class Meta:
