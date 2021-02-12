@@ -93,7 +93,48 @@ const ChatTemplate = ({ isOpened, close }) => {
                   주변 사람들을 편안하게 해주는 능력을 갖고 있는, 누구에게나 사랑받는 눈송이에요!<br/>
                   뽀송뽀송한 함박눈송이들 사이에 있으면 제 마음도 뽀송뽀송해지는 기분이랄까요?<br/>
                 </NoonsongDescription>
-                {/*<KakaoLink/>*/}
+                <KakaoLink>
+                  <a id="create-kakao-link-btn" href="javascript:;">
+                  <img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="30rem" />
+                  </a>
+                </KakaoLink>
+                {/* 사용하려면 Web 플랫폼 등록해야함 (도메인 있어야 함)
+                Kakao.Link.createDefaultButton({
+                  container: '#create-kakao-link-btn',
+                  objectType: 'feed',
+                  content: {
+                    title: '눈송이 유형 테스트',
+                    description: '나는 어떤 유형의 눈송이일까?',
+                    imageUrl:
+                      'https://cdn.discordapp.com/attachments/805692710342098944/807269209432129596/IMG_0566.jpg',
+                    link: {
+                      mobileWebUrl: 'https://developers.kakao.com',
+                      webUrl: 'https://developers.kakao.com',
+                    },
+                  },
+                  social: {
+                    likeCount: 286,
+                    commentCount: 45,
+                    sharedCount: 845,
+                  },
+                  buttons: [
+                    {
+                      title: '테스트 하기',
+                      link: {
+                        mobileWebUrl: 'https://developers.kakao.com',
+                        webUrl: 'https://developers.kakao.com',
+                      },
+                    },
+                    {
+                      title: '결과 보기',
+                      link: {
+                        mobileWebUrl: 'https://developers.kakao.com',
+                        webUrl: 'https://developers.kakao.com',
+                      },
+                    },
+                  ],
+                  })
+                */}
               </ResultWrapper>
               }
             </ContentWrapper>
@@ -151,7 +192,7 @@ const NoonsongType = styled.div`
     font-weight: bold;
     font-size: 2rem;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 `;
 
 const NoonsongImage = styled.div`
@@ -163,19 +204,22 @@ const NoonsongDescription = styled.div`
     font-size: 1rem;
     text-align: center;
     word-break: keep-all;
+    margin-bottom: 1rem;
 `;
 
 
-// Kakao.Link.createDefaultButton({})
+const KakaoLink = styled.div`
+    text-align: center;
+`;
 
 const ResultWrapper = styled.div`
-    width: calc(100% - 6rem);
+    width: calc(100% - 4rem);
     height: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: auto;
-    padding: 3rem;
+    padding: 2rem;
     font-family: "Carmen Sans";
     overflow-y: scroll;
 
