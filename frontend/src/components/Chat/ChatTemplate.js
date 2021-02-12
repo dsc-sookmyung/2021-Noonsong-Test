@@ -25,7 +25,6 @@ const ChatTemplate = ({ isOpened, close }) => {
     else {
       setNumbers([...numbers, numbers[numbers.length - 1] + 1]);
     }
-    console.log(selected);
   }, [selected])
 
   useEffect(() => {
@@ -66,7 +65,7 @@ const ChatTemplate = ({ isOpened, close }) => {
       <div>
         <ChatModal>
           <SideBar close={close}/>
-          { numbers.length < 26 ? (
+          { numbers.length < 32 ? (
           <ContentWrapper>
             <MBoxWrapper>
               <Messages numbers={numbers} contents={questions} selected={nowSelected} loaded={loaded}/>
@@ -94,6 +93,7 @@ const ChatTemplate = ({ isOpened, close }) => {
                   주변 사람들을 편안하게 해주는 능력을 갖고 있는, 누구에게나 사랑받는 눈송이에요!<br/>
                   뽀송뽀송한 함박눈송이들 사이에 있으면 제 마음도 뽀송뽀송해지는 기분이랄까요?<br/>
                 </NoonsongDescription>
+                {/*<KakaoLink/>*/}
               </ResultWrapper>
               }
             </ContentWrapper>
@@ -164,6 +164,9 @@ const NoonsongDescription = styled.div`
     text-align: center;
     word-break: keep-all;
 `;
+
+
+// Kakao.Link.createDefaultButton({})
 
 const ResultWrapper = styled.div`
     width: calc(100% - 6rem);
