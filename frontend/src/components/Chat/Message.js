@@ -2,7 +2,6 @@ import React from 'react';
 import SpeechBubble from './SpeechBubble';
 
 const Message = ({ text, selectedAnswer, index }) => {
-  console.log(selectedAnswer)
   return (
     <>
       {(index % 2) ? (
