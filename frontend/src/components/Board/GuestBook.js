@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Comments from './Comments';
 import Form from './Form';
 
 function GuestBook() {
   const [comments, setComments] = useState([]);
+  const [numbers, setNumbers] = useState([]);
 
   useEffect(async () => {
     /* get comments */
@@ -11,7 +12,12 @@ function GuestBook() {
     await res.json().then((data) => {
       setComments(data);
     });
-  }, [])
+    console.log("use effect");
+  }, [numbers])
+
+  const getComment = useCallback(() => {
+    setNumbers([...numbers, numbers[numbers.length -1] + 1]);
+  });
 
   return (
     <>
@@ -21,9 +27,7 @@ function GuestBook() {
           console.log(comments);
           return [...prevComments, commentObject]
         });
-        /* post comments */
-        // let res = fetch('http://localhost:8000/feedbacks/')
-      }}
+      }} getComment={getComment}
       />
     </>
   )
