@@ -7,17 +7,6 @@ const SelectContainer = ({index, getSelected, handleLoad, contents}) => {
     getSelected(selectedIndex);
     handleLoad();
     if (index === 16) {
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({selectedIndex: selectedIndex})
-      };
-      fetch('http://localhost:8000/responses/', requestOptions)
-        .then(res=>res.json())
-        .then(data=>console.log(data));
-    }
-
-    /*
       (async () => {
         const requestOptions = await fetch('http://localhost:8000/responses/', {
           method: 'POST',
@@ -28,6 +17,17 @@ const SelectContainer = ({index, getSelected, handleLoad, contents}) => {
 
         console.log(content);
       })();
+    }
+
+    /*
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({selectedIndex: selectedIndex})
+      };
+      fetch('http://localhost:8000/rgit esponses/', requestOptions)
+        .then(res=>res.json())
+        .then(data=>console.log(data));
     */
   }
 
