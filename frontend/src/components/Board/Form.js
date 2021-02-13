@@ -1,17 +1,31 @@
-import React from "react"
+import React, { useRef } from "react"
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import useInputState from './useInputState';
 import style from './Form.module.css';
 
-const Form = ({ saveComment }) => {
+const Form = ({ saveComment, getComment, handleLoad }) => {
   const { name, comment, reset, onChangeName, onChangeComment } = useInputState('');
-  
+  const textRef = useRef(null);
+
   return (
     <form
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        saveComment({name: name, comment: comment});
+        /* 로딩 중임을 알리는 불투명 화면 */
+        handleLoad();
+        setTimeout(() => textRef.current.focus(), 2500);
+        /* post comments */
+        const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({guest: name, content: comment})
+        };
+        await fetch('http://localhost:8000/feedbacks/', requestOptions)
+          .then(res=>res.json())
+          .then(data=>console.log(data));
+        { /*saveComment({name: name, comment: comment}); */ }
+        getComment();
         reset();
       }}
       className={style.form}
@@ -26,6 +40,7 @@ const Form = ({ saveComment }) => {
           variant="outlined"
           size="small"
           fullWidth
+          inputRef={textRef}
         />
         <TextField
           variant="standard"  // outlined
