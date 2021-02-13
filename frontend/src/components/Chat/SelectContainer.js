@@ -6,18 +6,17 @@ const SelectContainer = ({index, getSelected, handleLoad, contents}) => {
   const onClickSelect = (selectedIndex) => (e) => {
     getSelected(selectedIndex);
     handleLoad();
-    if (index === 16) {
-      (async () => {
-        const requestOptions = await fetch('http://localhost:8000/responses/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({selectedIndex})
-        });
-        const content = await requestOptions.json();
+    // if (index === 16) {    }
+    (async () => {
+      const requestOptions = await fetch('http://localhost:8000/responses/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({selectedIndex})
+      });
+      const content = await requestOptions.json();
 
-        console.log(content);
-      })();
-    }
+      console.log(content);
+    })();
 
     /*
       const requestOptions = {
