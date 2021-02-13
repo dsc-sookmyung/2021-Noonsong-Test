@@ -1,10 +1,22 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
 import Comments from './Comments';
 import Form from './Form';
+
+const useStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
+}));
 
 function GuestBook() {
   const [comments, setComments] = useState([]);
   const [numbers, setNumbers] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+  const classes = useStyles();
 
   useEffect(async () => {
     /* get comments */
@@ -12,12 +24,22 @@ function GuestBook() {
     await res.json().then((data) => {
       setComments(data);
     });
-    console.log("use effect");
   }, [numbers])
+
+  useEffect(() => {
+    if (!loaded) {
+      setTimeout(() => setLoaded(true), 2500);
+    }
+  }, [loaded]);
 
   const getComment = useCallback(() => {
     setNumbers([...numbers, numbers[numbers.length -1] + 1]);
   });
+
+  const handleLoad = () => {
+    setLoaded(!loaded);
+    console.log(loaded);
+  }
 
   return (
     <>
@@ -27,8 +49,15 @@ function GuestBook() {
           console.log(comments);
           return [...prevComments, commentObject]
         });
-      }} getComment={getComment}
+      }} 
+      getComment={getComment}
+      handleLoad={handleLoad}
       />
+      { !loaded ? (
+        <Backdrop classNmae={classes.backdrop} open={!loaded}>
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      ) : null }
     </>
   )
 }
