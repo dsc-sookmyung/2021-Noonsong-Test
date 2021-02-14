@@ -6,34 +6,8 @@ const SelectContainer = ({index, getSelected, handleLoad, contents}) => {
   const onClickSelect = (selectedIndex) => (e) => {
     getSelected(selectedIndex);
     handleLoad();
-    console.log(JSON.stringify({selectedIndex}));
-    // if (index === 16) {    }
-    (async () => {
-      const requestOptions = await fetch('http://localhost:8000/responses/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({selectedIndex})
-      });
-      const content = await requestOptions.json();
-
-      // console.log(content);
-    })();
-
-    /*
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({selectedIndex: selectedIndex})
-      };
-      fetch('http://localhost:8000/rgit esponses/', requestOptions)
-        .then(res=>res.json())
-        .then(data=>console.log(data));
-    */
   }
 
-  // const studentIdIndex = [1, 2, 3, 4, 5, 6, 7, 8];
-  // const collegeIndex = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-  
   return (
     <div>
       {index === 1 ? (
@@ -43,13 +17,6 @@ const SelectContainer = ({index, getSelected, handleLoad, contents}) => {
       ) : (
         index === 2 ? (
           <StyledSelectContainer>
-            {/*
-            {studentIdIndex.map((v) => {
-              return (
-                <Select key={`studentId ${v}`} onclick={onClickSelect(v)}>{contents[index-1].answers[v-1].answer}</Select>
-              )
-              })}
-            */}
             <Select onClick={onClickSelect(1)}>{contents[index - 1].answers[0].answer}</Select>
             <Select onClick={onClickSelect(2)}>{contents[index - 1].answers[1].answer}</Select>
             <Select onClick={onClickSelect(3)}>{contents[index - 1].answers[2].answer}</Select>
@@ -63,13 +30,6 @@ const SelectContainer = ({index, getSelected, handleLoad, contents}) => {
         ) : (
           index === 3 ? (
             <StyledSelectContainer>
-              {/*
-              {collegeIndex.map((v) => {
-              return (
-                <Select key={`college ${v}`} onclick={onClickSelect(v)}>{contents[index-1].answers[v-1].answer}</Select>
-              )
-              })}
-              */}
               <Select onClick={onClickSelect(1)}>{contents[index - 1].answers[0].answer}</Select>
               <Select onClick={onClickSelect(2)}>{contents[index - 1].answers[1].answer}</Select>
               <Select onClick={onClickSelect(3)}>{contents[index - 1].answers[2].answer}</Select>
