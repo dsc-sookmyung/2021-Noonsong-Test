@@ -4,22 +4,20 @@ import SelectContainer from './SelectContainer';
 import Messages from './Messages';
 import SideBar from '../_Basic/SideBar';
 import ProgressBar from '../_Basic/ProgressBar';
-import ResultTemplate from '../Result/ResultTemplate'
 import DelayedRender from './DelayedRender';
 
 import noonsongImage from '../../Images/bbosong.jpg';
 import ReplayIcon from '@material-ui/icons/Replay';
 import Button from '@material-ui/core/Button';
+import KakaoShareButton from './KakaoShareButton';
 
 const TestTemplate = ({ isOpened, close, reopen }) => {
   const [numbers, setNumbers] = useState([1]);
   const [selected, setSelected] = useState([]);
   const [nowSelected, setNowSelected] = useState([]);
   const [loaded, setLoaded] = useState(true);
-  const [isResultModalOpened, setIsResultModalOpened] = useState(false);
   const [questions, setQuestions] = useState([]);
-  const [reset, setReset] = useState(false);
-
+ 
   const mounted = useRef(false);
   useEffect(() => {
     if (!mounted.current) {
@@ -37,12 +35,13 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
   }, [loaded]);
 
   useEffect(async () => {
+    /* GET questions */
     let res = await fetch('http://localhost:8000/questions/');
     await res.json().then((data) => {
       setQuestions(data);
       console.log(questions);
     })
-  }, [reset])
+  }, [])
 
   const getSelected = useCallback((selectedIndex) => {
     setNowSelected([...nowSelected, selectedIndex]);
@@ -52,14 +51,6 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
 
   const handleLoad = () => {
     setLoaded(!loaded);
-  }
-
-  const openResultModal = () => {
-    setIsResultModalOpened(true);
-  }
-
-  const closeResultModal = () => {
-    setIsResultModalOpened(false);
   }
 
   const getConsole = () => {
@@ -72,15 +63,25 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
 
   const replayHandler = (e) => {
     e.preventDefault(e);
-    setReset(!reset);
-    setNumbers([1]);
-    setSelected([]);
-    setNowSelected([]);
-    setLoaded(true);
-    setQuestions([]);
     close();
-    setTimeout(() => getConsole(), 10000);
+    setTimeout(() => getConsole(), 5000);
+    window.location.reload();
   }
+
+  /*
+  if (numbers.length === 32) {    
+    (async () => {
+      const requestOptions = await fetch('http://localhost:8000/responses/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({nowSelected})
+      });
+      const content = await requestOptions.json();
+
+      console.log(content);
+    })();
+  }
+  */
 
   return (
     <>
@@ -126,48 +127,9 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
                     </Button>
                   </Replay>
                   <KakaoLink>
-                    <a id="create-kakao-link-btn" href="javascript:;">
-                    <img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="30rem" />
-                    </a>
+                    <KakaoShareButton />
                   </KakaoLink>
-                </ButtonsWrapper>
-                {/* 사용하려면 Web 플랫폼 등록해야함 (도메인 있어야 함)
-                Kakao.Link.createDefaultButton({
-                  container: '#create-kakao-link-btn',
-                  objectType: 'feed',
-                  content: {
-                    title: '눈송이 유형 테스트',
-                    description: '나는 어떤 유형의 눈송이일까?',
-                    imageUrl:
-                      'https://cdn.discordapp.com/attachments/805692710342098944/807269209432129596/IMG_0566.jpg',
-                    link: {
-                      mobileWebUrl: 'https://developers.kakao.com',
-                      webUrl: 'https://developers.kakao.com',
-                    },
-                  },
-                  social: {
-                    likeCount: 286,
-                    commentCount: 45,
-                    sharedCount: 845,
-                  },
-                  buttons: [
-                    {
-                      title: '테스트 하기',
-                      link: {
-                        mobileWebUrl: 'https://developers.kakao.com',
-                        webUrl: 'https://developers.kakao.com',
-                      },
-                    },
-                    {
-                      title: '결과 보기',
-                      link: {
-                        mobileWebUrl: 'https://developers.kakao.com',
-                        webUrl: 'https://developers.kakao.com',
-                      },
-                    },
-                  ],
-                  })
-                */}
+                </ButtonsWrapper>                
               </ResultWrapper>
               }
             </ContentWrapper>
