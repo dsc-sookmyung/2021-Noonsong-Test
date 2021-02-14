@@ -2,7 +2,7 @@ import React, { useState, useEffect, createElement } from 'react';
 import style from './Main.module.css';
 import '../../fonts/font.css';
 
-import ChatTemplate from '../Chat/ChatTemplate';
+import TestTemplate from '../Test/TestTemplate';
 import AboutTemplate from '../About/AboutTemplate';
 import BoardTemplate from '../Board/BoardTemplate';
 
@@ -125,7 +125,7 @@ function Main(props) {
           </div>
           <div className={style.postit}>방명록 →</div>
         </div>
-        <ChatTemplate isOpened={isTestModalOpened} close={closeTestModal}/>
+        <TestTemplate isOpened={isTestModalOpened} close={closeTestModal} reopen={openTestModal}/>
         <AboutTemplate isOpened={isAboutModalOpened} close={closeAboutModal}/>
         <BoardTemplate isOpened={isBoardModalOpened} close={closeBoardModal}/>
       </div>
