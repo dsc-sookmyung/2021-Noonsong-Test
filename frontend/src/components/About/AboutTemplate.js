@@ -24,9 +24,9 @@ function AboutTemplate({ isOpened, close }) {
         overflow: scroll;
         z-index: 99;
 
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 638px) {
             width: 100vw;
-            position: relative;
+            height: 100vh;
         }
     `;
 

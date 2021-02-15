@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from .models import Question, Answer, Result, Response
+from .models import Question, Answer, Result, User
 
 
 
@@ -20,7 +20,7 @@ class ResultSerializer(serializers.ModelSerializer):
         model = Result
         fields = ('id', 'title', 'image', 'explain')
 
-class ResponseSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Response
-        fields = '__all__'
+        model=User
+        fields = ('id','answer_list','ip', 'result_id') #return 할때 뭐 보낼지 
