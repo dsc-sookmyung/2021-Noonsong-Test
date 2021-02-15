@@ -13,10 +13,10 @@ const StyledModal = styled.div`
   border-radius: 1rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 
-  // Mobile
+  /* Mobile */
   @media only screen and (max-width: 767px) {
     width: 100vw;
-    position: relative;
+    height: 100vh;
   }
 `;
 

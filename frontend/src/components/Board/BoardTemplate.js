@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import GuestBook from './GuestBook';
+import Modal from '../_Basic/Modal';
 import SideBar from '../_Basic/SideBar';
 
 const BoardTemplate = ({ isOpened, close }) => {
@@ -8,12 +9,12 @@ const BoardTemplate = ({ isOpened, close }) => {
     <>
     { isOpened ? (
       <div>
-        <BoardModal>
+        <Modal>
           <SideBar close={close}/>
           <ContentWrapper>
             <GuestBook/>
           </ContentWrapper>
-        </BoardModal>
+        </Modal>
       </div>
     ) : null }
   </>
@@ -22,21 +23,10 @@ const BoardTemplate = ({ isOpened, close }) => {
 
 export default BoardTemplate;
 
-const BoardModal = styled.div`
-  width: 40rem;
-  height: 40rem;
-  background-color: white;
-  position: absolute;
-  top: 50%;
-  left 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 1rem;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-`;
-
 const ContentWrapper = styled.div`
   width: 100%;
-  height: calc(100% - 3rem);
+  min-height: calc(100% - 3rem);
+  height: auto;
   display: flex;
   flex-direction: column;
 `;

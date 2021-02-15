@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const StyledComment = styled.div`
   display: inline-block;
   width: auto;
-  padding: 1rem 1.4rem;
+  padding: 1.2rem 0rem;
   margin: 0.4rem;
 `;
 

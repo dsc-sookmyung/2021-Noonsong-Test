@@ -24,9 +24,10 @@ const Comments = ({ comments }) => {
 export default Comments;
 
 const CommentsContainer = styled.div`
-  height: 24rem;
+  min-height: 28rem;
+  height: auto;
   overflow-y: scroll;
-  padding: 0.8rem;
+  padding: 1.2rem;
 
   /* scrollbar */
   ::-webkit-scrollbar {
@@ -39,5 +40,18 @@ const CommentsContainer = styled.div`
       -webkit-border-radius: 7px;
       background-color: #f1f3f5; // background: #dee2e6;
       -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Mobile */
+  @media only screen and (max-width: 767px) {
+    min-height: 24rem;
+  }
+
+  @media only screen and (min-height: 720px) {
+    min-height: 28rem;
+  }
+
+  @media only screen and (min-height: 780px) {
+    min-height: 32rem;
   }
 `;
