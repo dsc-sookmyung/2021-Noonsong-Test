@@ -285,7 +285,6 @@
 @media(max-width: 871px) {
     .contentwrapper {
         min-height: 100vh;
-        height: auto;
         width: 100vw;
         margin: 0;
         border-radius: 0px;
