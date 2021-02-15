@@ -85,12 +85,10 @@ WSGI_APPLICATION = 'noonsongtest.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        #'NAME': BASE_DIR / 'db.sqlite3',
         'NAME':'gitribute',
         'USER':'root',
         'PASSWORD':get_secret("DATABASE"),
         'HOST':'34.67.105.35',
-        #'HOST':'localhost',
         'PORT':'3306',
     }
 }
