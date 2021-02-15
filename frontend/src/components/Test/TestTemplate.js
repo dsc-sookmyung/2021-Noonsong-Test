@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styled, { css } from 'styled-components';
+import Modal from '../_Basic/Modal';
 import SelectContainer from './SelectContainer';
 import Messages from './Messages';
 import SideBar from '../_Basic/SideBar';
@@ -17,6 +18,7 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
   const [nowSelected, setNowSelected] = useState([]);
   const [loaded, setLoaded] = useState(true);
   const [questions, setQuestions] = useState([]);
+  const [resultLoaded, setResultLoaded] = useState(false);
  
   const mounted = useRef(false);
   useEffect(() => {
@@ -78,6 +80,7 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
       });
       const content = await requestOptions.json();
 
+      setResultLoaded(true);
       console.log(content);
     })();
   }
@@ -87,7 +90,7 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
     <>
     { isOpened ? (
       <div>
-        <TestModal>
+        <Modal>
           <SideBar close={close}/>
           { numbers.length < 32 ? (
           <ContentWrapper>
@@ -105,7 +108,7 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
           </ContentWrapper>
           ) : (
             <ContentWrapper>
-            { !loaded ? 
+            { !loaded ? //resultLoaded
               <ProgressBarWrapper disappear={!loaded}>
                 <ProgressBar/>
               </ProgressBarWrapper>
@@ -134,7 +137,7 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
               }
             </ContentWrapper>
           )}
-        </TestModal>
+        </Modal>
       </div>
     ) : null}
   </>
@@ -142,22 +145,6 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
 }
 
 export default TestTemplate;
-
-const Background = styled.div`
-  position: relative;
-`;
-
-const TestModal = styled.div`
-  width: 40rem;
-  height: 40rem;
-  background-color: white;
-  position: absolute;
-  top: 50%;
-  left 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 1rem;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-`;
 
 const ContentWrapper = styled.div`
   width: 100%;
