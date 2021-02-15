@@ -105,12 +105,17 @@ function Main(props) {
               눈송이 유형 테스트를 통해 본인도 몰랐던 자신의 귀여움과 특별함을 찾아보세요!
             </p>
             <p className={style.typingtxt}>
-            아래의 학교 사진을 눌러 테스트를 시작할 수 있답니다  ◡‿◡✿ 
+            아래의 사진을 눌러 테스트를 시작할 수 있답니다  ◡‿◡✿ 
             </p>
           </div>
           
           <p className={style.typing}></p> 
           <img src={noonsong} alt="noonsong" className={style.noonsong}/>
+          <div className={style.linkwrapper}>
+            <div className={style.link} onClick={openTestModal}>테스트 바로가기 →</div>
+            <div className={style.link} onClick={openAboutModal}>Gitribute 팀원 소개 →</div>
+            <div className={style.link} onClick={openBoardModal}>방명록 →</div>
+          </div>
         </div>
         <div className={style.original} onClick={openTestModal}>
           <div className={style.postit}>테스트 바로가기 →</div>
