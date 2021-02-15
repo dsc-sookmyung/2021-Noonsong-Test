@@ -228,59 +228,18 @@
         cursor: pointer;
     }
 
-    .mainpage {
-        position: absolute;
-        left: 12rem;
-        right: 12rem;
-        height: 40%;
-        display: inline-block;
-        background-color: floralwhite;
-        line-height: 1;
-        padding: 4.4rem 3.6rem;
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-        min-height: 390px;
-        margin-top: 9rem;
-    }
-}
-
-@media(max-width: 871px) {
-    .contentwrapper {
-        height: 100vh;
-        width: 100vw;
-        margin: 0;
-        border-radius: 0px;
-        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-        background-color: beige;
-        background-image: url("../../Images/corkboard.jpg");
-        background-attachment: fixed;
-        background-size: 100% auto;
-        box-sizing: border-box;
-    }
-
-    .mainpage {
-        position: absolute;
-        left: 0rem;
-        right: 0rem;
-        height: 40%;
-        display: inline-block;
-        background-color: floralwhite;
-        line-height: 1;
-        padding: 4.4rem 3.6rem;
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-        min-height: 570px;
-        margin-top: 3rem;
-    }
-}
-
-@media(max-width: 1015px) {
     .framewrapper {
-        height: 100vh;
-        width: calc(100vw - 8rem);
+        height: 100%;
+        width: 100%;
+        display: block;
         padding: 0;
+        margin: 0 auto;
     }
 
     .mainpage {
         position: absolute;
+        left: 8.8rem;
+        right: 8.8rem;
         display: inline-block;
         background-color: floralwhite;
         line-height: 1;
@@ -323,6 +282,36 @@
     }
 }
 
+@media(max-width: 871px) {
+    .contentwrapper {
+        min-height: 100vh;
+        height: auto;
+        width: 100vw;
+        margin: 0;
+        border-radius: 0px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        background-color: beige;
+        background-image: url("../../Images/corkboard.jpg");
+        background-attachment: fixed;
+        background-size: 100% auto;
+        box-sizing: border-box;
+    }
+
+    .mainpage {
+        position: absolute;
+        left: 0rem;
+        right: 0rem;
+        height: 40%;
+        display: inline-block;
+        background-color: floralwhite;
+        line-height: 1;
+        padding: 4.4rem 3.6rem;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        min-height: 570px;
+        margin-top: 3rem;
+    }
+}
+
 @media(max-width: 470px) {
     .contentwrapper {
         margin: 0;
@@ -330,14 +319,14 @@
     }
 
     .framewrapper {
-        margin: 0;
         padding: 0;
     }
 
     .mainpage {
         position: absolute;
         width: calc(100vw - 4.8rem);
-        height: calc(100vh - 8.8rem);
+        min-height: calc(100vh - 8.8rem);
+        height: auto;
         display: inline-block;
         background-color: floralwhite;
         line-height: 1;
