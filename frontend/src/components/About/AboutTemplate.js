@@ -12,7 +12,8 @@ import jiyeon from '../../Images/hellouz818.png';
 function AboutTemplate({ isOpened, close }) {
     const AboutModal = styled.div`
         width: 40rem;
-        height: 40rem;
+        min-height: 40rem;
+        height: auto;
         background-color: white;
         position: absolute;
         top: 50%;
@@ -20,11 +21,19 @@ function AboutTemplate({ isOpened, close }) {
         transform: translate(-50%, -50%);
         border-radius: 1rem;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+        overflow: scroll;
+        z-index: 99;
+
+        @media only screen and (max-width: 768px) {
+            width: 100vw;
+            position: relative;
+        }
     `;
 
     const ContentWrapper = styled.div`
-        width: 100%;
-        height: 100%;
+        width: calc(100% - 4.8rem);
+        min-height: calc(100% - 4.8rem);
+        height: auto;
         padding: 2.4rem;
     `;
 
@@ -37,7 +46,8 @@ function AboutTemplate({ isOpened, close }) {
     `;
 
     const Description = styled.div`
-        margin: 1.2rem 0.4rem;
+        width: calc(100% - 0.8rem);
+        margin: 1.2rem 0.4rem 2.4rem;
         font-size: 0.95rem;
         font-family: "Carmen Sans";
         font-weight: 300;
@@ -46,9 +56,14 @@ function AboutTemplate({ isOpened, close }) {
     const ProfileWrapper = styled.div`
         width: calc(100% - 4rem);
         display: flex;
-        justify-content: space-between;
+        justify-content: space-evenly;
         flex-wrap: wrap;
         margin: 2.64rem 0;
+
+        @media only screen and (max-width: 768px) {
+            width: 100%;
+            margin: 0;
+        }
     `;
 
     return (

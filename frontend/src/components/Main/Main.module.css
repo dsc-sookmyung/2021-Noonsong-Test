@@ -27,8 +27,8 @@
 
 .mainpage {
     position: absolute;
-    left: 16rem;
-    right: 16rem;
+    left: 14rem;
+    right: 14rem;
     height: 40%;
     display: inline-block;
     background-color: floralwhite;
@@ -43,6 +43,7 @@
     margin: 0 0 2.4rem;
     font-weight: 900;
     font-size: 2.4em;
+    word-break: keep-all;
 }
 
 .typingtxt {
@@ -62,8 +63,7 @@
 
 .polaroid {
     display: inline-block;
-    width: 216px;
-    height: 180px;
+    height: 172px;
     padding: 1rem;
     background-color: white;
     align-self: flex-start;
@@ -73,6 +73,11 @@
     transform: rotate(-17deg);
     z-index: 1;
     cursor: pointer;
+}
+
+.polaroid > .imagewrapper {
+    width: 200px;
+    height: 140px;
 }
 
 .original {
@@ -88,9 +93,13 @@
     position: relative;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     transform: rotate(2deg);
-    margin-left: 20rem;
+    margin-left: 16rem;
     z-index: 0;
     cursor: pointer;
+}
+
+.original > .imagewrapper {
+    width: 320px;
 }
 
 .imagewrapper {
@@ -126,6 +135,7 @@
 
 .sticker {
     position: relative;
+    min-width: 224px;
 }
 
 .postit {
@@ -162,4 +172,186 @@
     bottom: 3.2rem;
     width: 7.2rem;
     margin-top: 2rem;
+}
+
+.linkwrapper {
+    display: none;
+}
+
+@media(max-width: 1348px) {
+    .typing {
+        font-family: "Carmen Sans";
+        font-weight: 400;
+        display: inline-block; 
+        line-height: 1.8;
+        font-size: 0.95em;
+        max-width: 640px;
+        width: 95%;
+    }
+
+    .mainpage {
+        position: absolute;
+        left: 8.8rem;
+        right: 8.8rem;
+        height: 40%;
+        display: inline-block;
+        background-color: floralwhite;
+        line-height: 1;
+        padding: 4.4rem 3.6rem;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        min-height: 390px;
+    }
+}
+
+@media(max-width: 1225px) {
+    .noonsong {
+        display: none;
+    }
+}
+
+@media(max-width: 1024px) {
+    .original {
+        width: 440px;
+        height: auto;
+        background-color: #355F95;
+        /* background-image: url("../../Images/frame-border.png"); */
+        background-attachment: fixed;
+        background-size: 100% auto;
+        padding: 1.2rem;
+        border: 0.7rem solid #2E4E7E;
+        align-self: flex-end;
+        position: relative;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        transform: rotate(2deg);
+        margin-left: 1rem;
+        z-index: 0;
+        cursor: pointer;
+    }
+
+    .framewrapper {
+        height: 100%;
+        width: 100%;
+        display: block;
+        padding: 0;
+        margin: 0 auto;
+    }
+
+    .mainpage {
+        position: absolute;
+        left: 8.8rem;
+        right: 8.8rem;
+        display: inline-block;
+        background-color: floralwhite;
+        line-height: 1;
+        padding: 4.4rem 2.4rem;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        margin-top: 0rem;
+        height: calc(90vh - 8.8rem);
+    }
+
+    .typing {
+        word-break: break-all;
+        height: 243px;
+    }
+
+    .linkwrapper {
+        font-family: "Carmen Sans";
+        display: inline-block;
+        z-index: 1;
+        margin-top: 4rem;
+        width: 100%;
+    }
+
+    .link {
+        margin-bottom: 0.6rem;
+        background-color: #f3dbcf;
+        padding: 0.8rem 1rem;
+        cursor: pointer;
+    }
+
+    .polaroid {
+        display: none;
+    }
+
+    .original {
+        display: none;
+    }
+
+    .sticker {
+        display: none;
+    }
+}
+
+@media(max-width: 871px) {
+    .contentwrapper {
+        min-height: 100vh;
+        height: auto;
+        width: 100vw;
+        margin: 0;
+        border-radius: 0px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        background-color: beige;
+        background-image: url("../../Images/corkboard.jpg");
+        background-attachment: fixed;
+        background-size: 100% auto;
+        box-sizing: border-box;
+    }
+
+    .mainpage {
+        position: absolute;
+        left: 0rem;
+        right: 0rem;
+        height: 40%;
+        display: inline-block;
+        background-color: floralwhite;
+        line-height: 1;
+        padding: 4.4rem 3.6rem;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        min-height: 570px;
+        margin-top: 3rem;
+    }
+}
+
+@media(max-width: 470px) {
+    .contentwrapper {
+        margin: 0;
+        padding: 0;
+    }
+
+    .framewrapper {
+        padding: 0;
+    }
+
+    .mainpage {
+        position: absolute;
+        width: calc(100vw - 4.8rem);
+        min-height: calc(100vh - 8.8rem);
+        height: auto;
+        display: inline-block;
+        background-color: floralwhite;
+        line-height: 1;
+        padding: 4.4rem 2.4rem;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        margin-top: 0rem;
+    }
+
+    .typing {
+        word-break: break-all;
+        height: 243px;
+    }
+
+    .linkwrapper {
+        font-family: "Carmen Sans";
+        display: inline-block;
+        z-index: 1;
+        margin-top: 4rem;
+        width: 100%;
+    }
+
+    .link {
+        margin-bottom: 0.6rem;
+        background-color: #f3dbcf;
+        padding: 0.8rem 1rem;
+        cursor: pointer;
+    }
 }

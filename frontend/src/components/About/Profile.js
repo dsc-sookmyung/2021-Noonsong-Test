@@ -7,15 +7,20 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 const Profile = ({ name, major, image, insta, github, role }) => {
   const StyledProfile = styled.div`
     display: flex;
-    width: 16rem;
+    width: 15rem;
     padding: 1.6rem 0;
+
+    @media only screen and (max-width: 768px) {
+      width: 16rem;
+    }
   `;
 
   const DescWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 0.6rem 0;
+    height: 76%;
   `;
 
   const Info = styled.div`
@@ -24,6 +29,11 @@ const Profile = ({ name, major, image, insta, github, role }) => {
     display: flex;
     color: #666666;
     line-height: 1;
+
+    @media only screen and (max-width: 768px) {
+      font-size: 1rem;
+    }
+
   `;
 
   const ProfileImage = styled.img`
@@ -32,6 +42,11 @@ const Profile = ({ name, major, image, insta, github, role }) => {
     height: 6.4rem;
     object-fit: cover;
     margin-right: 0.8rem;
+
+    @media only screen and (max-width: 768px) {
+      width: 8rem;
+      height: 8rem;
+    }
   `;
 
   const Name = styled.h3`
