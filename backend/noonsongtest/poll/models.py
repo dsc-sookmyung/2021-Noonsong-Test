@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import CharField, Model
+from django_mysql.models import ListCharField
 
 class Question(models.Model):
     question = models.CharField(max_length=1000)
@@ -21,23 +23,21 @@ class Result(models.Model):
     class Meta:
         db_table = 'results'
 
-class Response(models.Model):
-    question1 = models.IntegerField()
-    question2 = models.IntegerField()
-    question3 = models.IntegerField()
-    question4 = models.IntegerField()
-    question5 = models.IntegerField()
-    question6 = models.IntegerField()
-    question7 = models.IntegerField()
-    question8 = models.IntegerField()
-    question9 = models.IntegerField()
-    question10 = models.IntegerField()
-    question11 = models.IntegerField()
-    question12 = models.IntegerField()
-    question13 = models.IntegerField()
 
+class User(models.Model):
+    """
+    answer_list = ListCharField(
+        default = [],
+        base_field=CharField(max_length=10),
+        size=6,  
+        max_length=(6*16),
+    )
+    """
+    answer_list=models.CharField(max_length=100)
+    ip = models.GenericIPAddressField(null=True)
+    result_id = models.IntegerField(null = True)
+    
+    
     class Meta:
-        db_table = 'response'
-
-
-
+        db_table = 'poll_user'
+    
