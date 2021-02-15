@@ -21,6 +21,7 @@ class ResultSerializer(serializers.ModelSerializer):
         fields = ('id', 'title', 'image', 'explain')
 
 class UserSerializer(serializers.ModelSerializer):
+    answer_list=serializers.JSONField()
     class Meta:
-        model=User
+        model = User
         fields = ('id','answer_list','ip', 'result_id') #return 할때 뭐 보낼지 
