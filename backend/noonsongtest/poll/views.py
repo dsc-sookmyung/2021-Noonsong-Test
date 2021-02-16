@@ -27,6 +27,8 @@ class UserViewSet(viewsets.ModelViewSet):
       
         answer_list=request.data["answer_list"]
         a=answer_list.split(",")
+
+        
  
         case = 0
         if (int(a[2]) + int(a[3]) + int(a[4])) < 5:
@@ -72,11 +74,17 @@ class UserViewSet(viewsets.ModelViewSet):
             "result_id":resultnum,  
         }
 
+        statistics = {
+            "s_major":int(a[1]),
+            "result_id":resultnum,
+        }
         
         user_serializer = UserSerializer(data=user)
-        
-        if user_serializer.is_valid():
+        majorchart_serializer = MajorchartSerializer(data=statistics)
+
+        if user_serializer.is_valid() and majorchart_serializer.is_valid():
             user_serializer.save()
+            majorchart_serializer.save()
             result = Result.objects.get(id = user['result_id'])
             resultserializer = ResultSerializer(result)
             return Response(resultserializer.data)
@@ -88,3 +96,4 @@ class UserViewSet(viewsets.ModelViewSet):
 class MajorchartViewSet(viewsets.ModelViewSet):
     queryset=Majorchart.objects.all()
     serializer_class = MajorchartSerializer
+
