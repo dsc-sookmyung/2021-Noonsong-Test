@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from .models import Question, Answer, Result, User
+from .models import Question, Answer, Result, User, Majorchart
 
 
 
@@ -25,3 +25,8 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id','answer_list','ip', 'result_id') #return 할때 뭐 보낼지 
+
+class MajorchartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Majorchart
+        fields = ('id', 's_major', 'result_id')
