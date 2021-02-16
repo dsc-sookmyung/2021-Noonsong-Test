@@ -41,7 +41,12 @@ class UserViewSet(viewsets.ModelViewSet):
         else:
             case = case + 20
 
-        if (int(a[10]) + int(a[11]) + int(a[12]) + int(a[13]) + int(a[14])) < 8:
+        if int(a[14]) == 3:
+            ans15 = 1
+        elif int(a[14]) != 3:
+            ans15 = 2
+
+        if (int(a[10]) + int(a[11]) + int(a[12]) + int(a[13]) + ans15) < 8:
             case = case + 1
         else:
             case = case + 2
