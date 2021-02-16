@@ -25,43 +25,28 @@ const SelectContainer = ({index, getSelected, handleLoad, contents}) => {
             <Select onClick={onClickSelect(6)}>{contents[index - 1].answers[5].answer}</Select>
             <Select onClick={onClickSelect(7)}>{contents[index - 1].answers[6].answer}</Select>
             <Select onClick={onClickSelect(8)}>{contents[index - 1].answers[7].answer}</Select>
-        
+            <Select onClick={onClickSelect(9)}>{contents[index - 1].answers[8].answer}</Select>
+            <Select onClick={onClickSelect(10)}>{contents[index - 1].answers[9].answer}</Select>
+            <Select onClick={onClickSelect(11)}>{contents[index - 1].answers[10].answer}</Select>
+            <Select onClick={onClickSelect(12)}>{contents[index - 1].answers[11].answer}</Select>
+            <Select onClick={onClickSelect(13)}>{contents[index - 1].answers[12].answer}</Select>
+            <Select onClick={onClickSelect(14)}>{contents[index - 1].answers[13].answer}</Select>
           </StyledSelectContainer>
         ) : (
-          index === 3 ? (
+          index === 15 ? (
             <StyledSelectContainer>
               <Select onClick={onClickSelect(1)}>{contents[index - 1].answers[0].answer}</Select>
               <Select onClick={onClickSelect(2)}>{contents[index - 1].answers[1].answer}</Select>
               <Select onClick={onClickSelect(3)}>{contents[index - 1].answers[2].answer}</Select>
               <Select onClick={onClickSelect(4)}>{contents[index - 1].answers[3].answer}</Select>
-              <Select onClick={onClickSelect(5)}>{contents[index - 1].answers[4].answer}</Select>
-              <Select onClick={onClickSelect(6)}>{contents[index - 1].answers[5].answer}</Select>
-              <Select onClick={onClickSelect(7)}>{contents[index - 1].answers[6].answer}</Select>
-              <Select onClick={onClickSelect(8)}>{contents[index - 1].answers[7].answer}</Select>
-              <Select onClick={onClickSelect(9)}>{contents[index - 1].answers[8].answer}</Select>
-              <Select onClick={onClickSelect(10)}>{contents[index - 1].answers[9].answer}</Select>
-              <Select onClick={onClickSelect(11)}>{contents[index - 1].answers[10].answer}</Select>
-              <Select onClick={onClickSelect(12)}>{contents[index - 1].answers[11].answer}</Select>
-              <Select onClick={onClickSelect(13)}>{contents[index - 1].answers[12].answer}</Select>
-              <Select onClick={onClickSelect(14)}>{contents[index - 1].answers[13].answer}</Select>
             </StyledSelectContainer>
           ) : (
-            index === 16 ? (
-              <StyledSelectContainer>
-                <Select onClick={onClickSelect(1)}>{contents[index - 1].answers[0].answer}</Select>
-                <Select onClick={onClickSelect(2)}>{contents[index - 1].answers[1].answer}</Select>
-                <Select onClick={onClickSelect(3)}>{contents[index - 1].answers[2].answer}</Select>
-                <Select onClick={onClickSelect(4)}>{contents[index - 1].answers[3].answer}</Select>
-              </StyledSelectContainer>
-            ) : (
-              <StyledSelectContainer>
-                <Select onClick={onClickSelect(1)}>{contents[index - 1].answers[0].answer}</Select>
-                <Select onClick={onClickSelect(2)}>{contents[index - 1].answers[1].answer}</Select>
-              </StyledSelectContainer>
-            )  
-          )
+            <StyledSelectContainer>
+              <Select onClick={onClickSelect(1)}>{contents[index - 1].answers[0].answer}</Select>
+              <Select onClick={onClickSelect(2)}>{contents[index - 1].answers[1].answer}</Select>
+            </StyledSelectContainer>
+          )  
         )
-        
       )}
     </div>
   )

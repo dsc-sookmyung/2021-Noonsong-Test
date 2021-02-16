@@ -18,7 +18,10 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
   const [nowSelected, setNowSelected] = useState([]);
   const [loaded, setLoaded] = useState(true);
   const [questions, setQuestions] = useState([]);
-  const [resultLoaded, setResultLoaded] = useState(false);
+  //const [noonsongType, setNoonsongType] = useState("");
+  //const [noonsongImage, setNoonsongImage] = useState("");
+  //const [noonsongDescription, setNoonsongDescription] = useState("");
+  //const [resultLoaded, setResultLoaded] = useState(false);
  
   const mounted = useRef(false);
   useEffect(() => {
@@ -41,7 +44,7 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
     let res = await fetch('http://localhost:8000/questions/');
     await res.json().then((data) => {
       setQuestions(data);
-      console.log(questions);
+      console.log("Questions: "+questions);
     })
   }, [])
 
@@ -70,21 +73,29 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
     window.location.reload();
   }
 
-  /*
-  if (numbers.length === 32) {    
+  if (numbers.length === 30) {    
+    console.log("JSON: "+JSON.stringify(nowSelected.toString()));
     (async () => {
-      const requestOptions = await fetch('http://localhost:8000/responses/', {
+      const requestOptions = await fetch('http://localhost:8000/users/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({nowSelected})
+        body: JSON.stringify({answer_list: nowSelected.toString(), ip: null, result_id: null})
       });
       const content = await requestOptions.json();
-
-      setResultLoaded(true);
       console.log(content);
     })();
+
+    (async () => {
+      let res = await fetch('http://localhost:8000/users/');
+      await res.json().then((data) => {
+        console.log("RESULT: "+data);
+        // setNoonsongType(data.title);
+        // setNoonsongImage(data.image);
+        // setNoonsongDescription(data.explain);
+        // setResultLoaded(true);
+      });
+    })();
   }
-  */
 
   return (
     <>
@@ -92,7 +103,7 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
       <div>
         <Modal>
           <SideBar close={close}/>
-          { numbers.length < 32 ? (
+          { numbers.length < 30 ? (
           <ContentWrapper>
             <MBoxWrapper>
               <Messages numbers={numbers} contents={questions} selected={nowSelected} loaded={loaded}/>
@@ -114,9 +125,10 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
               </ProgressBarWrapper>
               :
               <ResultWrapper>
-                <NoonsongType>뽀송뽀송 함박눈송이</NoonsongType>
+                <NoonsongType>뽀송뽀송 함박눈송이{/*noonsongType*/}</NoonsongType>
                 <NoonsongImage><img src={noonsongImage} alt="loading..." style={{width: "20rem"}} /></NoonsongImage>
                 <NoonsongDescription>
+                  {/*noonsongDescription*/}
                   주변 사람들을 편안하게 해주는 능력을 갖고 있는, 누구에게나 사랑받는 눈송이에요!<br/>
                   뽀송뽀송한 함박눈송이들 사이에 있으면 제 마음도 뽀송뽀송해지는 기분이랄까요?<br/>
                 </NoonsongDescription>
@@ -148,7 +160,10 @@ export default TestTemplate;
 
 const ContentWrapper = styled.div`
   width: 100%;
-  height: 100%;
+  min-height: calc(100% - 3rem);
+  height: auto;
+  display: flex;
+  flex-direction: column;
 `;
 
 const MBoxWrapper = styled.div`
@@ -206,7 +221,8 @@ const ButtonsWrapper = styled.div`
 
 const ResultWrapper = styled.div`
     width: calc(100% - 4rem);
-    height: 90%;
+    min-height: calc(100% - 3rem);
+    height: auto;  
     display: flex;
     flex-direction: column;
     align-items: center;
