@@ -16,6 +16,7 @@ export default ProgressBar;
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
+  padding: 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,11 +25,11 @@ const Wrapper = styled.div`
 
 const Title = styled.div`
   width: 80%;
-  height: 50px;
+  height: 8rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 100px;
+  padding-bottom: 1.2rem;
   font-weight: bold;
   font-size: 1.5rem;
   border: 2px solid white;
