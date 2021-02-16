@@ -7,9 +7,7 @@ import SideBar from '../_Basic/SideBar';
 import ProgressBar from '../_Basic/ProgressBar';
 import DelayedRender from './DelayedRender';
 
-import noonsongImage from '../../Images/bbosong.jpg';
-import ReplayIcon from '@material-ui/icons/Replay';
-import Button from '@material-ui/core/Button';
+import Button from '../_Basic/Button';
 import KakaoShareButton from './KakaoShareButton';
 
 const TestTemplate = ({ isOpened, close, reopen }) => {
@@ -18,10 +16,8 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
   const [nowSelected, setNowSelected] = useState([]);
   const [loaded, setLoaded] = useState(true);
   const [questions, setQuestions] = useState([]);
-  //const [noonsongType, setNoonsongType] = useState("");
-  //const [noonsongImage, setNoonsongImage] = useState("");
-  //const [noonsongDescription, setNoonsongDescription] = useState("");
-  //const [resultLoaded, setResultLoaded] = useState(false);
+  const [result, setResult] = useState();
+  const [resultLoaded, setResultLoaded] = useState(false);
  
   const mounted = useRef(false);
   useEffect(() => {
@@ -48,6 +44,20 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
     })
   }, [])
 
+  if (numbers.length === 30) {    
+    (async () => {
+      const requestOptions = await fetch('http://localhost:8000/users/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({answer_list: nowSelected.toString(), ip: null, result_id: null})
+      });
+      await requestOptions.json().then((data) => {
+          setResult(data);
+          //alert("RESPONSE: "+data+" RESULT: "+result);
+        })
+    })();
+  }
+
   const getSelected = useCallback((selectedIndex) => {
     setNowSelected([...nowSelected, selectedIndex]);
     setTimeout(() => setSelected([...selected, selectedIndex]), 1000);
@@ -58,43 +68,14 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
     setLoaded(!loaded);
   }
 
-  const getConsole = () => {
-    console.log(numbers);
-    console.log(selected);
-    console.log(nowSelected);
-    console.log(loaded);
-    console.log(questions);
-  }
-
   const replayHandler = (e) => {
     e.preventDefault(e);
     close();
-    setTimeout(() => getConsole(), 5000);
     window.location.reload();
   }
 
-  if (numbers.length === 30) {    
-    console.log("JSON: "+JSON.stringify(nowSelected.toString()));
-    (async () => {
-      const requestOptions = await fetch('http://localhost:8000/users/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({answer_list: nowSelected.toString(), ip: null, result_id: null})
-      });
-      const content = await requestOptions.json();
-      console.log(content);
-    })();
-
-    (async () => {
-      let res = await fetch('http://localhost:8000/users/');
-      await res.json().then((data) => {
-        console.log("RESULT: "+data);
-        // setNoonsongType(data.title);
-        // setNoonsongImage(data.image);
-        // setNoonsongDescription(data.explain);
-        // setResultLoaded(true);
-      });
-    })();
+  const viewResult = (e) => {
+    setResultLoaded(true);
   }
 
   return (
@@ -119,26 +100,33 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
           </ContentWrapper>
           ) : (
             <ContentWrapper>
-            { !loaded ? //resultLoaded
-              <ProgressBarWrapper disappear={!loaded}>
+            {!resultLoaded ? (
+              <ProgressBarWrapper disappear={!resultLoaded}>
                 <ProgressBar/>
+                <DelayedRender delay={3000}>
+                  <Button
+                    onClick={viewResult}
+                    size="medium"
+                    >
+                    📌 결과보기
+                  </Button>
+                </DelayedRender>
               </ProgressBarWrapper>
-              :
+            ) : (
               <ResultWrapper>
-                <NoonsongType>뽀송뽀송 함박눈송이{/*noonsongType*/}</NoonsongType>
-                <NoonsongImage><img src={noonsongImage} alt="loading..." style={{width: "20rem"}} /></NoonsongImage>
+                <NoonsongType>{result.title}</NoonsongType>
+                <NoonsongImage><img src={result.image} alt="loading..." style={{width: "20rem"}} /></NoonsongImage>
                 <NoonsongDescription>
-                  {/*noonsongDescription*/}
-                  주변 사람들을 편안하게 해주는 능력을 갖고 있는, 누구에게나 사랑받는 눈송이에요!<br/>
-                  뽀송뽀송한 함박눈송이들 사이에 있으면 제 마음도 뽀송뽀송해지는 기분이랄까요?<br/>
+                  {result.explain}
                 </NoonsongDescription>
                 <ButtonsWrapper>
                   <Replay>
                     <Button 
-                      onClick={replayHandler}
+                      onClick={replayHandler} >
+                      {/*
                       variant="text"
-                      startIcon={<ReplayIcon fontSize="large"/>} >
-                      다시하기
+                      startIcon={<ReplayIcon fontSize="large"/>} */}
+                      📊 통계보기
                     </Button>
                   </Replay>
                   <KakaoLink>
@@ -146,8 +134,8 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
                   </KakaoLink>
                 </ButtonsWrapper>                
               </ResultWrapper>
-              }
-            </ContentWrapper>
+              )}
+              </ContentWrapper>
           )}
         </Modal>
       </div>
@@ -164,6 +152,7 @@ const ContentWrapper = styled.div`
   height: auto;
   display: flex;
   flex-direction: column;
+  font-family: "Carmen Sans";
 `;
 
 const MBoxWrapper = styled.div`
@@ -180,7 +169,10 @@ const ProgressBarWrapper = styled.div`
   ${props =>
   props.disappear &&
   css`
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   `}
 `;
 
