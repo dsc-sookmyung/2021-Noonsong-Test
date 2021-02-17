@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styled, { css } from 'styled-components';
+import ChatTemplate from './Chat/ChatTemplate';
+import ResultTemplate from './Result/ResultTemplate';
+import StatTemplate from './Statistics/StatTemplate';
 import Modal from '../_Basic/Modal';
-import SelectContainer from './SelectContainer';
-import Messages from './Messages';
 import SideBar from '../_Basic/SideBar';
 import ProgressBar from '../_Basic/ProgressBar';
+import Button from '../_Basic/Button';
 import DelayedRender from './DelayedRender';
 
-import Button from '../_Basic/Button';
-import KakaoShareButton from './KakaoShareButton';
-
-const TestTemplate = ({ isOpened, close, reopen }) => {
+const TestTemplate = ({ isOpened, close }) => {
   const [numbers, setNumbers] = useState([1]);
   const [selected, setSelected] = useState([]);
   const [nowSelected, setNowSelected] = useState([]);
@@ -18,7 +17,17 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
   const [questions, setQuestions] = useState([]);
   const [result, setResult] = useState();
   const [resultLoaded, setResultLoaded] = useState(false);
+  const [openStat, setOpenStat] = useState(false);
  
+  useEffect(async () => {
+    /* GET questions */
+    let res = await fetch('http://localhost:8000/questions/');
+    await res.json().then((data) => {
+      setQuestions(data);
+      console.log("Questions: "+questions);
+    })
+  }, [])
+
   const mounted = useRef(false);
   useEffect(() => {
     if (!mounted.current) {
@@ -34,15 +43,6 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
       setTimeout(() => setLoaded(true), 1000);
     }
   }, [loaded]);
-
-  useEffect(async () => {
-    /* GET questions */
-    let res = await fetch('http://localhost:8000/questions/');
-    await res.json().then((data) => {
-      setQuestions(data);
-      console.log("Questions: "+questions);
-    })
-  }, [])
 
   if (numbers.length === 30) {    
     (async () => {
@@ -68,14 +68,12 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
     setLoaded(!loaded);
   }
 
-  const replayHandler = (e) => {
-    e.preventDefault(e);
-    close();
-    window.location.reload();
-  }
-
   const viewResult = (e) => {
     setResultLoaded(true);
+  }
+
+  const viewStat = (e) => {
+    setOpenStat(true);
   }
 
   return (
@@ -86,56 +84,27 @@ const TestTemplate = ({ isOpened, close, reopen }) => {
           <SideBar close={close}/>
           { numbers.length < 30 ? (
           <ContentWrapper>
-            <MBoxWrapper>
-              <Messages numbers={numbers} contents={questions} selected={nowSelected} loaded={loaded}/>
-            </MBoxWrapper>
-            <DelayedRender delay={1000}>
-              <SelectContainer 
-                index={Math.ceil(numbers.length / 2)} 
-                getSelected={getSelected}
-                handleLoad={handleLoad}
-                contents={questions}>
-              </SelectContainer>
-            </DelayedRender>
+            <ChatTemplate numbers={numbers} nowSelected={nowSelected} loaded={loaded} questions={questions} getSelected={getSelected} handleLoad={handleLoad}/>
           </ContentWrapper>
           ) : (
             <ContentWrapper>
-            {!resultLoaded ? (
+            { !resultLoaded ? (
               <ProgressBarWrapper disappear={!resultLoaded}>
                 <ProgressBar/>
                 <DelayedRender delay={3000}>
-                  <Button
-                    onClick={viewResult}
-                    size="medium"
-                    >
+                  <Button onClick={viewResult} size="medium">
                     📌 결과보기
                   </Button>
                 </DelayedRender>
               </ProgressBarWrapper>
             ) : (
-              <ResultWrapper>
-                <NoonsongType>{result.title}</NoonsongType>
-                <NoonsongImage><img src={result.image} alt="loading..." style={{width: "20rem"}} /></NoonsongImage>
-                <NoonsongDescription>
-                  {result.explain}
-                </NoonsongDescription>
-                <ButtonsWrapper>
-                  <Replay>
-                    <Button 
-                      onClick={replayHandler} >
-                      {/*
-                      variant="text"
-                      startIcon={<ReplayIcon fontSize="large"/>} */}
-                      📊 통계보기
-                    </Button>
-                  </Replay>
-                  <KakaoLink>
-                    <KakaoShareButton />
-                  </KakaoLink>
-                </ButtonsWrapper>                
-              </ResultWrapper>
-              )}
-              </ContentWrapper>
+              !openStat ? (
+                <ResultTemplate title={result.title} image={result.image} explain={result.explain} viewStat={viewStat}/>
+              ) : (
+                <StatTemplate/>
+              )
+            )}
+            </ContentWrapper>
           )}
         </Modal>
       </div>
@@ -153,12 +122,7 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   font-family: "Carmen Sans";
-`;
-
-const MBoxWrapper = styled.div`
-  width: 100%;
-  height: 80%;
-  margin: 0 auto;
+  // overflow: scroll;
 `;
 
 const ProgressBarWrapper = styled.div`
@@ -174,65 +138,4 @@ const ProgressBarWrapper = styled.div`
     justify-content: center;
     align-items: center;
   `}
-`;
-
-const NoonsongType = styled.div`
-    width: 80%;
-    font-weight: bold;
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 1rem;
-`;
-
-const NoonsongImage = styled.div`
-    margin-bottom: 0.4rem;
-`;
-
-const NoonsongDescription = styled.div`
-    width: 80%;
-    font-size: 1rem;
-    text-align: center;
-    word-break: keep-all;
-    margin-bottom: 1rem;
-`;
-
-const Replay = styled.div`
-    padding-right: 0.5rem;
-`;
-
-const KakaoLink = styled.div`
-    padding-left: 0.5rem;
-`;
-
-const ButtonsWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-`;
-
-const ResultWrapper = styled.div`
-    width: calc(100% - 4rem);
-    min-height: calc(100% - 3rem);
-    height: auto;  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: auto;
-    padding: 2rem;
-    font-family: "Carmen Sans";
-    overflow-y: scroll;
-
-    /* scrollbar */
-    ::-webkit-scrollbar {
-      width: 16px;
-    }
-    ::-webkit-scrollbar-thumb {
-        height: 6px;
-        border: 4px solid rgba(0, 0, 0, 0);
-        background-clip: padding-box;
-        -webkit-border-radius: 7px;
-        background-color: #f1f3f5; // background: #dee2e6;
-        -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05);
-    }
 `;

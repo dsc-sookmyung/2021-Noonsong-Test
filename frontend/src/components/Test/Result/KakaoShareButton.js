@@ -1,11 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const KakaoShareButton = () => {
-  /*
-  useEffect(() => {
-    createKakaoButton()
-  }, [])
-  */
   const createKakaoButton = () => {
     if (window.Kakao) {
       const Kakao = window.Kakao
