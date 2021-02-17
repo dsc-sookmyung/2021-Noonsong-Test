@@ -24,52 +24,12 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
     def create(self, request):
-        """
+      
         answer_list=request.data["answer_list"]
-        answer_list = answer_list.replace('[', '')
-        answer_list = answer_list.replace(']', '')
         a=answer_list.split(",")
-        print(a)
-        print(len(a))
-        case = 0
-        if (int(a[3]) + int(a[4]) + int(a[5])) < 5:
-            case = case + 100
-        else:
-            case = case + 200
 
-        if (int(a[6]) + int(a[7]) + int(a[8]) + int(a[9]) + int(a[10])) < 8:
-            case = case + 10
-        else:
-            case = case + 20
-
-        if (int(a[11]) + int(a[12]) + int(a[13]) + int(a[14]) + int(a[15])) < 8:
-            case = case + 1
-        else:
-            case = case + 2
-
-        if case == 111:
-            resultnum = 1
-        elif case == 112:
-            resultnum = 2
-        elif case == 121:
-            resultnum = 3
-        elif case == 122:
-            resultnum = 4
-        elif case == 211:
-            resultnum = 5
-        elif case == 212:
-            resultnum = 6
-        elif case == 221:
-            resultnum = 7
-        elif case == 222:
-            resultnum = 8
-
-        print(resultnum)
         
-        """
-
-        a=answer_list.split(",")
-        print(a)
+ 
         case = 0
         if (int(a[2]) + int(a[3]) + int(a[4])) < 5:
             case = case + 100
@@ -81,7 +41,12 @@ class UserViewSet(viewsets.ModelViewSet):
         else:
             case = case + 20
 
-        if (int(a[10]) + int(a[11]) + int(a[12]) + int(a[13]) + int(a[14])) < 8:
+        if int(a[14]) == 3:
+            ans15 = 1
+        elif int(a[14]) != 3:
+            ans15 = 2
+
+        if (int(a[10]) + int(a[11]) + int(a[12]) + int(a[13]) + ans15) < 8:
             case = case + 1
         else:
             case = case + 2
@@ -114,45 +79,26 @@ class UserViewSet(viewsets.ModelViewSet):
             "result_id":resultnum,  
         }
 
+        statistics = {
+            "s_major":int(a[1]),
+            "result_id":resultnum,
+        }
         
         user_serializer = UserSerializer(data=user)
-        
-        if user_serializer.is_valid():
+        majorchart_serializer = MajorchartSerializer(data=statistics)
+
+        if user_serializer.is_valid() and majorchart_serializer.is_valid():
             user_serializer.save()
+            majorchart_serializer.save()
             result = Result.objects.get(id = user['result_id'])
             resultserializer = ResultSerializer(result)
             return Response(resultserializer.data)
-        return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-    def get(self, request):
-        user = User.objects.get(ip = request.data.get('ip',''))
-        user_serializer = UserSerializer(user)
-        user_serializer.save()
-        print(user)
-        if (len(user.answer_list)==16) and (request.data.get('ip')==user.ip):
-            result = Result.objects.get(id = user.result_id)
-            resultserializer = ResultSerializer(result)
-            return Response(resultserializer.data)
         else:
-            return Response({"message": "Error"})
+            return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
         
-
-
-  
-   
-
-"""
-@api_view(['GET'])
-def test(self):
-    user = User.objects.all()
-    serializer = UserSerializer(user)
-    return Response(serializer.data)
-"""     
-        
-
-
 
 class MajorchartViewSet(viewsets.ModelViewSet):
     queryset=Majorchart.objects.all()
     serializer_class = MajorchartSerializer
+
