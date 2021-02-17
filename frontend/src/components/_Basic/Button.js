@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components';
 import { darken, lighten } from 'polished';
 
 const colorStyles = css`
-  ${({ theme, color }) => {
-    const selected = theme.palette[color];
+  ${({ color }) => {
+    const selected = color;
     return css`
       background: ${selected};
       &:hover {
@@ -66,10 +66,13 @@ const fullWidthStyle = css`
 const StyledButton = styled.button`
   /* 공통 스타일 */
   display: inline-flex;
+  align-items: center;
+  justify-center: center;
   outline: none;
   border: none;
   border-radius: 4px;
   color: white;
+  font-family: "Carmen Sans";
   font-weight: bold;
   cursor: pointer;
   padding-left: 1rem;
@@ -104,7 +107,7 @@ function Button({ children, color, size, outline, fullWidth, ...rest }) {
 }
 
 Button.defaultProps = {
-  color: 'blue',
+  color: '#0D2D84',
   size: 'medium'
 };
 
