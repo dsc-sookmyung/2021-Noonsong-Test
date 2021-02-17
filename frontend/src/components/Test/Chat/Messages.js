@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import Message from './Message';
-import DelayedRender from './DelayedRender'
 import './TypingDot.css';
 
 const AlwaysScrollToBottom = () => {
@@ -50,6 +49,28 @@ const MessagesContainer = styled.div`
       background-color: #f1f3f5; // background: #dee2e6;
       -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05);
   }
+
+  /* Mobile */
+  @media only screen and (max-width: 767px) and (max-height: 860px) {
+    height: 40rem;
+  }
+
+  @media only screen and (max-width: 767px) and (max-height: 760px) {
+    height: 36rem;
+  }
+
+  @media only screen and (max-width: 767px) and (max-height: 720px) {
+    height: 32rem;
+  }
+
+  @media only screen and (max-width: 767px) and (max-height: 680px) {
+    height: 32rem;
+  }
+
+  @media only screen and (max-width: 767px) and (max-height: 640px) {
+    height: 30rem;
+  }
+  
 `;
 
 const Wrapper = styled.div`
