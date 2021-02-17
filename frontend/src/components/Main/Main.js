@@ -130,7 +130,7 @@ function Main(props) {
           </div>
           <div className={style.postit}>방명록 →</div>
         </div>
-        <TestTemplate isOpened={isTestModalOpened} close={closeTestModal} reopen={openTestModal}/>
+        <TestTemplate isOpened={isTestModalOpened} close={closeTestModal}/>
         <AboutTemplate isOpened={isAboutModalOpened} close={closeAboutModal}/>
         <BoardTemplate isOpened={isBoardModalOpened} close={closeBoardModal}/>
       </div>
