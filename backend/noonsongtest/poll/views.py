@@ -102,3 +102,88 @@ class MajorchartViewSet(viewsets.ModelViewSet):
     queryset=Majorchart.objects.all()
     serializer_class = MajorchartSerializer
 
+    def list(self, request):
+        s_major = request.data['s_major']
+        print(int(s_major))
+        #14까지가 단과대학, 15는 전체
+
+        count = 0
+        num1, num2, num3, num4, num5, num6, num7, num8 = 0,0,0,0,0,0,0,0
+        ratio1, ratio2, ratio3, ratio4, ratio5, ratio6, ratio7, ratio8 = 0,0,0,0,0,0,0,0
+        #전체 통계 보여달라고 했을때
+        if int(s_major) == 15:
+            total = Majorchart.objects.all()
+
+            for num in total:
+                count += 1
+               
+                if num.result_id == 1:
+                    num1 += 1
+                if num.result_id == 2:
+                    num2 += 1
+                if num.result_id == 3:
+                    num3 += 1
+                if num.result_id == 4:
+                    num4 += 1
+                if num.result_id == 5:
+                    num5 += 1
+                if num.result_id == 6:
+                    num6 += 1
+                if num.result_id == 7:
+                    num7 += 1
+                if num.result_id == 8:
+                    num8 += 1
+
+            ratio1 = round(num1/count,2)
+            ratio2 = round(num2/count,2)
+            ratio3 = round(num3/count,2)
+            ratio4 = round(num4/count,2)
+            ratio5 = round(num5/count,2)
+            ratio6 = round(num6/count,2)
+            ratio7 = round(num7/count,2)
+            ratio8 = round(num8/count,2)
+
+            return Response({"message": "전체 성공"})
+        
+
+            
+       
+        #단과대별로 통계 보여달라고 했을때
+        else :
+            selected = Majorchart.objects.filter(s_major=int(s_major))
+            
+            for num in selected:
+                count += 1
+                #print(num.result_id)
+                if num.result_id == 1:
+                    num1 += 1
+                if num.result_id == 2:
+                    num2 += 1
+                if num.result_id == 3:
+                    num3 += 1
+                if num.result_id == 4:
+                    num4 += 1
+                if num.result_id == 5:
+                    num5 += 1
+                if num.result_id == 6:
+                    num6 += 1
+                if num.result_id == 7:
+                    num7 += 1
+                if num.result_id == 8:
+                    num8 += 1
+
+            ratio1 = round(num1/count,2)
+            ratio2 = round(num2/count,2)
+            ratio3 = round(num3/count,2)
+            ratio4 = round(num4/count,2)
+            ratio5 = round(num5/count,2)
+            ratio6 = round(num6/count,2)
+            ratio7 = round(num7/count,2)
+            ratio8 = round(num8/count,2)
+            
+            return Response({"message": "단과대별 성공"})
+            
+
+
+      
+  
