@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from .models import Question, Answer, Result, User, Majorchart
+from .models import Question, Answer, Result, User, Majorchart, Statistic
 
 
 
@@ -30,3 +30,10 @@ class MajorchartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Majorchart
         fields = ('id', 's_major', 'result_id')
+
+class StatisticSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Statistic
+        fields = ('id', 'noonsong1_name', 'noonsong1_ratio','noonsong2_name', 'noonsong2_ratio','noonsong3_name', 'noonsong3_ratio',
+        'noonsong4_name', 'noonsong4_ratio','noonsong5_name', 'noonsong5_ratio','noonsong6_name', 'noonsong6_ratio',
+        'noonsong7_name', 'noonsong7_ratio','noonsong8_name', 'noonsong8_ratio', 'maxnoonsong_title', 'maxnoonsong_image')

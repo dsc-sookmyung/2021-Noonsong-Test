@@ -47,3 +47,28 @@ class Majorchart(models.Model):
 
     class Meta:
         db_table = 'majorchart'
+
+
+class Statistic(models.Model):
+    noonsong1_name = models.CharField(max_length=100)
+    noonsong1_ratio = models.FloatField()
+    noonsong2_name = models.CharField(max_length=100)
+    noonsong2_ratio = models.FloatField()
+    noonsong3_name = models.CharField(max_length=100)
+    noonsong3_ratio = models.FloatField()
+    noonsong4_name = models.CharField(max_length=100)
+    noonsong4_ratio = models.FloatField()
+    noonsong5_name = models.CharField(max_length=100)
+    noonsong5_ratio = models.FloatField()
+    noonsong6_name = models.CharField(max_length=100)
+    noonsong6_ratio = models.FloatField()
+    noonsong7_name = models.CharField(max_length=100)
+    noonsong7_ratio = models.FloatField()
+    noonsong8_name = models.CharField(max_length=100)
+    noonsong8_ratio = models.FloatField()
+    maxnoonsong_title = models.CharField(max_length=100)
+    maxnoonsong_image = models.CharField(max_length=3000, null=True)
+
+    
+
+
