@@ -3,7 +3,7 @@
 Team Gitribute(권은지, 남수연, 서희, 유지연)
 
 ### 사용 기술
-- Front-end: React Hook
+- Front-end: React Hook, Styled Components
 - Back-end: Django, GCP, mySQL
 
 ### 프로젝트 소개
