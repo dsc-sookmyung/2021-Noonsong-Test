@@ -124,6 +124,7 @@ function Main(props) {
               <img src={tape} alt="tape" className={style.tape}/>
             </div>
         </div>
+        <div className={style.spacer}></div>
         <div className={style.sticker} onClick={openBoardModal}>
           <div className={style.bedgewrapper}>
             <img src={bedge} alt="bedge" className={style.bedge + ' ' + style.image}/>
