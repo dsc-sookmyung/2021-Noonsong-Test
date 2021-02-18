@@ -81,7 +81,6 @@
 }
 
 .original {
-    width: 440px;
     height: auto;
     background-color: #355F95;
     /* background-image: url("../../Images/frame-border.png"); */
@@ -99,7 +98,11 @@
 }
 
 .original > .imagewrapper {
-    width: 320px;
+    width: 360px;
+}
+
+.spacer {
+    flex-grow: 1;
 }
 
 .imagewrapper {
