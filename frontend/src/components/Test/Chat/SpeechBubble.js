@@ -52,8 +52,8 @@ const StyledSpeechBubble = styled.div`
   /* 공통 스타일 */
   width: auto;
   display: inline-block;
-  margin-top: 10px;
-  padding: 14px 24px;
+  margin-top: 0.8rem;
+  padding: 1.2rem 1.6rem;
   text-align: center;
   font-weight: 900;
   font-family: arial;

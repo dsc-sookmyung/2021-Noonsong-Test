@@ -53,9 +53,9 @@ const SelectContainer = ({index, getSelected, handleLoad, contents}) => {
 }
 
 const StyledSelectContainer = styled.div`
-  width: 90%;
+  width: calc(100% - 2.4rem);
   margin: 0 auto;
-  padding: 1rem;
+  padding: 1.2rem;
   /* flexbox 스타일 */
   display: flex;
   flex-direction: row;

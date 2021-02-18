@@ -24,10 +24,10 @@ const Comments = ({ comments }) => {
 export default Comments;
 
 const CommentsContainer = styled.div`
-  min-height: 28rem;
-  height: auto;
-  overflow-y: scroll;
+  width: calc(100% - 2.4rem);
+  height: calc(100% - 2.4rem);
   padding: 1.2rem;
+  overflow: scroll;
 
   /* scrollbar */
   ::-webkit-scrollbar {
@@ -44,14 +44,14 @@ const CommentsContainer = styled.div`
 
   /* Mobile */
   @media only screen and (max-width: 767px) {
-    min-height: 24rem;
+    height: 24rem;
   }
 
   @media only screen and (min-height: 720px) {
-    min-height: 28rem;
+    height: 28rem;
   }
 
   @media only screen and (min-height: 780px) {
-    min-height: 32rem;
+    height: 32rem;
   }
 `;
