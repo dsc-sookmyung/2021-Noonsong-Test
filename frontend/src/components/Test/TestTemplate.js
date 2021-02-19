@@ -4,6 +4,7 @@ import ChatTemplate from './Chat/ChatTemplate';
 import ResultTemplate from './Result/ResultTemplate';
 import StatTemplate from './Statistics/StatTemplate';
 import Modal from '../_Basic/Modal';
+import ScrollModal from '../_Basic/ScrollModal';
 import SideBar from '../_Basic/SideBar';
 import ProgressBar from '../_Basic/ProgressBar';
 import Button from '../_Basic/Button';
@@ -44,19 +45,22 @@ const TestTemplate = ({ isOpened, close }) => {
     }
   }, [loaded]);
 
-  if (numbers.length === 30) {    
-    (async () => {
-      const requestOptions = await fetch('http://localhost:8000/users/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({answer_list: nowSelected.toString(), ip: null, result_id: null})
-      });
-      await requestOptions.json().then((data) => {
-          setResult(data);
-          //alert("RESPONSE: "+data+" RESULT: "+result);
-        })
-    })();
-  }
+  useEffect(() => {
+    if (numbers.length === 30) {    
+      console.log("POST answer_list");
+      (async () => {
+        const requestOptions = await fetch('http://localhost:8000/users/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({answer_list: nowSelected.toString(), ip: null, result_id: null})
+        });
+        await requestOptions.json().then((data) => {
+            setResult(data);
+            //alert("RESPONSE: "+data+" RESULT: "+result);
+          })
+      })();
+    }  
+  }, [numbers]);
 
   const getSelected = useCallback((selectedIndex) => {
     setNowSelected([...nowSelected, selectedIndex]);
@@ -80,13 +84,16 @@ const TestTemplate = ({ isOpened, close }) => {
     <>
     { isOpened ? (
       <div>
+        { numbers.length < 30 ? (
         <Modal>
           <SideBar close={close}/>
-          { numbers.length < 30 ? (
-          <ContentWrapper>
-            <ChatTemplate numbers={numbers} nowSelected={nowSelected} loaded={loaded} questions={questions} getSelected={getSelected} handleLoad={handleLoad}/>
-          </ContentWrapper>
-          ) : (
+            <ContentWrapper>
+              <ChatTemplate numbers={numbers} nowSelected={nowSelected} loaded={loaded} questions={questions} getSelected={getSelected} handleLoad={handleLoad}/>
+            </ContentWrapper>
+        </Modal>
+        ) : (
+        <ScrollModal>
+          <SideBar close={close}/>
             <ContentWrapper>
             { !resultLoaded ? (
               <ProgressBarWrapper disappear={!resultLoaded}>
@@ -105,8 +112,8 @@ const TestTemplate = ({ isOpened, close }) => {
               )
             )}
             </ContentWrapper>
-          )}
-        </Modal>
+        </ScrollModal>
+        )}
       </div>
     ) : null}
   </>
