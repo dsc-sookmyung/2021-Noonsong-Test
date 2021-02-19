@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import Comments from './Comments';
+import Form from './Form';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
-import Comments from './Comments';
-import Form from './Form';
+
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -54,7 +55,7 @@ function GuestBook() {
       handleLoad={handleLoad}
       />
       { !loaded ? (
-        <Backdrop classNmae={classes.backdrop} open={!loaded}>
+        <Backdrop className={classes.backdrop} open={!loaded}>
           <CircularProgress color="inherit" />
         </Backdrop>
       ) : null }
