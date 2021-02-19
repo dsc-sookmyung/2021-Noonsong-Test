@@ -181,7 +181,7 @@ class MajorchartViewSet(viewsets.ModelViewSet):
         #단과대별로 통계 보여달라고 했을때
         else :
             selected = Majorchart.objects.filter(s_major=int(s_major))
-            
+            m = 0
             for num in selected:
                 count += 1
                 
@@ -202,18 +202,28 @@ class MajorchartViewSet(viewsets.ModelViewSet):
                 if num.result_id == 8:
                     num8 += 1
 
-            ratio1 = round(num1/count,2)
-            ratio2 = round(num2/count,2)
-            ratio3 = round(num3/count,2)
-            ratio4 = round(num4/count,2)
-            ratio5 = round(num5/count,2)
-            ratio6 = round(num6/count,2)
-            ratio7 = round(num7/count,2)
-            ratio8 = round(num8/count,2)
+            if count !=0 :
+                ratio1 = round(num1/count,2)
+                ratio2 = round(num2/count,2)
+                ratio3 = round(num3/count,2)
+                ratio4 = round(num4/count,2)
+                ratio5 = round(num5/count,2)
+                ratio6 = round(num6/count,2)
+                ratio7 = round(num7/count,2)
+                ratio8 = round(num8/count,2)
 
-            numlist = [num1, num2, num3, num4, num5, num6, num7, num8]
-            maxnum = max(numlist) 
-            m = numlist.index(maxnum) + 1
+                numlist = [num1, num2, num3, num4, num5, num6, num7, num8]
+                maxnum = max(numlist) 
+                m = numlist.index(maxnum) + 1
+
+            if m > 0:
+                maxnoonsong_title=Result.objects.get(id=m).title
+                maxnoonsong_image=Result.objects.get(id=m).image
+
+            else:
+                maxnoonsong_title="아직 아무도 참여하지 않은 단과대에요!"
+                maxnoonsong_image="x"
+
 
             statistic_result = {
                 "noonsong1_name":Result.objects.get(id=1).title,
@@ -232,8 +242,8 @@ class MajorchartViewSet(viewsets.ModelViewSet):
                 "noonsong7_ratio":ratio7,
                 "noonsong8_name":Result.objects.get(id=8).title,
                 "noonsong8_ratio":ratio8,
-                "maxnoonsong_title":Result.objects.get(id=m).title,
-                "maxnoonsong_image":Result.objects.get(id=m).image,
+                "maxnoonsong_title":maxnoonsong_title,
+                "maxnoonsong_image":maxnoonsong_image,
             }
 
             statistic_serializer = StatisticSerializer(data=statistic_result)
@@ -242,7 +252,7 @@ class MajorchartViewSet(viewsets.ModelViewSet):
                 statistic_serializer.save()
                 return Response(statistic_serializer.data)
             else:
-                return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response(statistic_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             
             
 
