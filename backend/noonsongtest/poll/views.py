@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets, status
-from .serializers import QuestionSerializer, AnswerSerializer, ResultSerializer, UserSerializer, MajorchartSerializer
-from .models import Question, Answer, Result, User, Majorchart
+from .serializers import QuestionSerializer, AnswerSerializer, ResultSerializer, UserSerializer, MajorchartSerializer, StatisticSerializer
+from .models import Question, Answer, Result, User, Majorchart, Statistic
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.shortcuts import get_object_or_404
@@ -102,7 +102,7 @@ class MajorchartViewSet(viewsets.ModelViewSet):
     queryset=Majorchart.objects.all()
     serializer_class = MajorchartSerializer
 
-    def list(self, request):
+    def create(self, request):
         s_major = request.data['s_major']
         print(int(s_major))
         #14까지가 단과대학, 15는 전체
@@ -143,18 +143,48 @@ class MajorchartViewSet(viewsets.ModelViewSet):
             ratio7 = round(num7/count,2)
             ratio8 = round(num8/count,2)
 
-            return Response({"message": "전체 성공"})
-        
-
+            numlist = [num1, num2, num3, num4, num5, num6, num7, num8]
+            maxnum = max(numlist) 
+            m = numlist.index(maxnum) + 1
             
-       
+
+            statistic_result = {
+                "noonsong1_name":Result.objects.get(id=1).title,
+                "noonsong1_ratio":ratio1,
+                "noonsong2_name":Result.objects.get(id=2).title,
+                "noonsong2_ratio":ratio2,
+                "noonsong3_name":Result.objects.get(id=3).title,
+                "noonsong3_ratio":ratio3,
+                "noonsong4_name":Result.objects.get(id=4).title,
+                "noonsong4_ratio":ratio4,
+                "noonsong5_name":Result.objects.get(id=5).title,
+                "noonsong5_ratio":ratio5,
+                "noonsong6_name":Result.objects.get(id=6).title,
+                "noonsong6_ratio":ratio6,
+                "noonsong7_name":Result.objects.get(id=7).title,
+                "noonsong7_ratio":ratio7,
+                "noonsong8_name":Result.objects.get(id=8).title,
+                "noonsong8_ratio":ratio8,
+                "maxnoonsong_title":Result.objects.get(id=m).title,
+                "maxnoonsong_image":Result.objects.get(id=m).image,
+            }
+
+            statistic_serializer = StatisticSerializer(data=statistic_result)
+
+            if statistic_serializer.is_valid():
+                statistic_serializer.save()
+                return Response(statistic_serializer.data)
+            else:
+                return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
         #단과대별로 통계 보여달라고 했을때
         else :
             selected = Majorchart.objects.filter(s_major=int(s_major))
             
             for num in selected:
                 count += 1
-                #print(num.result_id)
+                
                 if num.result_id == 1:
                     num1 += 1
                 if num.result_id == 2:
@@ -180,8 +210,40 @@ class MajorchartViewSet(viewsets.ModelViewSet):
             ratio6 = round(num6/count,2)
             ratio7 = round(num7/count,2)
             ratio8 = round(num8/count,2)
+
+            numlist = [num1, num2, num3, num4, num5, num6, num7, num8]
+            maxnum = max(numlist) 
+            m = numlist.index(maxnum) + 1
+
+            statistic_result = {
+                "noonsong1_name":Result.objects.get(id=1).title,
+                "noonsong1_ratio":ratio1,
+                "noonsong2_name":Result.objects.get(id=2).title,
+                "noonsong2_ratio":ratio2,
+                "noonsong3_name":Result.objects.get(id=3).title,
+                "noonsong3_ratio":ratio3,
+                "noonsong4_name":Result.objects.get(id=4).title,
+                "noonsong4_ratio":ratio4,
+                "noonsong5_name":Result.objects.get(id=5).title,
+                "noonsong5_ratio":ratio5,
+                "noonsong6_name":Result.objects.get(id=6).title,
+                "noonsong6_ratio":ratio6,
+                "noonsong7_name":Result.objects.get(id=7).title,
+                "noonsong7_ratio":ratio7,
+                "noonsong8_name":Result.objects.get(id=8).title,
+                "noonsong8_ratio":ratio8,
+                "maxnoonsong_title":Result.objects.get(id=m).title,
+                "maxnoonsong_image":Result.objects.get(id=m).image,
+            }
+
+            statistic_serializer = StatisticSerializer(data=statistic_result)
+
+            if statistic_serializer.is_valid():
+                statistic_serializer.save()
+                return Response(statistic_serializer.data)
+            else:
+                return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             
-            return Response({"message": "단과대별 성공"})
             
 
 
