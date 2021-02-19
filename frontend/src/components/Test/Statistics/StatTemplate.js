@@ -1,13 +1,41 @@
 import React from 'react';
 import styled from 'styled-components';
+import Select from 'react-select';
 import MostPopular from './MostPopular';
 import Chart from './Chart';
 
-const StatTemplate = () => {
+const options = [
+  { value: '15', label: '전체', isToggled: true },
+  { value: '1', label: '문과대학', isToggled: false },
+  { value: '2', label: '이과대학', isToggled: false },
+  { value: '3', label: '공과대학', isToggled: false },
+  { value: '4', label: '생활과학대학', isToggled: false },
+  { value: '5', label: '사회과학대학', isToggled: false },
+  { value: '6', label: '법과대학', isToggled: false },
+  { value: '7', label: '경상대학', isToggled: false },
+  { value: '8', label: '음악대학', isToggled: false },
+  { value: '9', label: '약학대학', isToggled: false },
+  { value: '10', label: '미술대학', isToggled: false },
+  { value: '11', label: '기초교양대학', isToggled: false },
+  { value: '12', label: '글로벌서비스학부', isToggled: false },
+  { value: '13', label: '영어영문학부', isToggled: false },
+  { value: '14', label: '미디어학부', isToggled: false }
+]
+
+const StatTemplate = ({ stat, selectHandler, label }) => {
   return (
     <StatWrapper>
-      <MostPopular/>
-      <Chart/>
+      <div style={{width: '12rem'}}>
+        <Select 
+          onChange={selectHandler}
+          defaultValue={options[0]} 
+          options={options}
+          value={{label: label}} />
+      </div>
+      <MostPopular 
+        title={stat.maxnoonsong_title} 
+        image={stat.maxnoonsong_image} />
+      <Chart info={stat}/>
     </StatWrapper>
   )
 }

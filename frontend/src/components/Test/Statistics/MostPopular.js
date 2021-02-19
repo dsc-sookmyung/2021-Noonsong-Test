@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import SimpleSelect from './StatTemplate';
-import noonsongImg from '../../../Images/bbosong.jpg';
+import sookmyungSymbol from '../../../Images/sookmyung-symbol.png';
 
-const MostPopular = () => {
-  const [firstCategory, setFirstCategory] = useState('');
-
-  const handleChange = (e) => {
-    setFirstCategory(e.target.value);
-  };
-
+const MostPopular = ({ title, image }) => {
+  let imgWidth = "20rem";
+  if (image === "x") {
+    image = sookmyungSymbol;
+    imgWidth = "12rem";
+  }
+  
   return (
     <Wrapper>
       <Title>가장 많이 나온 송이 유형</Title>
-      {/*<SimpleSelect handleChange={handleChange}/>*/}
-      <NoonsongType>함박눈송이 (71%)</NoonsongType>
-      <NoonsongImage><img src={noonsongImg} alt="loading..." style={{width: "20rem"}}/></NoonsongImage>
+      <NoonsongType>{title}</NoonsongType>
+      <NoonsongImage><img src={image} alt="loading..." style={{width: imgWidth}}/></NoonsongImage>
     </Wrapper>
   )
 }

@@ -9,6 +9,16 @@ import SideBar from '../_Basic/SideBar';
 import ProgressBar from '../_Basic/ProgressBar';
 import Button from '../_Basic/Button';
 import DelayedRender from './DelayedRender';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
+}));
 
 const TestTemplate = ({ isOpened, close }) => {
   const [numbers, setNumbers] = useState([1]);
@@ -18,7 +28,11 @@ const TestTemplate = ({ isOpened, close }) => {
   const [questions, setQuestions] = useState([]);
   const [result, setResult] = useState();
   const [resultLoaded, setResultLoaded] = useState(false);
+  const [showBackdrop, setShowBackdrop] = useState(false);
+  const [stat, setStat] = useState();
   const [openStat, setOpenStat] = useState(false);
+  const [label, setLabel] = useState("");
+  const classes = useStyles();
  
   useEffect(async () => {
     /* GET questions */
@@ -77,7 +91,45 @@ const TestTemplate = ({ isOpened, close }) => {
   }
 
   const viewStat = (e) => {
-    setOpenStat(true);
+    setShowBackdrop(true);
+    (async () => {
+      const requestOptions = await fetch('http://localhost:8000/majorcharts/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({s_major: 15, result_id: null})
+      });
+      await requestOptions.json().then((data) => {
+        setShowBackdrop(false);
+        setOpenStat(true);
+      })
+    })();
+  }
+
+  useEffect(async () => {
+    const requestOptions = await fetch('http://localhost:8000/majorcharts/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({s_major: 15, result_id: null})
+    });
+    await requestOptions.json().then((data) => {
+      setStat(data);
+    })
+  }, [])
+
+  const selectHandler = (e) => {
+    setShowBackdrop(true);
+    setLabel(e.label);
+    (async () => {
+      const requestOptions = await fetch('http://localhost:8000/majorcharts/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({s_major: e.value, result_id: null})
+      });
+      await requestOptions.json().then((data) => {
+        setShowBackdrop(false);
+        setStat(data);
+      })
+    })();
   }
 
   return (
@@ -106,9 +158,21 @@ const TestTemplate = ({ isOpened, close }) => {
               </ProgressBarWrapper>
             ) : (
               !openStat ? (
-                <ResultTemplate title={result.title} image={result.image} explain={result.explain} viewStat={viewStat}/>
+                !showBackdrop ? (
+                  <ResultTemplate title={result.title} image={result.image} explain={result.explain} viewStat={viewStat}/>
+                ) : (
+                  <Backdrop className={classes.backdrop} open={showBackdrop}>
+                    <CircularProgress color="inherit" />
+                  </Backdrop>
+                )  
               ) : (
-                <StatTemplate/>
+                !showBackdrop ? (
+                  <StatTemplate stat={stat} selectHandler={selectHandler} label={label} />
+                ) : (
+                  <Backdrop className={classes.backdrop} open={showBackdrop}>
+                    <CircularProgress color="inherit" />
+                  </Backdrop>
+                )
               )
             )}
             </ContentWrapper>
