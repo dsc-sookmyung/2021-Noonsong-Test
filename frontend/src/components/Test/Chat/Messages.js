@@ -34,7 +34,9 @@ const Messages = ({ numbers, contents, selected, loaded }) => {
 export default Messages;
 
 const MessagesContainer = styled.div`
-  height: 32rem;
+  width: 100%;
+  height: 80vh;
+  padding: 1rem 0;
   overflow-y: scroll;
 
   /* scrollbar */
@@ -51,26 +53,15 @@ const MessagesContainer = styled.div`
   }
 
   /* Mobile */
-  @media only screen and (max-width: 767px) and (max-height: 860px) {
-    height: 40rem;
-  }
-
   @media only screen and (max-width: 767px) and (max-height: 760px) {
-    height: 36rem;
-  }
-
-  @media only screen and (max-width: 767px) and (max-height: 720px) {
-    height: 32rem;
+    min-height: 78vh;
+    height: auto;
   }
 
   @media only screen and (max-width: 767px) and (max-height: 680px) {
-    height: 32rem;
-  }
-
-  @media only screen and (max-width: 767px) and (max-height: 640px) {
-    height: 30rem;
-  }
-  
+    min-height: 76vh;
+    height: auto;
+  }  
 `;
 
 const Wrapper = styled.div`

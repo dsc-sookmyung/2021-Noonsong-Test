@@ -24,7 +24,7 @@ const BoardTemplate = ({ isOpened, close }) => {
 export default BoardTemplate;
 
 const ContentWrapper = styled.div`
-  width: 100%;
+  width: calc(l00% - 0rem);
   min-height: calc(100% - 3rem);
   height: auto;
   display: flex;
