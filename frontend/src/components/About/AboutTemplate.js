@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SideBar from '../_Basic/SideBar';
+import ScrollModal from '../_Basic/ScrollModal';
 import Profile from './Profile';
 import '../../fonts/font.css';
 
@@ -10,26 +11,6 @@ import eunji from '../../Images/heleneunji.jpg';
 import jiyeon from '../../Images/hellouz818.png';
 
 function AboutTemplate({ isOpened, close }) {
-    const AboutModal = styled.div`
-        width: 40rem;
-        min-height: 40rem;
-        height: auto;
-        background-color: white;
-        position: absolute;
-        top: 50%;
-        left 50%;
-        transform: translate(-50%, -50%);
-        border-radius: 1rem;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-        overflow: scroll;
-        z-index: 99;
-
-        @media only screen and (max-width: 638px) {
-            width: 100vw;
-            height: 100vh;
-        }
-    `;
-
     const ContentWrapper = styled.div`
         width: calc(100% - 4.8rem);
         min-height: calc(100% - 4.8rem);
@@ -69,7 +50,7 @@ function AboutTemplate({ isOpened, close }) {
     return (
         <>
             { isOpened ? (
-                <AboutModal>
+                <ScrollModal>
                     <SideBar close={close}/>
                     <ContentWrapper>
                         <Title>
@@ -114,7 +95,7 @@ function AboutTemplate({ isOpened, close }) {
                             />
                         </ProfileWrapper>
                     </ContentWrapper>
-                </AboutModal>
+                </ScrollModal>
             ) : null}
         </>
     );
