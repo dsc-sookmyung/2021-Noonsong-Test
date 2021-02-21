@@ -85,8 +85,7 @@ const TestTemplate = ({ isOpened, close }) => {
     setLoaded(!loaded);
   }
 
-  const viewStat = (e) => {
-    e.preventDefault();
+  const viewStat = () => {
     setShowBackdrop(true);
     (async () => {
       const requestOptions = await fetch('http://localhost:8000/majorcharts/', {
@@ -103,7 +102,6 @@ const TestTemplate = ({ isOpened, close }) => {
   }
 
   const selectHandler = (e) => {
-    e.preventDefault();
     setShowBackdrop(true);
     setLabel(e.label);
     (async () => {
@@ -119,8 +117,7 @@ const TestTemplate = ({ isOpened, close }) => {
     })();
   }
 
-  const viewResult = (e) => {
-    e.preventDefault();
+  const viewResult = () => {
     setOpenStat(false);
   }
 
