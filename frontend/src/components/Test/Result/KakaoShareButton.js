@@ -1,7 +1,9 @@
 import React from 'react';
 
 const KakaoShareButton = () => {
-  const createKakaoButton = () => {
+  const createKakaoButton = (e) => {
+    e.preventDefault();
+
     if (window.Kakao) {
       const Kakao = window.Kakao
       
