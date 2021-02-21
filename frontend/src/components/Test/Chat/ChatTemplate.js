@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import SelectContainer from './SelectContainer';
 import Messages from './Messages';
 import DelayedRender from '../DelayedRender';

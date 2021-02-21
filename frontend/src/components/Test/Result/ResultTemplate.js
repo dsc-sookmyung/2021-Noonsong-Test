@@ -34,6 +34,7 @@ const ResultWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    jusity-content: space-around;
     margin-bottom: auto;
     padding: 2rem;
     font-family: "Carmen Sans";
@@ -54,23 +55,36 @@ const ResultWrapper = styled.div`
 `;
 
 const NoonsongType = styled.div`
-    width: 80%;
     font-weight: bold;
     font-size: 2rem;
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
+
+    /* Mobile */
+    @media only screen and (max-width: 767px) and (min-height: 700px) {
+      margin-bottom: 3.6rem;
+    }
 `;
 
 const NoonsongImage = styled.div`
-    margin-bottom: 0.4rem;
+    margin-bottom: 1.2rem;
+
+    /* Mobile */
+    @media only screen and (max-width: 767px) and (min-height: 700px) {
+      margin-bottom: 3.6rem;
+    }
 `;
 
 const NoonsongDescription = styled.div`
-    width: 80%;
     font-size: 1rem;
     text-align: center;
     word-break: keep-all;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
+    
+    /* Mobile */
+    @media only screen and (max-width: 767px) and (min-height: 700px) {
+      margin-bottom: 3.6rem;
+    }
 `;
 
 const StatButton = styled.div`

@@ -4,10 +4,19 @@ import ChatTemplate from './Chat/ChatTemplate';
 import ResultTemplate from './Result/ResultTemplate';
 import StatTemplate from './Statistics/StatTemplate';
 import Modal from '../_Basic/Modal';
+import ScrollModal from '../_Basic/ScrollModal';
 import SideBar from '../_Basic/SideBar';
 import ProgressBar from '../_Basic/ProgressBar';
-import Button from '../_Basic/Button';
-import DelayedRender from './DelayedRender';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
+}));
 
 const TestTemplate = ({ isOpened, close }) => {
   const [numbers, setNumbers] = useState([1]);
@@ -17,7 +26,11 @@ const TestTemplate = ({ isOpened, close }) => {
   const [questions, setQuestions] = useState([]);
   const [result, setResult] = useState();
   const [resultLoaded, setResultLoaded] = useState(false);
+  const [showBackdrop, setShowBackdrop] = useState(false);
+  const [stat, setStat] = useState();
   const [openStat, setOpenStat] = useState(false);
+  const [label, setLabel] = useState("전체");
+  const classes = useStyles();
  
   useEffect(async () => {
     /* GET questions */
@@ -44,19 +57,23 @@ const TestTemplate = ({ isOpened, close }) => {
     }
   }, [loaded]);
 
-  if (numbers.length === 30) {    
-    (async () => {
-      const requestOptions = await fetch('http://localhost:8000/users/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({answer_list: nowSelected.toString(), ip: null, result_id: null})
-      });
-      await requestOptions.json().then((data) => {
-          setResult(data);
-          //alert("RESPONSE: "+data+" RESULT: "+result);
-        })
-    })();
-  }
+  useEffect(() => {
+    if (numbers.length === 30) {    
+      console.log("POST answer_list");
+      (async () => {
+        const requestOptions = await fetch('http://localhost:8000/users/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({answer_list: nowSelected.toString(), ip: null, result_id: null})
+        });
+        await requestOptions.json().then((data) => {
+            setResult(data);
+            setResultLoaded(true);
+            //alert("RESPONSE: "+data+" RESULT: "+result);
+          })
+      })();
+    }  
+  }, [numbers]);
 
   const getSelected = useCallback((selectedIndex) => {
     setNowSelected([...nowSelected, selectedIndex]);
@@ -68,45 +85,79 @@ const TestTemplate = ({ isOpened, close }) => {
     setLoaded(!loaded);
   }
 
-  const viewResult = (e) => {
-    setResultLoaded(true);
+  const viewStat = (e) => {
+    setShowBackdrop(true);
+    (async () => {
+      const requestOptions = await fetch('http://localhost:8000/majorcharts/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({s_major: 15, result_id: null})
+      });
+      await requestOptions.json().then((data) => {
+        setStat(data);
+        setShowBackdrop(false);
+        setOpenStat(true);
+      })
+    })();
   }
 
-  const viewStat = (e) => {
-    setOpenStat(true);
+  const selectHandler = (e) => {
+    setShowBackdrop(true);
+    setLabel(e.label);
+    (async () => {
+      const requestOptions = await fetch('http://localhost:8000/majorcharts/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({s_major: e.value, result_id: null})
+      });
+      await requestOptions.json().then((data) => {
+        setShowBackdrop(false);
+        setStat(data);
+      })
+    })();
   }
 
   return (
     <>
     { isOpened ? (
       <div>
+        { numbers.length < 30 ? (
         <Modal>
           <SideBar close={close}/>
-          { numbers.length < 30 ? (
-          <ContentWrapper>
-            <ChatTemplate numbers={numbers} nowSelected={nowSelected} loaded={loaded} questions={questions} getSelected={getSelected} handleLoad={handleLoad}/>
-          </ContentWrapper>
-          ) : (
+            <ContentWrapper>
+              <ChatTemplate numbers={numbers} nowSelected={nowSelected} loaded={loaded} questions={questions} getSelected={getSelected} handleLoad={handleLoad}/>
+            </ContentWrapper>
+        </Modal>
+        ) : (
+        <ScrollModal>
+          <SideBar close={close}/>
             <ContentWrapper>
             { !resultLoaded ? (
               <ProgressBarWrapper disappear={!resultLoaded}>
                 <ProgressBar/>
-                <DelayedRender delay={3000}>
-                  <Button onClick={viewResult} size="medium">
-                    📌 결과보기
-                  </Button>
-                </DelayedRender>
               </ProgressBarWrapper>
             ) : (
               !openStat ? (
-                <ResultTemplate title={result.title} image={result.image} explain={result.explain} viewStat={viewStat}/>
+                !showBackdrop ? (
+                  <ResultTemplate title={result.title} image={result.image} explain={result.explain} viewStat={viewStat}/>
+                ) : (
+                  <Backdrop className={classes.backdrop} open={showBackdrop}>
+                    <CircularProgress color="inherit" />
+                  </Backdrop>
+                )  
               ) : (
-                <StatTemplate/>
+                !showBackdrop ? (
+                  <StatTemplate stat={stat} selectHandler={selectHandler} label={label} />
+                ) : (
+                  <Backdrop className={classes.backdrop} open={showBackdrop}>
+                    <CircularProgress color="inherit" />
+                  </Backdrop>
+                )
               )
             )}
             </ContentWrapper>
-          )}
-        </Modal>
+        </ScrollModal>
+        )}
       </div>
     ) : null}
   </>
