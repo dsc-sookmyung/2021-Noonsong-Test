@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
+import Button from '../../_Basic/Button';
 import MostPopular from './MostPopular';
 import Chart from './Chart';
 
@@ -22,7 +23,7 @@ const options = [
   { value: '14', label: '미디어학부', isToggled: false }
 ]
 
-const StatTemplate = ({ stat, selectHandler, label }) => {
+const StatTemplate = ({ stat, selectHandler, label, viewResult }) => {
   return (
     <StatWrapper>
       <div style={{width: '12rem'}}>
@@ -36,6 +37,11 @@ const StatTemplate = ({ stat, selectHandler, label }) => {
         title={stat.maxnoonsong_title} 
         image={stat.maxnoonsong_image} />
       <Chart info={stat}/>
+      <Container>
+        <Button onClick={viewResult}>
+          📌 결과 다시 보러가기
+        </Button>
+      </Container>
     </StatWrapper>
   )
 }
@@ -66,4 +72,8 @@ const StatWrapper = styled.div`
         background-color: #f1f3f5; // background: #dee2e6;
         -webkit-box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05);
     }
+`;
+
+const Container = styled.div`
+    align-self: flex-start;
 `;

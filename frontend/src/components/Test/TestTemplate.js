@@ -86,6 +86,7 @@ const TestTemplate = ({ isOpened, close }) => {
   }
 
   const viewStat = (e) => {
+    e.preventDefault();
     setShowBackdrop(true);
     (async () => {
       const requestOptions = await fetch('http://localhost:8000/majorcharts/', {
@@ -102,6 +103,7 @@ const TestTemplate = ({ isOpened, close }) => {
   }
 
   const selectHandler = (e) => {
+    e.preventDefault();
     setShowBackdrop(true);
     setLabel(e.label);
     (async () => {
@@ -115,6 +117,11 @@ const TestTemplate = ({ isOpened, close }) => {
         setStat(data);
       })
     })();
+  }
+
+  const viewResult = (e) => {
+    e.preventDefault();
+    setOpenStat(false);
   }
 
   return (
@@ -147,7 +154,7 @@ const TestTemplate = ({ isOpened, close }) => {
                 )  
               ) : (
                 !showBackdrop ? (
-                  <StatTemplate stat={stat} selectHandler={selectHandler} label={label} />
+                  <StatTemplate stat={stat} selectHandler={selectHandler} label={label} viewResult={viewResult}/>
                 ) : (
                   <Backdrop className={classes.backdrop} open={showBackdrop}>
                     <CircularProgress color="inherit" />
@@ -173,7 +180,6 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   font-family: "Carmen Sans";
-  // overflow: scroll;
 `;
 
 const ProgressBarWrapper = styled.div`
