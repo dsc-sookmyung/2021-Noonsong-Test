@@ -180,7 +180,6 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   font-family: "Carmen Sans";
-  // overflow: scroll;
 `;
 
 const ProgressBarWrapper = styled.div`

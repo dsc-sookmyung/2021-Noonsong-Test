@@ -24,9 +24,10 @@ const BoardTemplate = ({ isOpened, close }) => {
 export default BoardTemplate;
 
 const ContentWrapper = styled.div`
-  width: calc(l00% - 0rem);
+  width: 100%;
   min-height: calc(100% - 3rem);
   height: auto;
   display: flex;
   flex-direction: column;
+  font-family: "Carmen Sans";
 `;

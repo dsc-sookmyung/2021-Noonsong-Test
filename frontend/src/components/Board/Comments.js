@@ -24,10 +24,10 @@ const Comments = ({ comments }) => {
 export default Comments;
 
 const CommentsContainer = styled.div`
-  width: calc(100% - 2.4rem);
-  height: calc(100% - 2.4rem);
+  width: 90%;
+  height: 80vh;
   padding: 1.2rem;
-  overflow: scroll;
+  overflow-y: scroll;
 
   /* scrollbar */
   ::-webkit-scrollbar {
