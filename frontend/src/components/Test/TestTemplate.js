@@ -23,6 +23,7 @@ const TestTemplate = ({ isOpened, close }) => {
   const [selected, setSelected] = useState([]);
   const [nowSelected, setNowSelected] = useState([]);
   const [loaded, setLoaded] = useState(true);
+  const [completed, setCompleted] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [result, setResult] = useState();
   const [resultLoaded, setResultLoaded] = useState(false);
@@ -33,15 +34,20 @@ const TestTemplate = ({ isOpened, close }) => {
   const classes = useStyles();
  
   useEffect(async () => {
+    const timer = setInterval(progress, 200);
     /* GET questions */
     let res = await fetch('http://localhost:8000/questions/');
     await res.json().then((data) => {
       setQuestions(data);
       console.log("Questions: "+questions);
     })
-  }, [])
+    return () => {
+      clearInterval(timer);
+    }
+  }, []);
 
   const mounted = useRef(false);
+
   useEffect(() => {
     if (!mounted.current) {
       mounted.current = true;
@@ -49,7 +55,7 @@ const TestTemplate = ({ isOpened, close }) => {
     else {
       setNumbers([...numbers, numbers[numbers.length - 1] + 1]);
     }
-  }, [selected])
+  }, [selected]);
 
   useEffect(() => {
     if (!loaded) {
@@ -83,6 +89,10 @@ const TestTemplate = ({ isOpened, close }) => {
 
   const handleLoad = () => {
     setLoaded(!loaded);
+  }
+
+  const progress = () => {
+    setCompleted((prevState) => prevState >= 100 ? 0 : prevState + 1);
   }
 
   const viewStat = () => {
@@ -129,7 +139,10 @@ const TestTemplate = ({ isOpened, close }) => {
         <Modal>
           <SideBar close={close}/>
             <ContentWrapper>
+              {questions.length === 0 ?
+              <LoadingTest>로딩중입니다...</LoadingTest> :
               <ChatTemplate numbers={numbers} nowSelected={nowSelected} loaded={loaded} questions={questions} getSelected={getSelected} handleLoad={handleLoad}/>
+              }
             </ContentWrapper>
         </Modal>
         ) : (
@@ -177,6 +190,7 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   font-family: "Carmen Sans";
+  position: relative;
 `;
 
 const ProgressBarWrapper = styled.div`
@@ -192,4 +206,12 @@ const ProgressBarWrapper = styled.div`
     justify-content: center;
     align-items: center;
   `}
+`;
+
+const LoadingTest = styled.div`
+  width: 100%;
+  height: 37rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
