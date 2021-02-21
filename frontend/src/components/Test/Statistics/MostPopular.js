@@ -26,7 +26,6 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  //overflow: scroll;
 `;
 
 const Title = styled.div`
@@ -38,14 +37,24 @@ const Title = styled.div`
   padding-bottom: 1.2rem;
   font-weight: bold;
   font-size: 2rem;
+
+  /* Mobile */
+  @media only screen and (max-width: 767px) and (max-height: 700px) {
+    font-size: 1.6rem;
+  }
 `;
 
 const NoonsongType = styled.div`
     width: auto;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     text-align: center;
     margin-bottom: 1rem;
+
+    /* Mobile */
+    @media only screen and (max-width: 767px) and (max-height: 700px) {
+      font-size: 1.2rem;
+    }
 `;
 
 const NoonsongImage = styled.div`
