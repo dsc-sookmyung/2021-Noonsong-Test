@@ -44,8 +44,8 @@ export default StatTemplate;
 
 const StatWrapper = styled.div`
     width: calc(100% - 4rem);
-    min-height: calc(100% - 3rem);
-    height: auto;  
+    max-height: 80vh;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
