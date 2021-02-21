@@ -3,11 +3,13 @@ astroid==2.4.2
 colorama==0.4.4
 Django==3.1.5
 django-cors-headers==3.7.0
+django-mysql==3.11.1
 djangorestframework==3.12.2
 isort==5.7.0
 lazy-object-proxy==1.4.3
 mccabe==0.6.1
 mysqlclient==2.0.3
+Pillow==8.1.0
 pylint==2.6.0
 pylint-django==2.4.2
 pylint-plugin-utils==0.6
