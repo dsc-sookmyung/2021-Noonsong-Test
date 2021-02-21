@@ -7,8 +7,6 @@ import Modal from '../_Basic/Modal';
 import ScrollModal from '../_Basic/ScrollModal';
 import SideBar from '../_Basic/SideBar';
 import ProgressBar from '../_Basic/ProgressBar';
-import Button from '../_Basic/Button';
-import DelayedRender from './DelayedRender';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
@@ -31,7 +29,7 @@ const TestTemplate = ({ isOpened, close }) => {
   const [showBackdrop, setShowBackdrop] = useState(false);
   const [stat, setStat] = useState();
   const [openStat, setOpenStat] = useState(false);
-  const [label, setLabel] = useState("");
+  const [label, setLabel] = useState("전체");
   const classes = useStyles();
  
   useEffect(async () => {
@@ -70,6 +68,7 @@ const TestTemplate = ({ isOpened, close }) => {
         });
         await requestOptions.json().then((data) => {
             setResult(data);
+            setResultLoaded(true);
             //alert("RESPONSE: "+data+" RESULT: "+result);
           })
       })();
@@ -86,10 +85,6 @@ const TestTemplate = ({ isOpened, close }) => {
     setLoaded(!loaded);
   }
 
-  const viewResult = (e) => {
-    setResultLoaded(true);
-  }
-
   const viewStat = (e) => {
     setShowBackdrop(true);
     (async () => {
@@ -99,22 +94,12 @@ const TestTemplate = ({ isOpened, close }) => {
         body: JSON.stringify({s_major: 15, result_id: null})
       });
       await requestOptions.json().then((data) => {
+        setStat(data);
         setShowBackdrop(false);
         setOpenStat(true);
       })
     })();
   }
-
-  useEffect(async () => {
-    const requestOptions = await fetch('http://localhost:8000/majorcharts/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({s_major: 15, result_id: null})
-    });
-    await requestOptions.json().then((data) => {
-      setStat(data);
-    })
-  }, [])
 
   const selectHandler = (e) => {
     setShowBackdrop(true);
@@ -150,11 +135,6 @@ const TestTemplate = ({ isOpened, close }) => {
             { !resultLoaded ? (
               <ProgressBarWrapper disappear={!resultLoaded}>
                 <ProgressBar/>
-                <DelayedRender delay={3000}>
-                  <Button onClick={viewResult} size="medium">
-                    📌 결과보기
-                  </Button>
-                </DelayedRender>
               </ProgressBarWrapper>
             ) : (
               !openStat ? (
