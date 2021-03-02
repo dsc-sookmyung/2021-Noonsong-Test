@@ -1,4 +1,7 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import Avatar from 'react-avatar';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const KakaoShareButton = () => {
   const createKakaoButton = (e) => {
@@ -28,14 +31,7 @@ const KakaoShareButton = () => {
         },
         buttons: [
           {
-            title: '테스트 하기',
-            link: {
-              mobileWebUrl: 'https://developers.kakao.com',
-              webUrl: 'https://developers.kakao.com',
-            },
-          },
-          {
-            title: '결과 보기',
+            title: '테스트 하러가기',
             link: {
               mobileWebUrl: 'https://developers.kakao.com',
               webUrl: 'https://developers.kakao.com',
@@ -46,20 +42,25 @@ const KakaoShareButton = () => {
     }
   }
 
-  var imageButton = {
-    width: "2rem",
-    height: "2rem",
-    backgroundImage: "url('https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png')",
-    backgroudnPosition: "center",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    border: 0,
-    cursor: "pointer"
-  }
+  const buttonFont = createMuiTheme({
+    typography: {
+      fontFamily: "Carmen Sans",
+      fontSize: "1rem",
+      fontWeight: "bold"
+  },});
 
   return (
     <div className="Kakao-share-button">
-      <button id="kakao-link-btn" onClick={createKakaoButton} style={imageButton} />
+      {/*<button id="kakao-link-btn" onClick={createKakaoButton} style={imageButton}/>*/}
+      <ThemeProvider theme={buttonFont}>
+        <Button 
+          id="kakao-link-btn" 
+          onClick={createKakaoButton}
+          variant="text"
+          startIcon={<Avatar src={'https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png'} size="2rem" />} >
+          테스트 공유하기
+        </Button>
+      </ThemeProvider>
     </div>
   )
 }

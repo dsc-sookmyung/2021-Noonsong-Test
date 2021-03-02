@@ -105,6 +105,7 @@ const TestTemplate = ({ isOpened, close }) => {
       });
       await requestOptions.json().then((data) => {
         setStat(data);
+        setLabel("전체");
         setShowBackdrop(false);
         setOpenStat(true);
       })
