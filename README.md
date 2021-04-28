@@ -16,7 +16,7 @@ Team Gitribute(권은지, 남수연, 서희, 유지연)
 <img src="https://i.ibb.co/VqtVtGZ/2021-02-06-9-20-16.png" alt="2021-02-06-9-20-16" border="0">
 
 ### 실행 방법
-1. 프로젝트 다운받기 (git clone https://github.com/dsc-sookmyung/2021-Gitribute)
+1. 프로젝트 다운받기 (git clone https://github.com/dsc-sookmyung/2021-Noonsong-Test)
 2. 백엔드 폴더로 이동하기 (cd backend)
 3. 가상환경 만들기 (python -m venv myvenv)
 4. 가상환경 켜기 (source myvenv/Scripts/activate)
