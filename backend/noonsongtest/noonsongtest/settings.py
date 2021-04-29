@@ -88,7 +88,7 @@ DATABASES = {
         'NAME':'gitribute',
         'USER':'root',
         'PASSWORD':get_secret("DATABASE"),
-        'HOST':'34.67.105.35',
+        'HOST':'localhost',
         'PORT':'3306',
     }
 }
