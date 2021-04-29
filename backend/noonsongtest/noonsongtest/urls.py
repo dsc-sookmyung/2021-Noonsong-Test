@@ -5,6 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
 from feedback.views import FeedbackViewSet
+from django.views.generic import TemplateView
 from poll.views import QuestionViewSet, AnswerViewSet, ResultViewSet, UserViewSet, MajorchartViewSet
 import poll.views
 
@@ -18,6 +19,7 @@ router.register(r'majorcharts',MajorchartViewSet)
 
 
 urlpatterns = [
+    url(r'^$', TemplateView.as_view(template_name='index.html'),name='index'),
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     #path('', views.ReactAppView.as_view()), 추가
