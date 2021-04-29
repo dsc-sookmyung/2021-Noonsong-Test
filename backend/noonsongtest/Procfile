@@ -1,1 +1,1 @@
-web: gunicorn noonsongtest.wsgi
+web: gunicorn noonsongtest.wsgi --log-file -
