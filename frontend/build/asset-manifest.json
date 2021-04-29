@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "./static/css/main.8c58c250.chunk.css",
-    "main.js": "./static/js/main.87e69486.chunk.js",
-    "main.js.map": "./static/js/main.87e69486.chunk.js.map",
-    "runtime-main.js": "./static/js/runtime-main.bb147fef.js",
-    "runtime-main.js.map": "./static/js/runtime-main.bb147fef.js.map",
-    "static/js/2.aaa10b22.chunk.js": "./static/js/2.aaa10b22.chunk.js",
-    "static/js/2.aaa10b22.chunk.js.map": "./static/js/2.aaa10b22.chunk.js.map",
-    "static/js/3.508c2eb3.chunk.js": "./static/js/3.508c2eb3.chunk.js",
-    "static/js/3.508c2eb3.chunk.js.map": "./static/js/3.508c2eb3.chunk.js.map",
+    "main.css": "./static/css/main.c88313a6.chunk.css",
+    "main.js": "./static/js/main.609cb6cf.chunk.js",
+    "main.js.map": "./static/js/main.609cb6cf.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.6eac0651.js",
+    "runtime-main.js.map": "./static/js/runtime-main.6eac0651.js.map",
+    "static/js/2.930faa4c.chunk.js": "./static/js/2.930faa4c.chunk.js",
+    "static/js/2.930faa4c.chunk.js.map": "./static/js/2.930faa4c.chunk.js.map",
+    "static/js/3.0df3ea6e.chunk.js": "./static/js/3.0df3ea6e.chunk.js",
+    "static/js/3.0df3ea6e.chunk.js.map": "./static/js/3.0df3ea6e.chunk.js.map",
     "index.html": "./index.html",
-    "static/css/main.8c58c250.chunk.css.map": "./static/css/main.8c58c250.chunk.css.map",
-    "static/js/2.aaa10b22.chunk.js.LICENSE.txt": "./static/js/2.aaa10b22.chunk.js.LICENSE.txt",
+    "static/css/main.c88313a6.chunk.css.map": "./static/css/main.c88313a6.chunk.css.map",
+    "static/js/2.930faa4c.chunk.js.LICENSE.txt": "./static/js/2.930faa4c.chunk.js.LICENSE.txt",
     "static/media/0hee0.110922c6.jpg": "./static/media/0hee0.110922c6.jpg",
     "static/media/font.css": "./static/media/Carmen Sans SemiBold.31994d1d.woff",
     "static/media/blue-pin.dd6d4c9a.png": "./static/media/blue-pin.dd6d4c9a.png",
@@ -21,13 +21,14 @@
     "static/media/heleneunji.8c16f1d1.jpg": "./static/media/heleneunji.8c16f1d1.jpg",
     "static/media/hellouz818.35e0d407.png": "./static/media/hellouz818.35e0d407.png",
     "static/media/mori8.4e9df033.jpg": "./static/media/mori8.4e9df033.jpg",
+    "static/media/noonsongGIF.25f3a409.gif": "./static/media/noonsongGIF.25f3a409.gif",
     "static/media/sookmyung-symbol.c3effbf9.png": "./static/media/sookmyung-symbol.c3effbf9.png",
     "static/media/tape.e156fe3f.png": "./static/media/tape.e156fe3f.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.bb147fef.js",
-    "static/js/2.aaa10b22.chunk.js",
-    "static/css/main.8c58c250.chunk.css",
-    "static/js/main.87e69486.chunk.js"
+    "static/js/runtime-main.6eac0651.js",
+    "static/js/2.930faa4c.chunk.js",
+    "static/css/main.c88313a6.chunk.css",
+    "static/js/main.609cb6cf.chunk.js"
   ]
 }
