@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createElement } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from './Main.module.css';
 import '../../fonts/font.css';
 
@@ -6,15 +6,8 @@ import TestTemplate from '../Test/TestTemplate';
 import AboutTemplate from '../About/AboutTemplate';
 import BoardTemplate from '../Board/BoardTemplate';
 
-import testImg from '../../Images/frame-test.png';
-import aboutImg from '../../Images/frame-about.png';
-import bluePin from '../../Images/blue-pin.png';
-import tape from '../../Images/tape.png';
-import bedge from '../../Images/sookmyung-symbol.png';
-import noonsong from '../../Images/noonsong1.gif';
 
-
-function Main(props) {
+function Main() {
   const [isTestModalOpened, setIsTestModalOpened] = useState(false);
   const [isAboutModalOpened, setIsAboutModalOpened] = useState(false);
   const [isBoardModalOpened, setIsBoardModalOpened] = useState(false);
@@ -56,25 +49,25 @@ function Main(props) {
       for (let i = 0; i < typingTxts.length; i++) {
         let typingBool = false; 
         let typingIdx = 0; 
-        let typingTxt = typingTxts[i].innerText.split('');
+        let typingTxt = (typingTxts[i] as HTMLElement).innerText.split('');
         if (typingBool === false) {
           typingBool = true;
           await intervalHandler(typingTxt, typingIdx);
-          document.querySelector('.' + style.typing).innerHTML = document.querySelector('.' + style.typing).innerHTML + '<br/>';
+          document.querySelector('.' + style.typing)!.innerHTML = document.querySelector('.' + style.typing)!.innerHTML + '<br/>';
         }
       }
     }
   }, [])
 
-  const intervalHandler = (typingTxt, typingIdx) => {
+  const intervalHandler = (typingTxt: string[], typingIdx: number) => {
     return new Promise((resolve, reject) => {
       var tyInt = setInterval(() => { 
         if (typingIdx < typingTxt.length) {
-          document.querySelector('.' + style.typing).append(typingTxt[typingIdx]);
+          document.querySelector('.' + style.typing)!.append(typingTxt[typingIdx]);
           typingIdx++; 
         } else { 
           clearInterval(tyInt);
-          resolve();
+          resolve(typingIdx);
         } 
       }, 60);
     })
@@ -85,8 +78,8 @@ function Main(props) {
       <div className={style.framewrapper}>
         <div className={style.polaroid} onClick={openAboutModal}>
           <div className={style.imagewrapper}>
-            <img src={aboutImg} alt="about" className={style.image}/>
-            <img src={bluePin} alt="pin" className={style.pin}/>
+            <img src="Images/frame-about.png" alt="about" className={style.image}/>
+            <img src="Images/blue-pin.png" alt="pin" className={style.pin}/>
           </div>
           <div className={style.postit}>Gitribute 팀원 소개 →</div>
         </div>
@@ -110,7 +103,7 @@ function Main(props) {
           </div>
           
           <p className={style.typing}></p> 
-          <img src={noonsong} alt="noonsong" className={style.noonsong}/>
+          <img src="Images/noonsong1.gif" alt="noonsong" className={style.noonsong}/>
           <div className={style.linkwrapper}>
             <div className={style.link} onClick={openTestModal}>테스트 바로가기 →</div>
             <div className={style.link} onClick={openAboutModal}>Gitribute 팀원 소개 →</div>
@@ -120,14 +113,14 @@ function Main(props) {
         <div className={style.original} onClick={openTestModal}>
           <div className={style.postit}>테스트 바로가기 →</div>
             <div className={style.imagewrapper}>
-              <img src={testImg} alt="test" className={style.image}/>
-              <img src={tape} alt="tape" className={style.tape}/>
+              <img src="Images/frame-test.png" alt="test" className={style.image}/>
+              <img src="Images/tape.png" alt="tape" className={style.tape}/>
             </div>
         </div>
         <div className={style.spacer}></div>
         <div className={style.sticker} onClick={openBoardModal}>
           <div className={style.bedgewrapper}>
-            <img src={bedge} alt="bedge" className={style.bedge + ' ' + style.image}/>
+            <img src="Images/sookmyung-symbol.png" alt="bedge" className={style.bedge + ' ' + style.image}/>
           </div>
           <div className={style.postit}>방명록 →</div>
         </div>
