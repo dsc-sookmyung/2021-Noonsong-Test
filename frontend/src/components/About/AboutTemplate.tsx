@@ -5,10 +5,10 @@ import ScrollModal from '../_Basic/ScrollModal';
 import Profile from './Profile';
 import '../../fonts/font.css';
 
-import suyeon from '../../Images/mori8.jpg';
-import suhee from '../../Images/0hee0.jpg';
-import eunji from '../../Images/heleneunji.jpg';
-import jiyeon from '../../Images/hellouz818.png';
+import suyeon from 'Images/mori8.jpg';
+import suhee from 'Images/0hee0.jpg';
+import eunji from 'Images/heleneunji.jpg';
+import jiyeon from 'Images/hellouz818.png';
 
 function AboutTemplate({ isOpened, close }) {
     const ContentWrapper = styled.div`
