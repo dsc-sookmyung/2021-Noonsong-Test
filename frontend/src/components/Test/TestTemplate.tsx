@@ -10,37 +10,36 @@ import ProgressBar from '../_Basic/ProgressBar';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
+import type { TestProps, Result, Stat } from './types';
 
-const useStyles = makeStyles((theme) => ({
-  backdrop: {
-    zIndex: theme.zIndex.drawer + 1,
-    color: '#fff',
-  },
-}));
 
-const TestTemplate = ({ isOpened, close }) => {
-  const [numbers, setNumbers] = useState([1]);
-  const [selected, setSelected] = useState([]);
-  const [nowSelected, setNowSelected] = useState([]);
-  const [loaded, setLoaded] = useState(true);
-  const [completed, setCompleted] = useState(0);
-  const [questions, setQuestions] = useState([]);
-  const [result, setResult] = useState();
-  const [resultLoaded, setResultLoaded] = useState(false);
-  const [showBackdrop, setShowBackdrop] = useState(false);
-  const [stat, setStat] = useState();
-  const [openStat, setOpenStat] = useState(false);
-  const [label, setLabel] = useState("전체");
+function TestTemplate({ isOpened, close }: TestProps) {
+  const [numbers, setNumbers] = useState<number[]>([1]);
+  const [selected, setSelected] = useState<number[]>([]);
+  const [nowSelected, setNowSelected] = useState<number[]>([]);
+  const [loaded, setLoaded] = useState<boolean>(true);
+  const [completed, setCompleted] = useState<number>(0);
+  const [questions, setQuestions] = useState<[]>([]);
+  const [result, setResult] = useState<Result>();
+  const [resultLoaded, setResultLoaded] = useState<boolean>(false);
+  const [showBackdrop, setShowBackdrop] = useState<boolean>(false);
+  const [stat, setStat] = useState<Stat>();
+  const [openStat, setOpenStat] = useState<boolean>(false);
+  const [label, setLabel] = useState<string>("전체");
   const classes = useStyles();
  
-  useEffect(async () => {
+  useEffect(() => {
     const timer = setInterval(progress, 200);
-    /* GET questions */
-    let res = await fetch('http://localhost:8000/questions/');
-    await res.json().then((data) => {
-      setQuestions(data);
-      console.log("Questions: "+questions);
-    })
+
+    (async () => {
+      /* GET questions */
+      let res = await fetch('http://localhost:8000/questions/');
+      await res.json().then((data) => {
+        setQuestions(data);
+        console.log("Questions: "+questions);
+      })
+    })();
+    
     return () => {
       clearInterval(timer);
     }
@@ -81,7 +80,7 @@ const TestTemplate = ({ isOpened, close }) => {
     }  
   }, [numbers]);
 
-  const getSelected = useCallback((selectedIndex) => {
+  const getSelected = ((selectedIndex: number): void => {
     setNowSelected([...nowSelected, selectedIndex]);
     setTimeout(() => setSelected([...selected, selectedIndex]), 1000);
     setNumbers([...numbers, numbers[numbers.length - 1] + 1]);
@@ -112,14 +111,14 @@ const TestTemplate = ({ isOpened, close }) => {
     })();
   }
 
-  const selectHandler = (e) => {
+  const selectHandler = (e: React.FormEvent<HTMLInputElement>): void => {
     setShowBackdrop(true);
-    setLabel(e.label);
+    setLabel(e.currentTarget.value);
     (async () => {
       const requestOptions = await fetch('http://localhost:8000/majorcharts/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({s_major: e.value, result_id: null})
+        body: JSON.stringify({s_major: e.currentTarget.value, result_id: null})
       });
       await requestOptions.json().then((data) => {
         setShowBackdrop(false);
@@ -128,7 +127,7 @@ const TestTemplate = ({ isOpened, close }) => {
     })();
   }
 
-  const viewResult = () => {
+  const viewResult = (e: React.MouseEvent<HTMLElement>): void => {
     setOpenStat(false);
   }
 
@@ -156,7 +155,7 @@ const TestTemplate = ({ isOpened, close }) => {
               </ProgressBarWrapper>
             ) : (
               !openStat ? (
-                !showBackdrop ? (
+                (!showBackdrop && result) ? (
                   <ResultTemplate title={result.title} image={result.image} explain={result.explain} viewStat={viewStat}/>
                 ) : (
                   <Backdrop className={classes.backdrop} open={showBackdrop}>
@@ -164,7 +163,7 @@ const TestTemplate = ({ isOpened, close }) => {
                   </Backdrop>
                 )  
               ) : (
-                !showBackdrop ? (
+                (!showBackdrop && stat) ? (
                   <StatTemplate stat={stat} selectHandler={selectHandler} label={label} viewResult={viewResult}/>
                 ) : (
                   <Backdrop className={classes.backdrop} open={showBackdrop}>
@@ -184,6 +183,13 @@ const TestTemplate = ({ isOpened, close }) => {
 
 export default TestTemplate;
 
+const useStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
+}));
+
 const ContentWrapper = styled.div`
   width: 100%;
   min-height: calc(100% - 3rem);
@@ -194,13 +200,16 @@ const ContentWrapper = styled.div`
   position: relative;
 `;
 
+interface styledProps {
+  disappear: boolean;
+}
+
 const ProgressBarWrapper = styled.div`
   display: none;
   width: 100%;
   height: 100%;
 
-  ${props =>
-  props.disappear &&
+  ${(props: styledProps) => props.disappear &&
   css`
     display: flex;
     flex-direction: column;

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Doughnut } from 'react-chartjs-2';
+import type { ChartProps } from '../types';
 
 const options = {
   layout: {
@@ -22,7 +23,7 @@ const options = {
   maintainAspectRatio: false
 }
 
-const Chart = ({ info }) => {
+const Chart = ({ info } : ChartProps ) => {
   let dataArr = [info.noonsong1_ratio, info.noonsong2_ratio, info.noonsong3_ratio, info.noonsong4_ratio,
     info.noonsong5_ratio, info.noonsong6_ratio, info.noonsong7_ratio, info.noonsong8_ratio]
   let rankColor = ["#a363d9","#ee657a","#db3838","#f6621f","#f9a228","#fecc2f","#b2c225","#33beb8"]

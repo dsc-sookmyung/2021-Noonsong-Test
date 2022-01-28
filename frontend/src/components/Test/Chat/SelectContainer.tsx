@@ -2,8 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import Select from './Select';
 
-const SelectContainer = ({index, getSelected, handleLoad, contents}) => {
-  const onClickSelect = (selectedIndex) => (e) => {
+
+interface SelectContainerProps {
+  index: number;
+  getSelected: (selectedIndex: number) => void;
+  handleLoad: () => void;
+  contents: any;
+  children? : any;
+}
+
+function SelectContainer({index, getSelected, handleLoad, contents}: SelectContainerProps) {
+  const onClickSelect = (selectedIndex: number) => (e: React.MouseEvent<HTMLElement>) => {
     getSelected(selectedIndex);
     handleLoad();
   }

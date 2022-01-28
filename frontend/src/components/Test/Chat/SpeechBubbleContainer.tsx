@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
+import type { SpeechBubbleProps } from '../types';
 
 
 const StyledSpeechBubbleContainer = styled.div`
@@ -23,7 +24,7 @@ const StyledSpeechBubbleContainer = styled.div`
   }
 `;
 
-function SpeechBubbleContainer({children, role, ...rest}) {
+function SpeechBubbleContainer({children, role, ...rest}: SpeechBubbleProps ) {
   return <StyledSpeechBubbleContainer role={role} {...rest}>{children}</StyledSpeechBubbleContainer>;
 }
 
