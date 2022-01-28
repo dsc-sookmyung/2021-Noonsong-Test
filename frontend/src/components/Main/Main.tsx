@@ -6,6 +6,12 @@ import TestTemplate from '../Test/TestTemplate';
 import AboutTemplate from '../About/AboutTemplate';
 import BoardTemplate from '../Board/BoardTemplate';
 
+import testImg from '../../Images/frame-test.png';
+import aboutImg from '../../Images/frame-about.png';
+import bluePin from '../../Images/blue-pin.png';
+import tape from '../../Images/tape.png';
+import badge from '../../Images/sookmyung-symbol.png';
+import noonsong from '../../Images/noonsong1.gif';
 
 function Main() {
   const [isTestModalOpened, setIsTestModalOpened] = useState<boolean>(false);
@@ -78,8 +84,8 @@ function Main() {
       <div className={style.framewrapper}>
         <div className={style.polaroid} onClick={openAboutModal}>
           <div className={style.imagewrapper}>
-            <img src="Images/frame-about.png" alt="about" className={style.image}/>
-            <img src="Images/blue-pin.png" alt="pin" className={style.pin}/>
+            <img src={aboutImg} alt="about" className={style.image}/>
+            <img src={bluePin} alt="pin" className={style.pin}/>
           </div>
           <div className={style.postit}>Gitribute 팀원 소개 →</div>
         </div>
@@ -103,7 +109,7 @@ function Main() {
           </div>
           
           <p className={style.typing}></p> 
-          <img src="Images/noonsong1.gif" alt="noonsong" className={style.noonsong}/>
+          <img src={noonsong} alt="noonsong" className={style.noonsong}/>
           <div className={style.linkwrapper}>
             <div className={style.link} onClick={openTestModal}>테스트 바로가기 →</div>
             <div className={style.link} onClick={openAboutModal}>Gitribute 팀원 소개 →</div>
@@ -113,14 +119,14 @@ function Main() {
         <div className={style.original} onClick={openTestModal}>
           <div className={style.postit}>테스트 바로가기 →</div>
             <div className={style.imagewrapper}>
-              <img src="Images/frame-test.png" alt="test" className={style.image}/>
-              <img src="Images/tape.png" alt="tape" className={style.tape}/>
+              <img src={testImg} alt="test" className={style.image}/>
+              <img src={tape} alt="tape" className={style.tape}/>
             </div>
         </div>
         <div className={style.spacer}></div>
         <div className={style.sticker} onClick={openBoardModal}>
           <div className={style.bedgewrapper}>
-            <img src="Images/sookmyung-symbol.png" alt="bedge" className={style.bedge + ' ' + style.image}/>
+            <img src={badge} alt="badge" className={style.bedge + ' ' + style.image}/>
           </div>
           <div className={style.postit}>방명록 →</div>
         </div>

@@ -9,3 +9,4 @@ declare module 'react-select'
 declare module '*.jpg';
 declare module '*.jpeg';
 declare module '*.png';
+declare module '*.gif';
