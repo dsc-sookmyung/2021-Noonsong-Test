@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import sookmyungSymbol from '../../../Images/sookmyung-symbol.png';
+import type { TitleImage } from '../types';
 
-const MostPopular = ({ title, image }) => {
+const MostPopular = ({ title, image }: TitleImage) => {
   let imgWidth = "20rem";
   if (image === "x") {
     image = sookmyungSymbol;

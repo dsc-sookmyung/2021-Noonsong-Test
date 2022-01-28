@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '../../_Basic/Button';
 import KakaoShareButton from './KakaoShareButton';
+import { ResultProps } from '../types';
 
-const ResultTemplate = ({ title, image, explain, viewStat }) => {
+const ResultTemplate = ({ title, image, explain, viewStat }: ResultProps) => {
   return (
     <ResultWrapper>
       <NoonsongType>{title}</NoonsongType>

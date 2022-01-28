@@ -1,20 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SelectContainer from './SelectContainer';
 import Messages from './Messages';
-import DelayedRender from '../DelayedRender';
+import type { ChatProps } from '../types';
 
-const ChatTemplate = ({ numbers, nowSelected, loaded, questions, getSelected, handleLoad }) => {
+
+function ChatTemplate({ numbers, nowSelected, loaded, questions, getSelected, handleLoad }: ChatProps) {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (show) return undefined;
+
+    const timeout = setTimeout(() => 1000);
+    return () => clearTimeout(timeout);
+  }, []);
+
   return (
     <>
       <Messages numbers={numbers} contents={questions} selected={nowSelected} loaded={loaded}/>
-      <DelayedRender delay={1000}>
-        <SelectContainer 
-          index={Math.ceil(numbers.length / 2)} 
-          getSelected={getSelected}
-          handleLoad={handleLoad}
-          contents={questions}>
-        </SelectContainer>
-      </DelayedRender>
+      <SelectContainer 
+        index={Math.ceil(numbers.length / 2)} 
+        getSelected={getSelected}
+        handleLoad={handleLoad}
+        contents={questions}>
+      </SelectContainer>
     </>
   )
 }
