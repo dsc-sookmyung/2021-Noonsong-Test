@@ -2,7 +2,29 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { darken, lighten } from 'polished';
 
-const colorStyles = css`
+type ColorProps = {
+  color: string;
+  outline?: boolean;
+}
+
+type SizeProps = {
+  size: keyof typeof sizes;   // Do Not Use `size: string`
+}
+
+type FullwidthProps = {
+  fullWidth?: boolean;
+}
+
+type ButtonProps = {
+  children?: any;
+  color: string;
+  outline?: boolean;
+  size: keyof typeof sizes;
+  fullWidth?: boolean;
+  onClick: (e: React.MouseEvent<HTMLElement>) => void;
+}
+
+const colorStyles = css<ColorProps>`
   ${({ color }) => {
     const selected = color;
     return css`
@@ -13,7 +35,7 @@ const colorStyles = css`
       &:active {
         background: ${darken(0.1, selected)};
       }
-      ${props =>
+      ${(props: ColorProps) =>
         props.outline &&
         css`
           color: ${selected};
@@ -43,14 +65,14 @@ const sizes = {
   }
 };
 
-const sizeStyles = css`
+const sizeStyles = css<SizeProps>`
   ${({ size }) => css`
     height: ${sizes[size].height};
     font-size: ${sizes[size].fontSize};
   `}
 `;
 
-const fullWidthStyle = css`
+const fullWidthStyle = css<FullwidthProps>`
   ${props =>
     props.fullWidth &&
     css`
@@ -63,7 +85,7 @@ const fullWidthStyle = css`
     `}
 `;
 
-const StyledButton = styled.button`
+const StyledButton = styled.button<ButtonProps>`
   /* 공통 스타일 */
   display: inline-flex;
   align-items: center;
@@ -92,7 +114,7 @@ const StyledButton = styled.button`
   ${fullWidthStyle}
 `;
 
-function Button({ children, color, size, outline, fullWidth, ...rest }) {
+function Button({ children, color, size, outline, fullWidth, ...rest }: ButtonProps) {
   return (
     <StyledButton
       color={color}

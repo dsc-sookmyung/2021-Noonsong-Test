@@ -33,7 +33,12 @@ const StyledSelect = styled.button`
   }
 `;
 
-function Select({children, ...rest}) {
+interface SelectProps {
+  children? : any;
+  onClick: (e: React.MouseEvent<HTMLElement>) => void;
+}
+
+function Select({children, ...rest}: SelectProps) {
   return <StyledSelect {...rest}>{children}</StyledSelect>;
 }
 

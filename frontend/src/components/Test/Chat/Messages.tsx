@@ -2,24 +2,39 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import Message from './Message';
 import './TypingDot.css';
+import { MessagesProps } from '../types';
+
 
 const AlwaysScrollToBottom = () => {
-  const scrollRef = useRef();
-  useEffect(() => scrollRef.current.scrollIntoView());
+  const scrollRef = useRef<null | HTMLDivElement>(null); 
+  useEffect(() => scrollRef?.current?.scrollIntoView());
   return <div ref={scrollRef} />;
 };
 
-const Messages = ({ numbers, contents, selected, loaded }) => {
+const Messages = ({ numbers, contents, selected, loaded }: MessagesProps) => {
+  const Wrapper = styled.div`
+    display: none;
+    margin-top: 10px;
+    padding: 15px;
+    font-family: arial;
+
+    ${!loaded &&
+    css`
+      display: block;
+      float: left;
+    `}
+  `;
+
   return (
     <div className="messagesSection">
       <MessagesContainer>
-        {numbers.map((v) => {
+        {numbers.map((number) => {
           return (
-            <div className="messagesContainer">
-              <Message key={`message ${v}`} text={contents[Math.ceil(v / 2) - 1]} selectedAnswer={selected} index={v} />
-              {(v === numbers.length) ? (
-                <Wrapper key={`typing ${v}`} disappear={!loaded}>
-                <div class="dot-typing"></div>
+            <div key={number} className="messagesContainer">
+              <Message text={contents[Math.ceil(number / 2) - 1]} selectedAnswer={selected} index={number} />
+              {(number === numbers.length) ? (
+                <Wrapper>
+                <div className="dot-typing"></div>
                 </Wrapper>
               ) : (null)}
               <AlwaysScrollToBottom />
@@ -62,18 +77,4 @@ const MessagesContainer = styled.div`
     min-height: 76vh;
     height: auto;
   }  
-`;
-
-const Wrapper = styled.div`
-  display: none;
-  margin-top: 10px;
-  padding: 15px;
-  font-family: arial;
-
-  ${props =>
-  props.disappear &&
-  css`
-    display: block;
-    float: left;
-    `}
 `;

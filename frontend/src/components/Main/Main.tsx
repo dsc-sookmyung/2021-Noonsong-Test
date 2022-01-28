@@ -8,37 +8,37 @@ import BoardTemplate from '../Board/BoardTemplate';
 
 
 function Main() {
-  const [isTestModalOpened, setIsTestModalOpened] = useState(false);
-  const [isAboutModalOpened, setIsAboutModalOpened] = useState(false);
-  const [isBoardModalOpened, setIsBoardModalOpened] = useState(false);
+  const [isTestModalOpened, setIsTestModalOpened] = useState<boolean>(false);
+  const [isAboutModalOpened, setIsAboutModalOpened] = useState<boolean>(false);
+  const [isBoardModalOpened, setIsBoardModalOpened] = useState<boolean>(false);
 
-  const openTestModal = () => {
+  const openTestModal = (): void => {
     setIsTestModalOpened(true);
     setIsAboutModalOpened(false);
     setIsBoardModalOpened(false);
   }
 
-  const closeTestModal = () => {
+  const closeTestModal = (): void => {
     setIsTestModalOpened(false);
   }
 
-  const openAboutModal = () => {
+  const openAboutModal = (): void => {
     setIsTestModalOpened(false);
     setIsAboutModalOpened(true);
     setIsBoardModalOpened(false);
   }
 
-  const closeAboutModal = () => {
+  const closeAboutModal = (): void => {
     setIsAboutModalOpened(false);
   }
 
-  const openBoardModal = () => {
+  const openBoardModal = (): void => {
     setIsAboutModalOpened(false);
     setIsTestModalOpened(false);
     setIsBoardModalOpened(true);
   }
 
-  const closeBoardModal = () => {
+  const closeBoardModal = (): void => {
     setIsBoardModalOpened(false);
   }
 

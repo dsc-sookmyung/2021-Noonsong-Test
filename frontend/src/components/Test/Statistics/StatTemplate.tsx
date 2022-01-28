@@ -4,6 +4,8 @@ import Select from 'react-select';
 import Button from '../../_Basic/Button';
 import MostPopular from './MostPopular';
 import Chart from './Chart';
+import type { StatProps } from '../types';
+
 
 const options = [
   { value: '15', label: '전체', isToggled: true },
@@ -23,7 +25,7 @@ const options = [
   { value: '14', label: '미디어학부', isToggled: false }
 ]
 
-const StatTemplate = ({ stat, selectHandler, label, viewResult }) => {
+function StatTemplate({ stat, selectHandler, label, viewResult }: StatProps) {
   return (
     <StatWrapper>
       <div style={{width: '12rem'}}>
