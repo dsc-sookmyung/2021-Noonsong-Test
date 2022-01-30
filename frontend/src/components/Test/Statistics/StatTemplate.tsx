@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
-import Button from '../../_Basic/Button';
+import Button from '../../Common/Button';
 import MostPopular from './MostPopular';
 import Chart from './Chart';
 import type { StatProps } from '../types';

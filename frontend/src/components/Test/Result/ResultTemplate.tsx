@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../../_Basic/Button';
+import Button from '../../Common/Button';
 import KakaoShareButton from './KakaoShareButton';
 import { ResultProps } from '../types';
 
