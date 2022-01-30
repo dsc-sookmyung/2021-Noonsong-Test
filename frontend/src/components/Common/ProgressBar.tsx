@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import noonsongGIF from '../../Images/noonsongGIF.gif';
 
-const ProgressBar = () => {
+
+function ProgressBar() {
   return (
     <Wrapper>
       <Title>결과 분석중...</Title>
