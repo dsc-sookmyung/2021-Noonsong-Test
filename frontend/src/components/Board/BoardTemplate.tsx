@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import GuestBook from './GuestBook';
-import Modal from '../_Basic/Modal';
-import SideBar from '../_Basic/SideBar';
+import Modal from '../Common/Modal';
+import SideBar from '../Common/SideBar';
+import type { BoardProps } from './types';
 
-const BoardTemplate = ({ isOpened, close }) => {
+
+function BoardTemplate({ isOpened, close }: BoardProps) {
     return (
     <>
     { isOpened ? (

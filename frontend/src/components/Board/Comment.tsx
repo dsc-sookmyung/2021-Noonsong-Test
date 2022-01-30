@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import type { CommentProps } from './types';
+
 
 const StyledComment = styled.div`
   display: inline-block;
@@ -26,8 +28,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const Comment = ({ name, comment }) => {
-  console.log(name);
+function Comment({ name, comment }: CommentProps) {
   return (
     <Wrapper>
       <StyledComment>

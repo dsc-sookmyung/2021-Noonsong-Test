@@ -4,6 +4,7 @@ import Form from './Form';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
+import type { CommentProps } from './types';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -14,17 +15,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function GuestBook() {
-  const [comments, setComments] = useState([]);
-  const [numbers, setNumbers] = useState([]);
-  const [loaded, setLoaded] = useState(false);
+  const [comments, setComments] = useState<CommentProps[]>([]);
+  const [numbers, setNumbers] = useState<number[]>([]);
+  const [loaded, setLoaded] = useState<boolean>(false);
   const classes = useStyles();
 
-  useEffect(async () => {
+  useEffect(() => {
     /* get comments */
-    let res = await fetch('http://localhost:8000/feedbacks/');
-    await res.json().then((data) => {
-      setComments(data);
-    });
+    (async () => {
+      let res = await fetch('http://localhost:8000/feedbacks/');
+      await res.json().then((data) => {
+        setComments(data);
+      });
+    })();
   }, [numbers])
 
   useEffect(() => {
@@ -33,11 +36,18 @@ function GuestBook() {
     }
   }, [loaded]);
 
-  const getComment = useCallback(() => {
-    setNumbers([...numbers, numbers[numbers.length -1] + 1]);
-  });
+  const saveComment = (prop: CommentProps) => (e: React.FormEvent<HTMLFormElement>): void => {
+    console.log(comments);
+    let array = [...comments];
+    array.push(prop);
+    setComments(array);
+  }
 
-  const handleLoad = () => {
+  const getComment = (e: React.FormEvent<HTMLFormElement>): void => {
+    setNumbers([...numbers, numbers[numbers.length -1] + 1]);
+  }
+
+  const handleLoad = (e: React.FormEvent<HTMLFormElement>): void => {
     setLoaded(!loaded);
     console.log(loaded);
   }
@@ -45,14 +55,10 @@ function GuestBook() {
   return (
     <>
       <Comments comments={comments} />
-      <Form saveComment={(commentObject) => {
-        setComments((prevComments) => {
-          console.log(comments);
-          return [...prevComments, commentObject]
-        });
-      }} 
-      getComment={getComment}
-      handleLoad={handleLoad}
+      <Form 
+        saveComment={saveComment}
+        getComment={getComment}
+        handleLoad={handleLoad}
       />
       { !loaded ? (
         <Backdrop className={classes.backdrop} open={!loaded}>

@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
+
+interface StyledProps {
+  children?: any;
+}
+
 const StyledScrollModal = styled.div`
   width: 40rem;
   min-height: 40rem;
@@ -21,7 +26,7 @@ const StyledScrollModal = styled.div`
   }
 `;
 
-function ScrollModal({children, ...rest}) {
+function ScrollModal({children, ...rest}: StyledProps) {
   return <StyledScrollModal {...rest}>{children}</StyledScrollModal>;
 }
 

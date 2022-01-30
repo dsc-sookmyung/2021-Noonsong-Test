@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
+
+interface StyledProps {
+  children?: any;
+}
+
 const StyledModal = styled.div`
   width: 40rem;
   min-height: 40rem;
@@ -21,7 +26,7 @@ const StyledModal = styled.div`
   }
 `;
 
-function Modal({children, ...rest}) {
+function Modal({children, ...rest}: StyledProps) {
   return <StyledModal {...rest}>{children}</StyledModal>;
 }
 
