@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import SideBar from '../_Basic/SideBar';
-import ScrollModal from '../_Basic/ScrollModal';
+import SideBar from '../Common/SideBar';
+import ScrollModal from '../Common/ScrollModal';
 import Profile from './Profile';
 import '../../fonts/font.css';
 
