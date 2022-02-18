@@ -2,20 +2,21 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { darken, lighten } from 'polished';
 
-type ColorProps = {
+
+interface ColorProps {
   color: string;
   outline?: boolean;
 }
 
-type SizeProps = {
+interface SizeProps {
   size: keyof typeof sizes;   // Do Not Use `size: string`
 }
 
-type FullwidthProps = {
+interface FullwidthProps {
   fullWidth?: boolean;
 }
 
-type ButtonProps = {
+interface ButtonProps {
   children?: any;
   color: string;
   outline?: boolean;

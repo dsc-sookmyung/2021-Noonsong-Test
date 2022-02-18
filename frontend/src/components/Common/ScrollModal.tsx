@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledModal = styled.div`
+
+interface StyledProps {
+  children?: any;
+}
+
+const StyledScrollModal = styled.div`
   width: 40rem;
   min-height: 40rem;
   height: auto;
@@ -12,17 +17,17 @@ const StyledModal = styled.div`
   transform: translate(-50%, -50%);
   border-radius: 1rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  overflow: scroll;
   z-index: 99;
 
-  /* Mobile */
-  @media only screen and (max-width: 767px) {
-    width: 100vw;
-    height: 100vh;
+  @media only screen and (max-width: 638px) {
+      width: 100vw;
+      height: 100vh;
   }
 `;
 
-function Modal({children, ...rest}) {
-  return <StyledModal {...rest}>{children}</StyledModal>;
+function ScrollModal({children, ...rest}: StyledProps) {
+  return <StyledScrollModal {...rest}>{children}</StyledScrollModal>;
 }
 
-export default Modal;
+export default ScrollModal;

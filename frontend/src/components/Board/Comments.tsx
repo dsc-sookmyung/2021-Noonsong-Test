@@ -1,14 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Comment from './Comment';
+import type { CommentsProps } from './types';
+
 
 const AlwaysScrollToBottom = () => {
-  const scrollRef = useRef();
-  useEffect(() => scrollRef.current.scrollIntoView());
+  const scrollRef = useRef<null | HTMLDivElement>(null); 
+  useEffect(() => scrollRef?.current?.scrollIntoView());
   return <div ref={scrollRef}/>;
 };
 
-const Comments = ({ comments }) => {
+function Comments({ comments }: CommentsProps) {
   return (
     <div className="commentsSection">
       <CommentsContainer>

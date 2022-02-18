@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SideBar = ({ close }) => {
+
+interface SideBarProps {
+  close: (e: React.MouseEvent<HTMLElement>) => void;
+}
+
+function SideBar({ close }: SideBarProps) {
   const StyledSideBar = styled.div`
     width: 100%;
     height: 1rem;
